@@ -1,0 +1,350 @@
+Prefix: : <http://purl.obolibrary.org/obo/>
+Prefix: i: <http://purl.obolibrary.org/obo/test/inst_>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+
+Ontology: <http://purl.obolibrary.org/obo/go/examples/change-me.owl>
+
+Import: <http://purl.obolibrary.org/obo/wbbt.owl>
+Import: <http://purl.obolibrary.org/obo/go.owl>
+Import: <http://purl.obolibrary.org/obo/go/extensions/lego-relations.owl>
+Import: <http://purl.obolibrary.org/obo/omeo/Caenorhabditis_elegans-uniprot-labels.owl>
+
+Annotations: 
+    rdfs:comment "PMID 21771813
+
+Microtubule-based localization of a synaptic calcium- signaling complex is required for left-right neuronal
+asymmetry in C. elegans
+Chieh Chang1, Yi-Wen Hsieh1, Bluma J. Lesch2, Cornelia I. Bargmann2 and Chiou-Fen Chuang1,*
+
+SUMMARY
+The axons of C. elegans left and right AWC olfactory neurons communicate at synapses through a calcium-signaling complex to regulate stochastic asymmetric cell identities called AWCON and AWCOFF. However, it is not known how the calcium-signaling complex, which consists of UNC-43/CaMKII, TIR-1/SARM adaptor protein and NSY-1/ASK1 MAPKKK, is localized to postsynaptic sites in the AWC axons for this lateral interaction. Here, we show that microtubule-based localization of the TIR-1 signaling complex to the synapses regulates AWC asymmetry. Similar to unc-43, tir-1 and nsy-1 loss-of-function mutants, specific disruption of microtubules in AWC by nocodazole generates two AWCON neurons. Reduced localization of UNC-43, TIR-1 and NSY-1 proteins in the AWC axons strongly correlates with the 2AWCON phenotype in nocodazole-treated animals. We identified kinesin motor unc-104/kif1a mutants for enhancement of the 2AWCON phenotype of a hypomorphic tir-1 mutant. Mutations in unc-104, like microtubule depolymerization, lead to a reduced level of UNC-43, TIR-1 and NSY-1 proteins in the AWC axons. In addition,
+dynamic transport of TIR-1 in the AWC axons is dependent on unc-104, the primary motor required for the transport of presynaptic vesicles. Furthermore, unc-104 acts non-cell autonomously in the AWCON neuron to regulate the AWCOFF identity. Together, these results suggest a model in which UNC-104 may transport some unknown presynaptic factor(s) in the future AWCON cell that non-cell autonomously control the trafficking of the TIR-1 signaling complex to postsynaptic regions of the AWC axons to regulate the AWCOFF identity."
+
+AnnotationProperty: rdfs:label
+
+    
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+ObjectProperty: BFO_0000066
+
+    
+ObjectProperty: directly_activates
+
+    
+ObjectProperty: enabled_by
+
+    
+ObjectProperty: occurs_in
+
+    
+ObjectProperty: BFO_0000050
+
+    
+ObjectProperty: directly_inhibits
+
+    
+Class: WBbt_0005672
+
+    
+Class: GO_0019901
+
+    
+Class: GO_0030424
+
+    
+Class: UniProtKB_E0AHC6
+
+    
+Class: UniProtKB_H2KYW5
+
+    
+Class: UniProtKB_Q965R3
+
+    
+Class: UniProtKB_Q9N419
+
+    
+Class: UniProtKB_G5EDF7
+
+    
+Class: GO_0045596
+
+    
+Class: GO_0003700
+
+    
+Class: GO_0004871
+
+    
+Class: UniProtKB_O61715
+
+    
+Class: UniProtKB_O62305
+
+    
+Class: GO_0001708
+
+    
+Class: GO_0004709
+
+    
+Class: GO_0004708
+
+    
+Class: UniProtKB_G4SFC3
+
+    
+Class: UniProtKB_Q21029
+
+    
+Class: UniProtKB_Q86DA5
+
+    
+Class: GO_0035545
+
+    
+Class: GO_0005243
+
+    SubClassOf: 
+        occurs_in some GO_0005921
+    
+    
+Class: GO_0003674
+
+    
+Class: GO_0005262
+
+    
+Class: GO_0005923
+
+    
+Class: GO_0005921
+
+    
+Class: UniProtKB_G5EF54
+
+    
+Class: GO_0015267
+
+    
+Class: WBbt_0005832
+
+    
+Class: WBbt_0005833
+
+    
+Individual: LEGO_PMID_21771813_0000020
+
+    Annotations: 
+        rdfs:label "tir-1 activity"@en,
+        rdfs:comment "Here, we show that microtubule-based localization of the TIR-1 signaling complex to the synapses regulates AWC asymmetry"
+    
+    Types: 
+        GO_0019901,
+        enabled_by some UniProtKB_Q86DA5
+    
+    Facts:  
+     BFO_0000050  LEGO_PMID_21771813_0000017,
+     directly_activates  LEGO_PMID_21771813_0000019
+    
+    
+Individual: LEGO_PMID_21771813_0000024
+
+    Annotations: 
+        rdfs:label "claudin activity"@en,
+        rdfs:comment "establishment of cell fate?"
+    
+    Types: 
+        enabled_by some UniProtKB_Q9N419,
+        occurs_in some GO_0005923,
+        GO_0015267
+    
+    Facts:  
+     directly_inhibits  LEGO_PMID_21771813_0000022
+    
+    
+Individual: LEGO_PMID_21771813_0000023
+
+    Annotations: 
+        rdfs:label "innexin activity"@en,
+        rdfs:comment "establishment of cell fate?"
+    
+    Types: 
+        GO_0005243,
+        enabled_by some UniProtKB_O61715
+    
+    Facts:  
+     directly_inhibits  LEGO_PMID_21771813_0000022,
+     BFO_0000050  LEGO_PMID_21771813_0000017
+    
+    
+Individual: LEGO_PMID_21771813_0000022
+
+    Annotations: 
+        rdfs:label "unc-2-calcium channel activity"@en
+    
+    Types: 
+        GO_0005262,
+        enabled_by some UniProtKB_G4SFC3
+    
+    Facts:  
+     directly_activates  LEGO_PMID_21771813_0000021,
+     BFO_0000050  LEGO_PMID_21771813_0000017
+    
+    
+Individual: LEGO_PMID_21771813_0000021
+
+    Annotations: 
+        rdfs:label "CaMKII/UNC-43 activity"@en
+    
+    Types: 
+        GO_0019901,
+        enabled_by some UniProtKB_O62305
+    
+    Facts:  
+     directly_activates  LEGO_PMID_21771813_0000020,
+     BFO_0000050  LEGO_PMID_21771813_0000017
+    
+    
+Individual: LEGO_PMID_21771813_0000028
+
+    Annotations: 
+        rdfs:comment "check: no 'maintenance of cell identity' in GO. Existing GO annotation is to 'neuron fate specification'.
+
+GO:0001708 ! cell fate specification [DEF: \"The process involved in the specification of cell identity. Once specification has taken place, a cell will be committed to differentiate down a specific pathway if left in its normal environment.\"]",
+        rdfs:label "nsy-7 activity"@en,
+        rdfs:comment "NSY-7 likely acts as a transcriptional regulator that represses expression of AWC-OFF genes, such as srsx-3 and hlh-11, in the AWC-ON cell; in vitro, NSY-7 displays sequence-specific, DNA-binding activity to elements found within the promoter regions of srsx-3 and hlh-11; consistent with its role as a transcriptional regulator, a NSY-7::GFP reporter localizes to the AWC nucleus"
+    
+    Types: 
+        enabled_by some UniProtKB_H2KYW5,
+        GO_0003700
+    
+    Facts:  
+     directly_inhibits  LEGO_PMID_21771813_0000026,
+     BFO_0000050  LEGO_PMID_21771813_0000029,
+     directly_inhibits  LEGO_PMID_21771813_0000025
+    
+    
+Individual: LEGO_PMID_21771813_0000027
+
+    Annotations: 
+        rdfs:label "l/r asymmetry"@en
+    
+    Types: 
+        GO_0035545
+    
+    
+Individual: LEGO_PMID_21771813_0000017
+
+    Annotations: 
+        rdfs:label "establishment of cell fate"@en
+    
+    Types: 
+        occurs_in some WBbt_0005672,
+        GO_0001708
+    
+    Facts:  
+     BFO_0000050  LEGO_PMID_21771813_0000027
+    
+    
+Individual: LEGO_PMID_21771813_0000026
+
+    Annotations: 
+        rdfs:label "srsx-3 -> AWC-OFF"@en,
+        rdfs:comment "Troemel et al. 1999; Bauer Huang et al. 2007"
+    
+    Types: 
+        occurs_in some WBbt_0005833,
+        enabled_by some UniProtKB_Q965R3,
+        GO_0003674,
+        BFO_0000050 some 
+            (GO_0001708
+             and (occurs_in some WBbt_0005833))
+    
+    
+Individual: LEGO_PMID_21771813_0000016
+
+    Annotations: 
+        rdfs:label "unc-76 activity"@en
+    
+    Types: 
+        GO_0004871,
+        enabled_by some UniProtKB_E0AHC6,
+        BFO_0000066 some GO_0030424
+    
+    Facts:  
+     directly_activates  LEGO_PMID_21771813_0000024,
+     BFO_0000050  LEGO_PMID_21771813_0000017,
+     directly_activates  LEGO_PMID_21771813_0000023
+    
+    
+Individual: LEGO_PMID_21771813_0000025
+
+    Annotations: 
+        rdfs:label "str-2 -> AWC-ON"@en,
+        rdfs:comment "Troemel et al. 1999; Bauer Huang et al. 2007"
+    
+    Types: 
+        occurs_in some WBbt_0005832,
+        enabled_by some UniProtKB_G5EF54,
+        BFO_0000050 some 
+            (GO_0001708
+             and (occurs_in some WBbt_0005832)),
+        GO_0003674
+    
+    
+Individual: LEGO_PMID_21771813_0000019
+
+    Annotations: 
+        rdfs:label "nsy-1-MAPKKK activity"@en
+    
+    Types: 
+        GO_0004709,
+        enabled_by some UniProtKB_Q21029
+    
+    Facts:  
+     directly_activates  LEGO_PMID_21771813_0000018,
+     BFO_0000050  LEGO_PMID_21771813_0000017
+    
+    
+Individual: LEGO_PMID_21771813_0000018
+
+    Annotations: 
+        rdfs:label "sek-1-MAPKK-activity"@en
+    
+    Types: 
+        enabled_by some UniProtKB_G5EDF7,
+        GO_0004708
+    
+    Facts:  
+     directly_activates  LEGO_PMID_21771813_0000026,
+     directly_inhibits  LEGO_PMID_21771813_0000025,
+     BFO_0000050  LEGO_PMID_21771813_0000017
+    
+    
+Individual: LEGO_PMID_21771813_0000029
+
+    Annotations: 
+        rdfs:comment "check: no 'maintenance of cell identity' in GO. Existing GO annotation is to 'neuron fate specification'.
+
+GO:0001708 ! cell fate specification [DEF: \"The process involved in the specification of cell identity. Once specification has taken place, a cell will be committed to differentiate down a specific pathway if left in its normal environment.\"]",
+        rdfs:label "maintenance of cell fate"@en
+    
+    Types: 
+        GO_0045596
+    
+    Facts:  
+     BFO_0000050  LEGO_PMID_21771813_0000027
+    
+    
