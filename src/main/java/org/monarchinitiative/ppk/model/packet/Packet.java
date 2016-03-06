@@ -3,14 +3,23 @@ package org.monarchinitiative.ppk.model.packet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.monarchinitiative.ppk.model.condition.DiseaseOccurrenceAssociation;
+import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
 import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Packet {
 	
+	@JsonProperty("entities")
 	private List<Entity> entities;
 	
-	private List<PhenotypeAssociation> phenotype_profile;
+	@JsonProperty("phenotype_profile")
+	private List<PhenotypeAssociation> phenotypeAssociationList;
+	
+	@JsonProperty("diagnosis_profile")
+	private List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociationList;
 
 	/**
 	 * @return the entities
@@ -35,21 +44,24 @@ public class Packet {
 	/**
 	 * @return the phenotype_profile
 	 */
-	public List<PhenotypeAssociation> getPhenotype_profile() {
-		return phenotype_profile;
+	@JsonProperty("phenotype_profile")
+	public List<PhenotypeAssociation> getPhenotypeAssociationList() {
+		return phenotypeAssociationList;
 	}
 
 	/**
 	 * @param phenotype_profile the phenotype_profile to set
 	 */
-	public void setPhenotype_profile(List<PhenotypeAssociation> phenotype_profile) {
-		this.phenotype_profile = phenotype_profile;
+	@JsonProperty("phenotype_profile")
+	public void setPhenotypeAssociationList(List<PhenotypeAssociation> phenotype_profile) {
+		this.phenotypeAssociationList = phenotype_profile;
 	}
 
+	@JsonProperty("phenotype_profile")
 	public void addPhenotypeAssociation(PhenotypeAssociation a) {
-		if (phenotype_profile == null)
-			phenotype_profile = new ArrayList<PhenotypeAssociation>();
-		phenotype_profile.add(a);
+		if (phenotypeAssociationList == null)
+			phenotypeAssociationList = new ArrayList<PhenotypeAssociation>();
+		phenotypeAssociationList.add(a);
 	}
 
 	

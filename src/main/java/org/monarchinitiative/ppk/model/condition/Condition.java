@@ -2,9 +2,14 @@ package org.monarchinitiative.ppk.model.condition;
 
 import org.monarchinitiative.ppk.model.meta.OntologyClass;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
 public class Condition {
 	
-	private OntologyClass phenotypeOntologyClass;
+	@JsonPropertyDescription("A class in an ontology which this condition instantiates")
+	@JsonProperty("type")
+	private OntologyClass ontologyClass;
 	private String description;
 
 	/**
@@ -24,15 +29,15 @@ public class Condition {
 	/**
 	 * @return the phenotypeOntologyClass
 	 */
-	public OntologyClass getPhenotypeOntologyClass() {
-		return phenotypeOntologyClass;
+	public OntologyClass getOntologyClass() {
+		return ontologyClass;
 	}
 
 	/**
 	 * @param phenotypeOntologyClass the phenotypeOntologyClass to set
 	 */
-	public void setPhenotypeOntologyClass(OntologyClass phenotypeOntologyClass) {
-		this.phenotypeOntologyClass = phenotypeOntologyClass;
+	public void setOntologyClass(OntologyClass phenotypeOntologyClass) {
+		this.ontologyClass = phenotypeOntologyClass;
 	}
 
 	

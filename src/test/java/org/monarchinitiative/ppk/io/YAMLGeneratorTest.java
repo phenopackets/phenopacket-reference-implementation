@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.monarchinitiative.ppk.model.condition.Phenotype;
+import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
 import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.meta.EntityType;
 import org.monarchinitiative.ppk.model.meta.OntologyClass;
 import org.monarchinitiative.ppk.model.packet.Packet;
-import org.monarchinitiative.ppk.model.packet.PhenotypeAssociation;
 import org.monarchinitiative.ppk.model.packet.Profile;
 
 public class YAMLGeneratorTest {
@@ -26,7 +26,7 @@ public class YAMLGeneratorTest {
 		oc.setId("X:1");
 		oc.setLabel("foo");
 		p.setDescription("foo");
-		p.setPhenotypeOntologyClass(oc);
+		p.setOntologyClass(oc);
 
 		PhenotypeAssociation pa = new PhenotypeAssociation();
 		pa.setEntity(e);

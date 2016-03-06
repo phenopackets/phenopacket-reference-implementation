@@ -2,8 +2,11 @@ package org.monarchinitiative.ppk.model.meta;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Association {
 	
+	@JsonProperty("entity")
 	private Entity entity;
 	private List<Evidence> evidenceList;
 
