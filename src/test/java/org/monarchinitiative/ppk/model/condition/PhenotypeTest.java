@@ -20,7 +20,7 @@ public class PhenotypeTest {
 		oc.setId("X:1");
 		oc.setLabel("foo");
 		p.setDescription("foo");
-		p.setPhenotypeOntologyClass(oc);
+		p.setOntologyClass(oc);
 		
 		Representer representer = new Representer();
 		representer.getPropertyUtils().setSkipMissingProperties(true);

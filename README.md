@@ -1,5 +1,8 @@
-Initial pass at phenopacket java library.
+Reference implementation for phenopackets/PXF
 
-Approach is to access at YAML level (via snakeyaml). Other options are
-at the semantically equivalent level (e.g. via GSON) or jump straight
-to JSON-LD (use Jena).
+See https://github.com/phenopackets/phenopacket-format/ for more details.
+
+This provides a reference java implementation for PXF. Jackson
+annotations are used to describe the mapping to the JSON serialization
+of PXF. We are also experimenting with generating the JSON Schema from
+the reference implementation.
