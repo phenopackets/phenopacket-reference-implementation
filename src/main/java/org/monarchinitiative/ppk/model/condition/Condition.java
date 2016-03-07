@@ -1,6 +1,6 @@
 package org.monarchinitiative.ppk.model.condition;
 
-import org.monarchinitiative.ppk.model.meta.OntologyClass;
+import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;

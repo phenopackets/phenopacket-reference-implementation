@@ -1,4 +1,4 @@
-package org.monarchinitiative.ppk.model.meta;
+package org.monarchinitiative.ppk.model.ontology;
 
 public class OntologyClass {
 	
