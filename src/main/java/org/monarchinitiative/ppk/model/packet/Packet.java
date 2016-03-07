@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Packet {
 	
+	//TODO - have a distinct list for each type
 	@JsonProperty("entities")
 	private List<Entity> entities;
 	

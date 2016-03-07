@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.meta.EntityType;
-import org.monarchinitiative.ppk.model.meta.OntologyClass;
+import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -20,7 +20,7 @@ public class PhenotypeTest {
 		oc.setId("X:1");
 		oc.setLabel("foo");
 		p.setDescription("foo");
-		p.setOntologyClass(oc);
+		//p.setOntologyClassConjunction(oc);
 		
 		Representer representer = new Representer();
 		representer.getPropertyUtils().setSkipMissingProperties(true);

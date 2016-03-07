@@ -1,6 +1,6 @@
 package org.monarchinitiative.ppk.model.ontology;
 
-public class OntologyClass {
+public class OntologyClass extends OntologyClassExpression {
 	
 	String id;
 	String label;

@@ -1,44 +1,30 @@
 package org.monarchinitiative.ppk.model.condition;
 
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
+import org.monarchinitiative.ppk.model.ontology.Individual;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-public class Condition {
+public class Condition extends Individual {
 	
-	@JsonPropertyDescription("A class in an ontology which this condition instantiates")
-	@JsonProperty("type")
-	private OntologyClass ontologyClass;
-	private String description;
+	String timeOfOnset;
 
 	/**
-	 * @return the description
+	 * @return the timeOfOnset
 	 */
-	public String getDescription() {
-		return description;
+	public String getTimeOfOnset() {
+		return timeOfOnset;
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param timeOfOnset the timeOfOnset to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTimeOfOnset(String timeOfOnset) {
+		this.timeOfOnset = timeOfOnset;
 	}
-
-	/**
-	 * @return the phenotypeOntologyClass
-	 */
-	public OntologyClass getOntologyClass() {
-		return ontologyClass;
-	}
-
-	/**
-	 * @param phenotypeOntologyClass the phenotypeOntologyClass to set
-	 */
-	public void setOntologyClass(OntologyClass phenotypeOntologyClass) {
-		this.ontologyClass = phenotypeOntologyClass;
-	}
+	
+	
 
 	
 	

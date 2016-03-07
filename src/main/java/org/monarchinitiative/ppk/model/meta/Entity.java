@@ -1,6 +1,10 @@
 package org.monarchinitiative.ppk.model.meta;
 
-public class Entity {
+import java.util.Set;
+
+import org.monarchinitiative.ppk.model.ontology.Individual;
+
+public class Entity extends Individual {
 	
 	private String id;
 	private String label;
