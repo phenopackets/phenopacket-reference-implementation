@@ -28,6 +28,10 @@ public abstract class Condition extends ClassInstance {
 	@JsonProperty("offset")
 	@JsonPropertyDescription("the time region in which the condition ceases to manifest")
 	private TemporalRegion timeOfFinishing;
+	
+	@JsonProperty("severity")
+	@JsonPropertyDescription("the degree to which the phenotype is manifest, related to the concept of expressivity, see http://www.ncbi.nlm.nih.gov/books/NBK22090/")
+	private ConditionSeverity severity;
 
 	public Condition(Builder builder) {
 		super(builder);
