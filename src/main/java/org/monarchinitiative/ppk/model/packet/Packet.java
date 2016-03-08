@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.monarchinitiative.ppk.model.condition.DiseaseOccurrenceAssociation;
 import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
+import org.monarchinitiative.ppk.model.environment.EnvironmentAssociation;
 import org.monarchinitiative.ppk.model.genome.Variant;
 import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
@@ -50,6 +51,9 @@ public class Packet {
 	
 	@JsonProperty("diagnosis_profile")
 	private List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociationList;
+
+	@JsonProperty("environment_profile")
+	private List<EnvironmentAssociation> environmentAssociationList;
 
 	public Packet(Builder builder) {
 		id = builder.id;

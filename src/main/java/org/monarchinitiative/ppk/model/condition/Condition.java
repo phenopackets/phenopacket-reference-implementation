@@ -1,5 +1,7 @@
 package org.monarchinitiative.ppk.model.condition;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 
@@ -13,6 +15,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
  *
  */
 public abstract class Condition extends ClassInstance {
+	
+	@JsonProperty("has_location")
+	@JsonPropertyDescription("the location in an organism or cell in which the phenotype manifests")
+	@JsonldProperty("http://purl.obolibrary.org/obo/BFO_0000066")
+	private OrganismalSite hasLocation;
 	
 	@JsonProperty("onset")
 	@JsonPropertyDescription("the time region in which the condition is first manifest")
@@ -60,6 +67,24 @@ public abstract class Condition extends ClassInstance {
 		this.timeOfFinishing = timeOfFinishing;
 	}
 	
+	
+	
+	/**
+	 * @return the hasLocation
+	 */
+	public OrganismalSite getHasLocation() {
+		return hasLocation;
+	}
+
+	/**
+	 * @param hasLocation the hasLocation to set
+	 */
+	public void setHasLocation(OrganismalSite hasLocation) {
+		this.hasLocation = hasLocation;
+	}
+
+
+
 	public abstract static class Builder extends ClassInstance.Builder {
 		protected TemporalRegion timeOfOnset;
 		protected TemporalRegion timeOfFinishing;
