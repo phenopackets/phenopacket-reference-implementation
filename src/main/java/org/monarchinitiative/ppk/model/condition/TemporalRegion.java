@@ -1,6 +1,5 @@
 package org.monarchinitiative.ppk.model.condition;
 
-import java.util.Date;
 
 import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 
@@ -18,34 +17,34 @@ import org.monarchinitiative.ppk.model.ontology.ClassInstance;
  */
 public class TemporalRegion extends ClassInstance {
 	
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 
 	/**
 	 * @return the startTime
 	 */
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
 	/**
 	 * @param startTime the startTime to set
 	 */
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
 	/**
 	 * @return the endTime
 	 */
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
 	/**
 	 * @param endTime the endTime to set
 	 */
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	
