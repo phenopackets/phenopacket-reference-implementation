@@ -35,7 +35,7 @@ public class YAMLGeneratorTest {
 		//p.setOntologyClassConjunction(occ);
 
 		PhenotypeAssociation pa = new PhenotypeAssociation();
-		pa.setEntity(e);
+		pa.setEntity(e.getId());
 		pa.setPhenotype(p);
 		pk.addPhenotypeAssociation(pa);
 

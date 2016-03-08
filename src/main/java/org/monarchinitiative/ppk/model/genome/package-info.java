@@ -2,6 +2,8 @@
  * 
  */
 /**
+ * See https://github.com/phenopackets/phenopacket-format/issues/10
+ * 
  * @author cjm
  *
  */

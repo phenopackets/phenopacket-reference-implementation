@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public abstract class Association {
 	
 	@JsonProperty("entity")
-	private Entity entity;
+	private String entity;
 	
 	@JsonProperty("evidence_list")
 	private List<Evidence> evidenceList;
@@ -22,14 +22,14 @@ public abstract class Association {
 	/**
 	 * @return the entity
 	 */
-	public Entity getEntity() {
+	public String getEntity() {
 		return entity;
 	}
 
 	/**
 	 * @param entity the entity to set
 	 */
-	public void setEntity(Entity entity) {
+	public void setEntity(String entity) {
 		this.entity = entity;
 	}
 

@@ -12,6 +12,9 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class PhenotypeTest {
 
 	@Test
@@ -41,9 +44,9 @@ public class PhenotypeTest {
 	}
 	
 	@Test
-	public void builderTest() {
+	public void builderTest() throws JsonProcessingException {
 		Phenotype.Builder pb = new Phenotype.Builder();
-		pb.addType("X:1");
+		pb.addType("X:1").description("test description");
 		Phenotype p = pb.build();
 		
 		Representer representer = new Representer();
@@ -60,6 +63,10 @@ public class PhenotypeTest {
 		Entity e = new Entity();
 		e.setType(EntityType.disease);
 		System.out.println(yaml.dump(e));
+		
+		ObjectMapper m = new ObjectMapper();
+		String s = m.writerWithDefaultPrettyPrinter().writeValueAsString(p);
+		System.out.println(s);
 		
 	}
 

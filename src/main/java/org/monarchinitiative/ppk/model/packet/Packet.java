@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.monarchinitiative.ppk.model.condition.DiseaseOccurrenceAssociation;
 import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
+import org.monarchinitiative.ppk.model.genome.Variant;
 import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
+import org.monarchinitiative.ppk.model.organism.Organism;
+import org.monarchinitiative.ppk.model.organism.Person;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,7 +35,16 @@ public class Packet {
 	//TODO - have a distinct list for each type
 	@JsonProperty("entities")
 	private List<Entity> entities;
-	
+
+	@JsonProperty("variants")
+	private List<Variant> variants;
+
+	@JsonProperty("persons")
+	private List<Person> persons;
+
+	@JsonProperty("organisms")
+	private List<Organism> organisms;
+
 	@JsonProperty("phenotype_profile")
 	private List<PhenotypeAssociation> phenotypeAssociationList;
 	
@@ -95,6 +107,65 @@ public class Packet {
 		if (entities == null)
 			entities = new ArrayList<Entity>();
 		entities.add(entity);
+	}
+	
+	
+
+	/**
+	 * @return the variants
+	 */
+	public List<Variant> getVariants() {
+		return variants;
+	}
+
+	/**
+	 * @param variants the variants to set
+	 */
+	public void setVariants(List<Variant> variants) {
+		this.variants = variants;
+	}
+
+	/**
+	 * @return the persons
+	 */
+	public List<Person> getPersons() {
+		return persons;
+	}
+
+	/**
+	 * @param persons the persons to set
+	 */
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
+	}
+
+	/**
+	 * @return the organisms
+	 */
+	public List<Organism> getOrganisms() {
+		return organisms;
+	}
+
+	/**
+	 * @param organisms the organisms to set
+	 */
+	public void setOrganisms(List<Organism> organisms) {
+		this.organisms = organisms;
+	}
+
+	/**
+	 * @return the diseaseOccurrenceAssociationList
+	 */
+	public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociationList() {
+		return diseaseOccurrenceAssociationList;
+	}
+
+	/**
+	 * @param diseaseOccurrenceAssociationList the diseaseOccurrenceAssociationList to set
+	 */
+	public void setDiseaseOccurrenceAssociationList(
+			List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociationList) {
+		this.diseaseOccurrenceAssociationList = diseaseOccurrenceAssociationList;
 	}
 
 	/**

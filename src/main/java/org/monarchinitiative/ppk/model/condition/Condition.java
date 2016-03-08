@@ -23,6 +23,7 @@ public abstract class Condition extends ClassInstance {
 	private TemporalRegion timeOfFinishing;
 
 	public Condition(Builder builder) {
+		super(builder);
 		this.timeOfOnset = builder.timeOfOnset;
 		this.timeOfFinishing = builder.timeOfFinishing;
 	}

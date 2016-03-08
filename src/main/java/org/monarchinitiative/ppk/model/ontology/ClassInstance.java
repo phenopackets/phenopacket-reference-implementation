@@ -72,12 +72,18 @@ public abstract class ClassInstance {
 	}
 	
 	public static class Builder {
-		List<OntologyClass> typeList = new ArrayList<>();
-		List<OntologyClass> negatedTypeList;
-		String description;
+		private List<OntologyClass> typeList = new ArrayList<>(); 
+		private List<OntologyClass> negatedTypeList;
+		private String description;
 		
 		public Builder addType(String id) {
-			// TODO
+			OntologyClass c = new OntologyClass(id);
+			typeList.add(c);
+			return this;
+		}
+		
+		public Builder description(String description) {
+			this.description = description;
 			return this;
 		}
 
@@ -86,7 +92,9 @@ public abstract class ClassInstance {
 	}
 	
 	public ClassInstance(ClassInstance.Builder builder) {
-		
+		this.typeList = builder.typeList;
+		this.negatedTypeList = builder.negatedTypeList;
+		this.description = builder.description;
 	}
 	public ClassInstance() {
 		

@@ -20,6 +20,16 @@ public class OntologyClass extends OntologyClassExpression {
 	@JsonProperty("label")
 	@JsonPropertyDescription("A string that contains the preferred natural language term to denote the class")
 	String label;
+	
+	public OntologyClass() {
+		super();
+	}
+	
+	
+	public OntologyClass(String id) {
+		super();
+		this.id = id;
+	}
 	/**
 	 * @return the id
 	 */
