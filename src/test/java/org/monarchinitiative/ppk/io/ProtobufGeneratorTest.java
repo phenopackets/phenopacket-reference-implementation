@@ -21,10 +21,10 @@ public class ProtobufGeneratorTest {
 		
 		ObjectMapper mapper = new ProtobufMapper();
 		//TODO: make these compile and pass!
-//		ProtobufSchemaGenerator gen = new ProtobufSchemaGenerator();
-		//mapper.acceptJsonFormatVisitor(c, gen);
-//		ProtobufSchema schemaWrapper = gen.getGeneratedSchema();
-		
+		ProtobufSchemaGenerator gen = new ProtobufSchemaGenerator();
+		mapper.acceptJsonFormatVisitor(c, gen);
+		ProtobufSchema schemaWrapper = gen.getGeneratedSchema();
+		System.out.println(schemaWrapper.getSource().toString());
 	
 	}
 
