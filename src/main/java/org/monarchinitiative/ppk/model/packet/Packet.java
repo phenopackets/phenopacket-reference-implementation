@@ -13,6 +13,12 @@ import org.monarchinitiative.ppk.model.meta.Entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Top level container
+ * 
+ * @author cjm
+ *
+ */
 public class Packet {
 	
 	@JsonProperty("id")

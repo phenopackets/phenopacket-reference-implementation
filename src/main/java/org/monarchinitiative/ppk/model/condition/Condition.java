@@ -15,9 +15,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 public abstract class Condition extends ClassInstance {
 	
 	@JsonProperty("onset")
+	@JsonPropertyDescription("the time region in which the condition is first manifest")
 	private TemporalRegion timeOfOnset;
 
 	@JsonProperty("offset")
+	@JsonPropertyDescription("the time region in which the condition ceases to manifest")
 	private TemporalRegion timeOfFinishing;
 
 	public Condition(Builder builder) {
