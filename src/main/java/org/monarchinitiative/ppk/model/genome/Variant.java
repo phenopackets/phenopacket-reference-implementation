@@ -1,11 +1,15 @@
 package org.monarchinitiative.ppk.model.genome;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
+
 import org.monarchinitiative.ppk.model.meta.Entity;
 
 /**
  * @author cjm
  *
  */
+
+@JsonldType("http://purl.obolibrary.org/obo/SO_0001059")
 public class Variant extends Entity {
 	
 	/**

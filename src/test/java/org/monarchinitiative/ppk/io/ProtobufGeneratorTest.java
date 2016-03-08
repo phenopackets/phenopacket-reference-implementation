@@ -1,6 +1,9 @@
 package org.monarchinitiative.ppk.io;
 
 import org.junit.Test;
+import org.monarchinitiative.ppk.model.condition.Phenotype;
+import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
+import org.monarchinitiative.ppk.model.meta.Evidence;
 import org.monarchinitiative.ppk.model.packet.Packet;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -15,6 +18,7 @@ public class ProtobufGeneratorTest {
 	public void makeSchemaTest() throws JsonMappingException  {
 		
 		makeSchema(Packet.class);
+		//makeSchema(Evidence.class);
 	}
 	
 	public void makeSchema(Class c) throws JsonMappingException  {

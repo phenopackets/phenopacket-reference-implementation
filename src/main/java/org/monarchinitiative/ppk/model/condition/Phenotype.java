@@ -1,7 +1,12 @@
 package org.monarchinitiative.ppk.model.condition;
 
-import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
+/**
+ * An individual occurrence of a phenotype (a type of condition)
+ * 
+ * @author cjm
+ *
+ */
 public class Phenotype extends Condition {
 	
 	public Phenotype(Phenotype.Builder builder) {

@@ -1,8 +1,9 @@
 package org.monarchinitiative.ppk.model.meta;
 
-public class Evidence {
+import org.monarchinitiative.ppk.model.ontology.ClassInstance;
+
+public class Evidence extends ClassInstance {
 	
-	private String type;
-	
+
 	
 }
