@@ -1,20 +1,14 @@
 package org.monarchinitiative.ppk.io;
 
-import static org.junit.Assert.*;
-
-import java.util.Collections;
-import java.util.List;
-
 import org.junit.Test;
 import org.monarchinitiative.ppk.model.condition.Phenotype;
 import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
-import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.meta.EntityType;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
-import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 import org.monarchinitiative.ppk.model.packet.Packet;
-import org.monarchinitiative.ppk.model.packet.Profile;
+
+import java.util.Collections;
 
 public class YAMLGeneratorTest {
 
@@ -30,7 +24,7 @@ public class YAMLGeneratorTest {
 		OntologyClass oc = new OntologyClass();
 		oc.setId("X:1");
 		oc.setLabel("foo");
-		p.setTypeList((List<OntologyClass>) Collections.singleton(oc));
+		p.setTypeList(Collections.singletonList(oc));
 		p.setDescription("foo");
 		//p.setOntologyClassConjunction(occ);
 
