@@ -1,13 +1,41 @@
 package org.monarchinitiative.ppk.model.meta;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+
 import java.util.Set;
 
-import org.monarchinitiative.ppk.model.ontology.Individual;
+import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 
-public class Entity extends Individual {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
+/**
+ * An entity encompasses persons or non-human organisms, variants, diseases, genes, cohorts, etc
+ * 
+ * @author cjm
+ *
+ */
+public class Entity extends ClassInstance {
 	
+	
+	public Entity(Builder builder) {
+		super(builder);
+		// TODO Auto-generated constructor stub
+	}
+	public Entity() {
+		super();
+	}
+	@JsonProperty("id")
+	@JsonPropertyDescription("A unique identifier for the entity, can be either URI or CURIE")
+	@JsonldId
 	private String id;
+	
+	@JsonProperty("label")
+	@JsonPropertyDescription("A string that contains the preferred natural language term to denote the entity")
+    @JsonldProperty("http://www.w3.org/2000/01/rdf-schema#label")
 	private String label;
+
 	private EntityType type;
 	
 	/**

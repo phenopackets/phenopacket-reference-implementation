@@ -1,8 +1,24 @@
 package org.monarchinitiative.ppk.model.ontology;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
+/**
+ * An OntologyClass is any individual term or concept in any ontology.
+ * 
+ * Formally, this class corresponds to a Class as defined in https://www.w3.org/TR/owl2-syntax/#Classes
+ * 
+ * @author cjm
+ *
+ */
 public class OntologyClass extends OntologyClassExpression {
 	
+	@JsonProperty("id")
+	@JsonPropertyDescription("A unique ontology class identifier, can be either URI or CURIE")
 	String id;
+	
+	@JsonProperty("label")
+	@JsonPropertyDescription("A string that contains the preferred natural language term to denote the class")
 	String label;
 	/**
 	 * @return the id

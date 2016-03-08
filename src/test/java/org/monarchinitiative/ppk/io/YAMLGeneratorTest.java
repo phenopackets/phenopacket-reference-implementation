@@ -12,7 +12,7 @@ import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.meta.EntityType;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
-import org.monarchinitiative.ppk.model.ontology.Individual;
+import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 import org.monarchinitiative.ppk.model.packet.Packet;
 import org.monarchinitiative.ppk.model.packet.Profile;
 
@@ -30,7 +30,7 @@ public class YAMLGeneratorTest {
 		OntologyClass oc = new OntologyClass();
 		oc.setId("X:1");
 		oc.setLabel("foo");
-		p.setClassList((List<OntologyClass>) Collections.singleton(oc));
+		p.setTypeList((List<OntologyClass>) Collections.singleton(oc));
 		p.setDescription("foo");
 		//p.setOntologyClassConjunction(occ);
 

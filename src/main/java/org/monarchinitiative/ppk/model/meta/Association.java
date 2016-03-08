@@ -4,10 +4,19 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Association {
+/**
+ * An association connects an entity (for example, disease, person or variant) with either
+ * another entity, or with some kind of descriptor (for example, phenotype)
+ * 
+ * @author cjm
+ *
+ */
+public abstract class Association {
 	
 	@JsonProperty("entity")
 	private Entity entity;
+	
+	@JsonProperty("evidence_list")
 	private List<Evidence> evidenceList;
 
 	/**

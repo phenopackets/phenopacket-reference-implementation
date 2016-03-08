@@ -43,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	@JsonSubTypes({  
 	    @Type(value = OntologyClass.class, name = "ontology_class"),  
 	    @Type(value = OntologyNegatedClassExpression.class, name = "complement") }) 
+@Deprecated
 public class OntologyClassExpression {
 	
 	String description;

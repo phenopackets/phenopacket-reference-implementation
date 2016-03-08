@@ -27,15 +27,20 @@
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
 		</dependency>
- <dependency>
-	<groupId>com.fasterxml.jackson.module</groupId>
-	<artifactId>jackson-module-jsonSchema</artifactId>
-	<version>2.7.2</version>
-</dependency>
-                <dependency>
-                  <groupId>org.yaml</groupId>
-                  <artifactId>snakeyaml</artifactId>
-                  <version>1.15</version>
-                </dependency>
+		<dependency>
+			<groupId>com.io-informatics.oss</groupId>
+			<artifactId>jackson-jsonld</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jsonSchema</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.15</version>
+		</dependency>
 	</dependencies>
 </project>
