@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/phenopackets/phenopacket-reference-implementation.svg?branch=master)](https://travis-ci.org/phenopackets/phenopacket-reference-implementation)
+
 Reference implementation for phenopackets/PXF
 
 See https://github.com/phenopackets/phenopacket-format/ for more details.
