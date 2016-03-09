@@ -33,7 +33,7 @@ public class Packet {
 	@JsonldProperty("http://purl.org/dc/elements/1.1/title")
 	String title;
 	
-	//TODO - have a distinct list for each type
+	// ---- ENTITIES ----
 	@JsonProperty("entities")
 	private List<Entity> entities;
 
@@ -46,6 +46,7 @@ public class Packet {
 	@JsonProperty("organisms")
 	private List<Organism> organisms;
 
+	// ---- PROFILES/ASSOCIATIONS ----
 	@JsonProperty("phenotype_profile")
 	private List<PhenotypeAssociation> phenotypeAssociationList;
 	

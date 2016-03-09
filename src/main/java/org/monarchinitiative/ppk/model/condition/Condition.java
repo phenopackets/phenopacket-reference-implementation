@@ -2,6 +2,7 @@ package org.monarchinitiative.ppk.model.condition;
 
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
 
+import org.monarchinitiative.ppk.model.environment.Environment;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 
@@ -32,6 +33,10 @@ public abstract class Condition extends ClassInstance {
 	@JsonProperty("severity")
 	@JsonPropertyDescription("the degree to which the phenotype is manifest, related to the concept of expressivity, see http://www.ncbi.nlm.nih.gov/books/NBK22090/")
 	private ConditionSeverity severity;
+	
+	@JsonProperty("environment")
+	@JsonPropertyDescription("the environment in which the phenotype is expressed")
+	private Environment environment;
 
 	public Condition(Builder builder) {
 		super(builder);

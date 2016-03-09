@@ -1,5 +1,7 @@
 package org.monarchinitiative.ppk.model.condition;
 
+import java.util.List;
+
 
 /**
  * An individual occurrence of a phenotype (a type of condition)
@@ -9,12 +11,30 @@ package org.monarchinitiative.ppk.model.condition;
  */
 public class Phenotype extends Condition {
 	
+	List<Measurement> measurements;
+	
 	public Phenotype(Phenotype.Builder builder) {
 		super(builder);
 	}
 
 	public Phenotype() {
 		super();
+	}
+
+
+
+	/**
+	 * @return the measurements
+	 */
+	public List<Measurement> getMeasurements() {
+		return measurements;
+	}
+
+	/**
+	 * @param measurements the measurements to set
+	 */
+	public void setMeasurements(List<Measurement> measurements) {
+		this.measurements = measurements;
 	}
 
 

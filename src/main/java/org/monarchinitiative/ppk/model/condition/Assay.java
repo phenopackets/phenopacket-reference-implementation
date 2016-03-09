@@ -1,5 +1,7 @@
 package org.monarchinitiative.ppk.model.condition;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
+
 import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 
 /**
@@ -9,6 +11,7 @@ import org.monarchinitiative.ppk.model.ontology.ClassInstance;
  * @author cjm
  *
  */
+@JsonldType("http://purl.obolibrary.org/obo/OBI_0000070")
 public class Assay extends ClassInstance {
 
 }
