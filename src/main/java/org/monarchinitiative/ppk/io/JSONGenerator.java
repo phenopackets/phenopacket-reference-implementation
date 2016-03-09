@@ -1,21 +1,18 @@
 package org.monarchinitiative.ppk.io;
 
-import org.monarchinitiative.ppk.model.condition.Phenotype;
-import org.yaml.snakeyaml.TypeDescription;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.representer.Representer;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
-public class JSONGenerator {
-	
+public class JsonGenerator {
+
 	public static String render(Object obj) throws JsonProcessingException {
-		
-		ObjectMapper m = new ObjectMapper();
-		String s = m.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-		return s;
+		return prettyJsonString(obj);
 	}
 
+	private static String prettyJsonString(Object obj) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
+		return writer.writeValueAsString(obj);
+	}
 }
