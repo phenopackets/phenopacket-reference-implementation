@@ -1,50 +1,44 @@
 package org.monarchinitiative.ppk.io;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.Map;
 
 public class JsonYamlConverter {
 	
-	public static String renderYAML(Object obj) throws IOException {
+	public static String renderYaml(Object obj) throws IOException {
 
 		// First make JSON representation, using data bindings
-		ObjectMapper m = new ObjectMapper();
-		Object value;
-		String s = m.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+		String json = JsonGenerator.render(obj);
 		
 		// now read, bypassing data bindings
-		Map<String, Object> map = new HashMap<String, Object>();
-		m = new ObjectMapper();
-		map = m.readValue(s, new TypeReference<Map<String, String>>(){});
+		ObjectMapper m = new ObjectMapper();
+		Map<String, Object> map = m.readValue(json, new TypeReference<Map<String, String>>(){});
 		//JsonNode genericObj = m.readTree(s);
 		
 		// now write the generic obj as yaml
-		Representer representer = new Representer();
-		representer.getPropertyUtils().setSkipMissingProperties(true);
-		Constructor constructor = new Constructor();
-		Yaml yaml = new Yaml(constructor, representer);
+		Yaml yaml = makeYaml();
 		return yaml.dump(map);
 	}
-	
-	public Object renderJSON(Object obj) throws JsonProcessingException {
-		ObjectMapper m = new ObjectMapper();
-		Object value;
-		String s = m.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+
+	public Object renderJson(Object obj) throws JsonProcessingException {
+		Yaml yaml = makeYaml();
+		String json = JsonGenerator.render(obj);
+		return yaml.parse(new StringReader(json));
+	}
+
+	private static Yaml makeYaml() {
 		Representer representer = new Representer();
 		representer.getPropertyUtils().setSkipMissingProperties(true);
 		Constructor constructor = new Constructor();
-		Yaml yaml = new Yaml(constructor, representer);
-		return yaml.parse(new StringReader(s));		
+		return new Yaml(constructor, representer);
 	}
 
 }

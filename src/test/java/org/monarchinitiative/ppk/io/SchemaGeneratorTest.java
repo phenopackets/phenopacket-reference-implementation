@@ -18,7 +18,7 @@ public class SchemaGeneratorTest {
 		makeSchema(Packet.class);
 	}
 	
-	public void makeSchema(Class c) throws JsonProcessingException {
+	private void makeSchema(Class c) throws JsonProcessingException {
 		
 		ObjectMapper m = new ObjectMapper();
 		SchemaFactoryWrapper visitor = new SchemaFactoryWrapper();
