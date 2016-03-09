@@ -3,6 +3,8 @@ package org.monarchinitiative.ppk.model.ontology;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
+import java.util.Objects;
+
 /**
  * An OntologyClass is any individual term or concept in any ontology.
  * 
@@ -54,7 +56,27 @@ public class OntologyClass extends OntologyClassExpression {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
 
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		OntologyClass that = (OntologyClass) o;
+		return Objects.equals(id, that.id) &&
+				Objects.equals(label, that.label);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, label);
+	}
+
+	@Override
+	public String toString() {
+		return "OntologyClass{" +
+				"id='" + id + '\'' +
+				", label='" + label + '\'' +
+				'}';
+	}
 }

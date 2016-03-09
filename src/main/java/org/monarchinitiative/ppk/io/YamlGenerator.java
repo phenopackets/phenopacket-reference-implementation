@@ -6,7 +6,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
-public class YAMLGenerator {
+public class YamlGenerator {
 	
 	public String render(Object obj) {
 		Representer representer = new Representer();

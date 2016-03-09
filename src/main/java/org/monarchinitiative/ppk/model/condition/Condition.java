@@ -9,6 +9,8 @@ import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
+import java.util.Objects;
+
 /**
  * An abstract class that encompasses both {@link DiseaseOccurrence}s and {@link Phenotype}s
  * 
@@ -101,6 +103,29 @@ public abstract class Condition extends ClassInstance {
 		
 	}
 
-	
-	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Condition condition = (Condition) o;
+		return Objects.equals(hasLocation, condition.hasLocation) &&
+				Objects.equals(timeOfOnset, condition.timeOfOnset) &&
+				Objects.equals(timeOfFinishing, condition.timeOfFinishing) &&
+				Objects.equals(severity, condition.severity);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(hasLocation, timeOfOnset, timeOfFinishing, severity);
+	}
+
+	@Override
+	public String toString() {
+		return "Condition{" +
+				"hasLocation=" + hasLocation +
+				", timeOfOnset=" + timeOfOnset +
+				", timeOfFinishing=" + timeOfFinishing +
+				", severity=" + severity +
+				'}';
+	}
 }
