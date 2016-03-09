@@ -10,9 +10,9 @@ import org.monarchinitiative.ppk.model.packet.Packet;
 
 import java.util.Collections;
 
-public class YAMLGeneratorTest {
+public class YamlGeneratorTest {
 
-	public Packet makePacket() {
+	private Packet makePacket() {
 		Packet pk = new Packet();
 
 		Entity e = new Entity();
@@ -38,7 +38,7 @@ public class YAMLGeneratorTest {
 
 	@Test
 	public void test() {
-		YAMLGenerator yg = new YAMLGenerator();
+		YamlGenerator yg = new YamlGenerator();
 		Packet pk = makePacket();
 		System.out.println(yg.render(pk));
 	}
