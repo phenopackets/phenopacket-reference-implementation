@@ -45,6 +45,18 @@ public class Organism extends Entity {
 	public void setStrain(OntologyClass strain) {
 		this.strain = strain;
 	}
+	/**
+	 * @return the sex
+	 */
+	public String getSex() {
+		return sex;
+	}
+	/**
+	 * @param sex the sex to set
+	 */
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	
 	
 	
