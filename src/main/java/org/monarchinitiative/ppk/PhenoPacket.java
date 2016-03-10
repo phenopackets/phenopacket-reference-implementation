@@ -1,21 +1,18 @@
-package org.monarchinitiative.ppk.model.packet;
+package org.monarchinitiative.ppk;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.monarchinitiative.ppk.model.condition.DiseaseOccurrenceAssociation;
 import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
 import org.monarchinitiative.ppk.model.environment.EnvironmentAssociation;
 import org.monarchinitiative.ppk.model.genome.Variant;
-import org.monarchinitiative.ppk.model.meta.Association;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.organism.Organism;
 import org.monarchinitiative.ppk.model.organism.Person;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Top level container
@@ -23,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author cjm
  *
  */
-public class Packet {
+public class PhenoPacket {
 	
 	@JsonProperty("id")
 	@JsonldId
@@ -56,12 +53,12 @@ public class Packet {
 	@JsonProperty("environment_profile")
 	private List<EnvironmentAssociation> environmentAssociationList;
 
-	public Packet(Builder builder) {
+	public PhenoPacket(Builder builder) {
 		id = builder.id;
 		title = builder.title;
 	}
 
-	public Packet() {
+	public PhenoPacket() {
 	}
 	
 	
@@ -213,8 +210,8 @@ public class Packet {
 			return this;
 		}
 		
-		public Packet build() {
-			return new Packet(this);
+		public PhenoPacket build() {
+			return new PhenoPacket(this);
 		}
 	}
 	

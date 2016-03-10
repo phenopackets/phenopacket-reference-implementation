@@ -1,20 +1,19 @@
 package org.monarchinitiative.ppk.io;
 
-import org.junit.Test;
-import org.monarchinitiative.ppk.model.packet.Packet;
-
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.protobuf.ProtobufMapper;
 import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchema;
 import com.fasterxml.jackson.dataformat.protobuf.schemagen.ProtobufSchemaGenerator;
+import org.junit.Test;
+import org.monarchinitiative.ppk.PhenoPacket;
 
 public class ProtobufGeneratorTest {
 
 	@Test
 	public void makeSchemaTest() throws JsonMappingException  {
 		
-		makeSchema(Packet.class);
+		makeSchema(PhenoPacket.class);
 		//makeSchema(Evidence.class);
 	}
 	
