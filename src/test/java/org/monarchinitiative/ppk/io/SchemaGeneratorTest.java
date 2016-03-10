@@ -1,21 +1,20 @@
 package org.monarchinitiative.ppk.io;
 
-import org.junit.Test;
-import org.monarchinitiative.ppk.model.condition.Phenotype;
-import org.monarchinitiative.ppk.model.ontology.OntologyClassExpression;
-import org.monarchinitiative.ppk.model.packet.Packet;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
+import org.junit.Test;
+import org.monarchinitiative.ppk.PhenoPacket;
+import org.monarchinitiative.ppk.model.condition.Phenotype;
+import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
 public class SchemaGeneratorTest {
 
 	@Test
 	public void makeSchemaTest() throws JsonProcessingException {
 		
-		makeSchema(Packet.class);
+		makeSchema(PhenoPacket.class);
 	}
 	
 	private void makeSchema(Class c) throws JsonProcessingException {
@@ -37,7 +36,7 @@ public class SchemaGeneratorTest {
 	@Test
 	public void makeOntologySchemaTest() throws JsonProcessingException {
 		
-		makeSchema(OntologyClassExpression.class);
+		makeSchema(OntologyClass.class);
 	}
 
 }

@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author cjm
  *
  */
-public class OntologyClass extends OntologyClassExpression {
+public class OntologyClass {
 	
 	@JsonProperty("id")
 	@JsonPropertyDescription("A unique ontology class identifier, can be either URI or CURIE")
