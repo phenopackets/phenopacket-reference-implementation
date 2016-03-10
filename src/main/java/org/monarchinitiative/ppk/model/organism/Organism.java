@@ -3,14 +3,23 @@ package org.monarchinitiative.ppk.model.organism;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
 /**
  * @author cjm
  *
  */
 public class Organism extends Entity {
 	
+	@JsonProperty("taxon")
+	@JsonPropertyDescription("points to an instance of the taxon to which this belongs")
 	private OntologyClass taxon;
 	private OntologyClass strain;
+	
+	@JsonProperty("sex")
+	@JsonPropertyDescription("code for the biological sex of the organism. Mappings from codes are in JSON-LD context")
+	private String sex;
 	
 	/**
 	 * @return the taxon
