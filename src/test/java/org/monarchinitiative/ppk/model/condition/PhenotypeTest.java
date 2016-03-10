@@ -1,6 +1,5 @@
 package org.monarchinitiative.ppk.model.condition;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 import org.monarchinitiative.ppk.io.JsonGenerator;
 import org.monarchinitiative.ppk.io.YamlGenerator;
@@ -13,11 +12,9 @@ public class PhenotypeTest {
 	private final YamlGenerator yamlGenerator = new YamlGenerator();
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		Phenotype p = new Phenotype();
-		OntologyClass oc = new OntologyClass();
-		oc.setId("X:1");
-		oc.setLabel("foo");
+		OntologyClass oc = new OntologyClass.Builder("X:1").setLabel("foo").build();
 		p.setDescription("foo");
 		//p.setOntologyClassConjunction(oc);
 
@@ -31,7 +28,7 @@ public class PhenotypeTest {
 	}
 	
 	@Test
-	public void builderTest() throws JsonProcessingException {
+	public void builderTest() throws Exception {
 		Phenotype.Builder pb = new Phenotype.Builder();
 		pb.addType("X:1").description("test description");
 		Phenotype p = pb.build();

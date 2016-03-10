@@ -17,20 +17,15 @@ public class OntologyClass {
 	
 	@JsonProperty("id")
 	@JsonPropertyDescription("A unique ontology class identifier, can be either URI or CURIE")
-	String id;
+	final String id;
 	
 	@JsonProperty("label")
 	@JsonPropertyDescription("A string that contains the preferred natural language term to denote the class")
-	String label;
+	final String label;
 	
-	public OntologyClass() {
-		super();
-	}
-	
-	
-	public OntologyClass(String id) {
-		super();
-		this.id = id;
+	private OntologyClass(Builder builder) {
+		this.id = builder.id;
+		this.label = builder.label;
 	}
 	/**
 	 * @return the id
@@ -38,25 +33,13 @@ public class OntologyClass {
 	public String getId() {
 		return id;
 	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	/**
 	 * @return the label
 	 */
 	public String getLabel() {
 		return label;
 	}
-	/**
-	 * @param label the label to set
-	 */
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
 
 	@Override
 	public boolean equals(Object o) {
@@ -79,4 +62,23 @@ public class OntologyClass {
 				", label='" + label + '\'' +
 				'}';
 	}
+
+    public static class Builder {
+        String id;
+        String label = "";
+
+        public Builder(String id) {
+            this.id = id;
+        }
+
+        public OntologyClass build() {
+            return new OntologyClass(this);
+        }
+
+        public Builder setLabel(String label) {
+            this.label = label;
+            return this;
+        }
+
+    }
 }

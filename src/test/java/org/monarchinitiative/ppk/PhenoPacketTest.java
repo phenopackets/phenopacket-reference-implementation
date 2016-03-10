@@ -2,7 +2,7 @@ package org.monarchinitiative.ppk;
 
 import org.junit.Test;
 import org.monarchinitiative.ppk.io.JsonGenerator;
-import org.monarchinitiative.ppk.io.JsonYamlConverter;
+import org.monarchinitiative.ppk.io.YamlGenerator;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class PhenoPacketTest {
 		assertEquals(title, pk.getTitle());
 
 		System.out.println(JsonGenerator.render(pk));
-		System.out.println(JsonYamlConverter.renderYaml(pk));
+		System.out.println(YamlGenerator.render(pk));
 
 	}
 

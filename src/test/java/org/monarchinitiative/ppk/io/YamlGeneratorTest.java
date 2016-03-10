@@ -1,19 +1,19 @@
 package org.monarchinitiative.ppk.io;
 
 import org.junit.Test;
+import org.monarchinitiative.ppk.PhenoPacket;
 import org.monarchinitiative.ppk.model.condition.Phenotype;
 import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
 import org.monarchinitiative.ppk.model.meta.Entity;
 import org.monarchinitiative.ppk.model.meta.EntityType;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
-import org.monarchinitiative.ppk.model.packet.Packet;
 
 import java.util.Collections;
 
 public class YamlGeneratorTest {
 
-	private Packet makePacket() {
-		Packet pk = new Packet();
+	private PhenoPacket makePhenoPacket() {
+		PhenoPacket pk = new PhenoPacket();
 
 		Entity e = new Entity();
 		e.setType(EntityType.disease);
@@ -21,10 +21,8 @@ public class YamlGeneratorTest {
 
 		Phenotype p = new Phenotype();
 		//OntologyClassConjunction occ = new OntologyClassConjunction();
-		OntologyClass oc = new OntologyClass();
-		oc.setId("X:1");
-		oc.setLabel("foo");
-		p.setTypeList(Collections.singletonList(oc));
+		OntologyClass oc = new OntologyClass.Builder("X:1").setLabel("foo").build();
+		p.setTypes(Collections.singletonList(oc));
 		p.setDescription("foo");
 		//p.setOntologyClassConjunction(occ);
 
@@ -37,9 +35,9 @@ public class YamlGeneratorTest {
 	}
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		YamlGenerator yg = new YamlGenerator();
-		Packet pk = makePacket();
+		PhenoPacket pk = makePhenoPacket();
 		System.out.println(yg.render(pk));
 	}
 

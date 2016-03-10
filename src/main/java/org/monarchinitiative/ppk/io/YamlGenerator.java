@@ -1,22 +1,16 @@
 package org.monarchinitiative.ppk.io;
 
-import org.monarchinitiative.ppk.model.condition.Phenotype;
-import org.yaml.snakeyaml.TypeDescription;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.representer.Representer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class YamlGenerator {
 	
-	public String render(Object obj) {
-		Representer representer = new Representer();
-		representer.getPropertyUtils().setSkipMissingProperties(true);
-
-		
-		Constructor constructor = new Constructor();
-		constructor.addTypeDescription(new TypeDescription(Phenotype.class, "!test"));
-		Yaml yaml = new Yaml(constructor, representer);
-		return yaml.dump(obj);
+	public static String render(Object obj) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+		ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
+		return writer.writeValueAsString(obj);
 	}
 
 }
