@@ -8,3 +8,15 @@ This provides a reference java implementation for PXF. Jackson
 annotations are used to describe the mapping to the JSON serialization
 of PXF. We are also experimenting with generating the JSON Schema from
 the reference implementation.
+
+=== 
+
+INSTALL
+
+./gradlew jar
+
+- or - 
+
+mvn package
+
+

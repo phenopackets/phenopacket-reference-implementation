@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.monarchinitiative.ppk'
+version = '0.0.1-SNAPSHOT'
+
+description = """ppk-model"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version:'18.0'
+    compile(group: 'com.io-informatics.oss', name: 'jackson-jsonld', version:'0.0.5') {
+exclude(module: 'jackson-annotations')
+exclude(module: 'jackson-core')
+exclude(module: 'jackson-databind')
+    }
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jsonSchema', version:'2.7.2'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version:'2.5.4'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-protobuf', version:'2.7.2'
+    compile group: 'junit', name: 'junit', version:'4.12'
+}
