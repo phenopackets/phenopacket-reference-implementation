@@ -23,6 +23,8 @@ public class OntologyClass {
 	@JsonPropertyDescription("A string that contains the preferred natural language term to denote the class")
 	final String label;
 	
+	
+	
 	private OntologyClass(Builder builder) {
 		this.id = builder.id;
 		this.label = builder.label;
