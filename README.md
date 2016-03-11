@@ -15,8 +15,3 @@ INSTALL
 
 ./gradlew jar
 
-- or - 
-
-mvn package
-
-
