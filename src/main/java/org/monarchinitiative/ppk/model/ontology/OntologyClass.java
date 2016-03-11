@@ -1,7 +1,9 @@
 package org.monarchinitiative.ppk.model.ontology;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ import java.util.Objects;
  * @author cjm
  *
  */
+@JsonDeserialize(builder = OntologyClass.Builder.class)
 public class OntologyClass {
 	
 	@JsonProperty("id")
@@ -66,15 +69,14 @@ public class OntologyClass {
 	}
 
     public static class Builder {
+
         String id;
+        @JsonProperty
         String label = "";
 
-        public Builder(String id) {
+        @JsonCreator
+        public Builder(@JsonProperty("id") String id) {
             this.id = id;
-        }
-
-        public OntologyClass build() {
-            return new OntologyClass(this);
         }
 
         public Builder setLabel(String label) {
@@ -82,5 +84,8 @@ public class OntologyClass {
             return this;
         }
 
+        public OntologyClass build() {
+            return new OntologyClass(this);
+        }
     }
 }
