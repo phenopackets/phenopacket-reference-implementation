@@ -1,6 +1,6 @@
 persons:
   - id: #1
-    ##date_of_birth: 1999-01-01
+    date_of_birth: 1999-01-01
     sex: M
   - id: #2
     sex: M

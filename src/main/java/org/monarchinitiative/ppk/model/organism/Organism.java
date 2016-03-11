@@ -21,6 +21,9 @@ public class Organism extends Entity {
 	@JsonPropertyDescription("code for the biological sex of the organism. Mappings from codes are in JSON-LD context")
 	private String sex;
 	
+	@JsonProperty("date_of_birth")
+	private String dateOfBirth;
+	
 	/**
 	 * @return the taxon
 	 */
@@ -56,6 +59,18 @@ public class Organism extends Entity {
 	 */
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	/**
+	 * @return the dateOfBirth
+	 */
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+	/**
+	 * @param dateOfBirth the dateOfBirth to set
+	 */
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 	
 	
