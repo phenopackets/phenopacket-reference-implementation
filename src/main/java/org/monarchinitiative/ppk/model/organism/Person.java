@@ -7,8 +7,8 @@ import org.monarchinitiative.ppk.model.meta.Entity;
  *
  */
 public class Person extends Organism {
-	
-	
-	
+
+
+
 
 }

@@ -9,8 +9,6 @@ import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
 public class PhenotypeTest {
 
-	private final YamlGenerator yamlGenerator = new YamlGenerator();
-
 	@Test
 	public void test() throws Exception {
 		Phenotype p = new Phenotype();
@@ -18,12 +16,12 @@ public class PhenotypeTest {
 		p.setDescription("foo");
 		//p.setOntologyClassConjunction(oc);
 
-		String output = yamlGenerator.render(p);
-		System.out.println(output);
+		System.out.println(YamlGenerator.render(p));
 		
 		Entity e = new Entity();
 		e.setType(EntityType.disease);
-		System.out.println(yamlGenerator.render(e));
+
+		System.out.println(YamlGenerator.render(e));
 		
 	}
 	
@@ -33,14 +31,15 @@ public class PhenotypeTest {
 		pb.addType("X:1").description("test description");
 		Phenotype p = pb.build();
 
-		String output = yamlGenerator.render(p);
-		System.out.println(output);
-		
+		System.out.println(JsonGenerator.render(p));
+		System.out.println(YamlGenerator.render(p));
+
 		Entity e = new Entity();
 		e.setType(EntityType.disease);
-		System.out.println(yamlGenerator.render(e));
-		System.out.println(JsonGenerator.render(p));
-		
+
+		System.out.println(JsonGenerator.render(e));
+		System.out.println(YamlGenerator.render(e));
+
 	}
 
 }

@@ -1,0 +1,31 @@
+persons:
+  - id: #1
+    date_of_birth: 1999-01-01
+    sex: M
+  - id: #2
+    sex: M
+  - id: #3
+    sex: M
+phenotype_profile:
+  - entity: #1
+    phenotype:
+      types:
+        - id: HP:0003560
+          label: Muscular dystrophy
+      onset:
+        types:
+          - id: HP:0003584
+            label: Late onset
+      description: additional notes on this phenotype here
+    evidence:
+      - types:
+          id: TAS
+        source:
+          id: PMID:23455423
+          title: Mutations in prion-like domains in hnRNPA2B1 and hnRNPA1 cause multisystem proteinopathy and ALS
+  - entity: #1
+    phenotype:
+      types:
+        - id: HP:0007354
+          label: Amyotrophic lateral sclerosis
+     
