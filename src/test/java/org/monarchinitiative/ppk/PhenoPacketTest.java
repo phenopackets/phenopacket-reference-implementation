@@ -4,18 +4,20 @@ import org.junit.Test;
 import org.monarchinitiative.ppk.io.JsonGenerator;
 import org.monarchinitiative.ppk.io.YamlGenerator;
 import org.monarchinitiative.ppk.io.YamlReader;
-import org.monarchinitiative.ppk.model.organism.Person;
+import org.monarchinitiative.ppk.model.association.PhenotypeAssociation;
 import org.monarchinitiative.ppk.model.condition.Phenotype;
-import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
-import org.monarchinitiative.ppk.model.genome.Variant;
-import org.monarchinitiative.ppk.model.meta.EntityType;
+import org.monarchinitiative.ppk.model.entity.Person;
+import org.monarchinitiative.ppk.model.entity.Variant;
+import org.monarchinitiative.ppk.model.meta.Evidence;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
 import java.io.IOException;
-import java.util.List;
+import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PhenoPacketTest {
 
@@ -34,8 +36,7 @@ public class PhenoPacketTest {
 
 	@Test
 	public void testFromFile() throws IOException {
-		ClassLoader classLoader = getClass().getClassLoader();
-		PhenoPacket packet = YamlReader.readFile(classLoader.getResource("condition/person-phenotype-example2.yaml").getFile());
+		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/condition/person-phenotype-example2.yaml").toFile());
 		System.out.println(YamlGenerator.render(packet));
 		List<Person> persons = packet.getPersons();
 		assertTrue(persons.size() == 3);
@@ -49,20 +50,20 @@ public class PhenoPacketTest {
 	public void testCanCapturePatientPhenotypesWithVariantInfo() throws IOException {
 
 		Person person = new Person();
+		person.setId("person#1");
 		person.setLabel("Joe Bloggs");
-		// This is a bit silly - a person isn't always a patient. Plus why should I have to set it?
-		// Being a person is an inherent property of being a person....
-		person.setType(EntityType.patient);
 
 		Phenotype phenotype = new Phenotype();
 		phenotype.setTypes(Collections.singletonList(new OntologyClass.Builder("HP:0200055").setLabel("Small hands").build()));
 
-		PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation();
-		patientPhenotypeAssociation.setPhenotype(phenotype);
-		//shouldn't setEntity actually require an Entity? If I call person.getId() - id is null in this case - then the association is lost.
-		patientPhenotypeAssociation.setEntity(person.getLabel());
-
+		PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Builder(phenotype)
+																						.setEntity(person)
+				.addEvidence(new Evidence())
+				.addEvidence(new Evidence())
+																						.build();
 		Variant personVariant = new Variant();
+		personVariant.setId("variant#1");
+		personVariant.setLabel("c.1234A>G");
 		personVariant.setDescriptionHGVS("c.1234A>G");
 
 		//How can I associate the variant with the person? If there are multiple people in the phenopacket, must they all have the same variant?
@@ -74,6 +75,7 @@ public class PhenoPacketTest {
 		pk.addEntity(person);
 		pk.setPersons(Collections.singletonList(person));
 		pk.addPhenotypeAssociation(patientPhenotypeAssociation);
+		pk.addEntity(personVariant);
 		pk.setVariants(Collections.singletonList(personVariant));
 
 		assertEquals(id, pk.getId());

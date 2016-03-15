@@ -3,8 +3,8 @@ package org.monarchinitiative.ppk.model.condition;
 import org.junit.Test;
 import org.monarchinitiative.ppk.io.JsonGenerator;
 import org.monarchinitiative.ppk.io.YamlGenerator;
-import org.monarchinitiative.ppk.model.meta.Entity;
-import org.monarchinitiative.ppk.model.meta.EntityType;
+import org.monarchinitiative.ppk.model.entity.Disease;
+import org.monarchinitiative.ppk.model.entity.Entity;
 import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
 public class PhenotypeTest {
@@ -18,8 +18,7 @@ public class PhenotypeTest {
 
 		System.out.println(YamlGenerator.render(p));
 		
-		Entity e = new Entity();
-		e.setType(EntityType.disease);
+		Entity e = new Disease();
 
 		System.out.println(YamlGenerator.render(e));
 		
@@ -34,8 +33,7 @@ public class PhenotypeTest {
 		System.out.println(JsonGenerator.render(p));
 		System.out.println(YamlGenerator.render(p));
 
-		Entity e = new Entity();
-		e.setType(EntityType.disease);
+		Entity e = new Disease();
 
 		System.out.println(JsonGenerator.render(e));
 		System.out.println(YamlGenerator.render(e));

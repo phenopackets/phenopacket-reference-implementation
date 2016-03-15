@@ -1,12 +1,12 @@
 package org.monarchinitiative.ppk.io;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.monarchinitiative.ppk.PhenoPacket;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.monarchinitiative.ppk.PhenoPacket;
+import org.monarchinitiative.ppk.model.entity.Entity;
+
+import java.io.File;
+import java.io.IOException;
 
 public class YamlReader {
 	
@@ -15,6 +15,8 @@ public class YamlReader {
 	}
 	public static PhenoPacket readFile(File file) throws IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+		objectMapper.addMixIn(Entity.class, EntityMixin.class);
+//		objectMapper.addMixIn(Condition.class, ConditionMixin.class);
 		return objectMapper.readValue(file, PhenoPacket.class);
 	}
 

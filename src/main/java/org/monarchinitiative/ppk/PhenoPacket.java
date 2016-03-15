@@ -3,13 +3,13 @@ package org.monarchinitiative.ppk;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
-import org.monarchinitiative.ppk.model.condition.DiseaseOccurrenceAssociation;
-import org.monarchinitiative.ppk.model.condition.PhenotypeAssociation;
-import org.monarchinitiative.ppk.model.environment.EnvironmentAssociation;
-import org.monarchinitiative.ppk.model.genome.Variant;
-import org.monarchinitiative.ppk.model.meta.Entity;
-import org.monarchinitiative.ppk.model.organism.Organism;
-import org.monarchinitiative.ppk.model.organism.Person;
+import org.monarchinitiative.ppk.model.association.DiseaseOccurrenceAssociation;
+import org.monarchinitiative.ppk.model.association.EnvironmentAssociation;
+import org.monarchinitiative.ppk.model.association.PhenotypeAssociation;
+import org.monarchinitiative.ppk.model.entity.Entity;
+import org.monarchinitiative.ppk.model.entity.Organism;
+import org.monarchinitiative.ppk.model.entity.Person;
+import org.monarchinitiative.ppk.model.entity.Variant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,7 +173,6 @@ public class PhenoPacket {
 	/**
 	 * @return the phenotype_profile
 	 */
-	@JsonProperty("phenotype_profile")
 	public List<PhenotypeAssociation> getPhenotypeAssociationList() {
 		return phenotypeAssociationList;
 	}
@@ -181,15 +180,13 @@ public class PhenoPacket {
 	/**
 	 * @param phenotype_profile the phenotype_profile to set
 	 */
-	@JsonProperty("phenotype_profile")
 	public void setPhenotypeAssociationList(List<PhenotypeAssociation> phenotype_profile) {
 		this.phenotypeAssociationList = phenotype_profile;
 	}
 
-	@JsonProperty("phenotype_profile")
 	public void addPhenotypeAssociation(PhenotypeAssociation a) {
 		if (phenotypeAssociationList == null)
-			phenotypeAssociationList = new ArrayList<PhenotypeAssociation>();
+			phenotypeAssociationList = new ArrayList<>();
 		phenotypeAssociationList.add(a);
 	}
 

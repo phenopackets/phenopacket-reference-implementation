@@ -1,19 +1,16 @@
 package org.monarchinitiative.ppk.model.condition;
 
-import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
-
-import org.monarchinitiative.ppk.model.environment.Environment;
-import org.monarchinitiative.ppk.model.ontology.OntologyClass;
-import org.monarchinitiative.ppk.model.ontology.ClassInstance;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+import org.monarchinitiative.ppk.model.environment.Environment;
+import org.monarchinitiative.ppk.model.ontology.ClassInstance;
 
 import java.util.Objects;
 
 /**
  * An abstract class that encompasses both {@link DiseaseOccurrence}s and {@link Phenotype}s
- * 
+ *
  * @author cjm
  *
  */

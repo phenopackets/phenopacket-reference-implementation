@@ -1,13 +1,17 @@
 persons:
-  - id: #1
+  - !<person>
+    id: '#1'
     date_of_birth: 1999-01-01
     sex: M
-  - id: #2
+  - !<person>
+    id: '#2'
     sex: M
-  - id: #3
+  - !<person>
+    id: '#3'
     sex: M
 phenotype_profile:
-  - entity: #1
+  - entity: !<person>
+      id: '#1'
     phenotype:
       types:
         - id: HP:0003560

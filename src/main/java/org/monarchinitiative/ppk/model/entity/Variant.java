@@ -1,8 +1,6 @@
-package org.monarchinitiative.ppk.model.genome;
+package org.monarchinitiative.ppk.model.entity;
 
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
-
-import org.monarchinitiative.ppk.model.meta.Entity;
 
 /**
  * 
@@ -15,7 +13,12 @@ import org.monarchinitiative.ppk.model.meta.Entity;
 
 @JsonldType("http://purl.obolibrary.org/obo/SO_0001059")
 public class Variant extends GenomicEntity {
-	
+
+	@Override
+	public EntityType getType() {
+		return EntityType.VARIANT;
+	}
+
 	/**
 	 * This is highly preliminary, follow https://github.com/phenopackets/phenopacket-format/issues/10
 	 */

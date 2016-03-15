@@ -1,17 +1,19 @@
-package org.monarchinitiative.ppk.model.organism;
-
-import org.monarchinitiative.ppk.model.meta.Entity;
-import org.monarchinitiative.ppk.model.ontology.OntologyClass;
+package org.monarchinitiative.ppk.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import org.monarchinitiative.ppk.model.ontology.ClassInstance;
+import org.monarchinitiative.ppk.model.ontology.OntologyClass;
 
 /**
  * @author cjm
  *
  */
-public class Organism extends Entity {
-	
+public class Organism extends ClassInstance implements Entity {
+
+	private String id;
+	private String label;
+
 	@JsonProperty("taxon")
 	@JsonPropertyDescription("points to an instance of the taxon to which this belongs")
 	private OntologyClass taxon;
@@ -23,7 +25,31 @@ public class Organism extends Entity {
 	
 	@JsonProperty("date_of_birth")
 	private String dateOfBirth;
-	
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public String getLabel() {
+		return label;
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.ORGANISM;
+	}
+
 	/**
 	 * @return the taxon
 	 */
@@ -72,8 +98,16 @@ public class Organism extends Entity {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Organism{" +
+				"id='" + id + '\'' +
+				", label='" + label + '\'' +
+				", taxon=" + taxon +
+				", strain=" + strain +
+				", sex='" + sex + '\'' +
+				", dateOfBirth='" + dateOfBirth + '\'' +
+				'}';
+	}
 }
