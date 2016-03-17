@@ -1,5 +1,6 @@
 package org.monarchinitiative.ppk.io;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -17,6 +18,7 @@ public class JsonGenerator {
 
     private static String prettyJsonString(Object obj) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.addMixIn(Entity.class, EntityMixin.class);
         mapper.addMixIn(Condition.class, ConditionMixin.class);
         ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
