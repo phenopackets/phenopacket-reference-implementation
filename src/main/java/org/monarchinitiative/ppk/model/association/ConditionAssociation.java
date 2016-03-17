@@ -6,12 +6,12 @@ import org.monarchinitiative.ppk.model.entity.Entity;
 /**
  * @author Jules Jacobsen <jules.jacobsen@sanger.ac.uk>
  */
-public class GenericAssociation<T extends Entity, S extends Condition> {
+public class ConditionAssociation<T extends Entity, S extends Condition> {
 
     private T entity;
     private S condition;
 
-    public GenericAssociation(T entity, S condition) {
+    public ConditionAssociation(T entity, S condition) {
         this.entity = entity;
         this.condition = condition;
     }

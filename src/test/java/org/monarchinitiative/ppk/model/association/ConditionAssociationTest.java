@@ -9,7 +9,7 @@ import org.monarchinitiative.ppk.model.entity.Person;
 /**
  * @author Jules Jacobsen <jules.jacobsen@sanger.ac.uk>
  */
-public class GenericAssociationTest {
+public class ConditionAssociationTest {
 
     @Test
     public void testTypesNotErasedWhenSerialised() throws Exception {
@@ -21,7 +21,7 @@ public class GenericAssociationTest {
 
         Phenotype phenotype = pb.build();
 
-        GenericAssociation<Person, Phenotype> association =  new GenericAssociation<>(person, phenotype);
+        ConditionAssociation<Person, Phenotype> association =  new ConditionAssociation<>(person, phenotype);
 
         System.out.println(JsonGenerator.render(association));
         System.out.println(YamlGenerator.render(association));
