@@ -18,6 +18,8 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -45,6 +47,30 @@ public class PhenoPacketTest {
 		// order is preserved
 		assertTrue(persons.get(0).getSex().equals("M"));
 		assertEquals("#1", persons.get(0).getId());
+	}
+
+	@Test
+	public void testFromFile_PersonVariantPhenotype() throws IOException {
+		PhenoPacket packet = YamlReader.readFile("src/test/resources/person-variant-phenotype-example1.yaml");
+		System.out.println(YamlGenerator.render(packet));
+
+		assertThat(packet.getId(), equalTo("phenopkt#1"));
+		assertThat(packet.getTitle(), equalTo("Patient X phenotypes and potentially causative variant"));
+
+		List<Person> persons = packet.getPersons();
+		assertThat(persons.size(), equalTo(1));
+		Person person = persons.get(0);
+		assertThat(person.getSex(), equalTo("M"));
+		assertThat(person.getId(), equalTo("person#1"));
+
+		List<Variant> variants = packet.getVariants();
+		assertThat(variants.size(), equalTo(1));
+		Variant variant = variants.get(0);
+		assertThat(variant.getId(), equalTo("variant#1"));
+		assertThat(variant.getDescriptionHGVS(), equalTo("c.1234A>G"));
+
+		List<PhenotypeAssociation> phenotypeAssociations = packet.getPhenotypeAssociations();
+
 	}
 
 	@Test

@@ -38,9 +38,11 @@ public class EvidenceTest {
     @Test
     public void testYamlRead() throws Exception {
         PhenoPacket phenoPacket = YamlReader.readFile("src/test/resources/condition/person-phenotype-example2.yaml");
-        PhenotypeAssociation phenotypeAssociation = phenoPacket.getPhenotypeAssociationList().get(0);
+        PhenotypeAssociation phenotypeAssociation = phenoPacket.getPhenotypeAssociations().get(0);
+
         Evidence evidence = phenotypeAssociation.getEvidence().get(0);
         assertThat(evidence.getSupportingPublications().isEmpty(), is(false));
+
         Publication publication = evidence.getSupportingPublications().get(0);
         assertThat(publication.getId(), equalTo("PMID:23455423"));
         assertThat(publication.getTitle(), equalTo("Mutations in prion-like domains in hnRNPA2B1 and hnRNPA1 cause multisystem proteinopathy and ALS"));

@@ -45,7 +45,7 @@ public class PhenoPacket {
 
 	// ---- PROFILES/ASSOCIATIONS ----
 	@JsonProperty("phenotype_profile")
-	private List<PhenotypeAssociation> phenotypeAssociationList;
+	private List<PhenotypeAssociation> phenotypeAssociations;
 	
 	@JsonProperty("diagnosis_profile")
 	private List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociationList;
@@ -173,21 +173,21 @@ public class PhenoPacket {
 	/**
 	 * @return the phenotype_profile
 	 */
-	public List<PhenotypeAssociation> getPhenotypeAssociationList() {
-		return phenotypeAssociationList;
+	public List<PhenotypeAssociation> getPhenotypeAssociations() {
+		return phenotypeAssociations;
 	}
 
 	/**
 	 * @param phenotype_profile the phenotype_profile to set
 	 */
-	public void setPhenotypeAssociationList(List<PhenotypeAssociation> phenotype_profile) {
-		this.phenotypeAssociationList = phenotype_profile;
+	public void setPhenotypeAssociations(List<PhenotypeAssociation> phenotype_profile) {
+		this.phenotypeAssociations = phenotype_profile;
 	}
 
 	public void addPhenotypeAssociation(PhenotypeAssociation a) {
-		if (phenotypeAssociationList == null)
-			phenotypeAssociationList = new ArrayList<>();
-		phenotypeAssociationList.add(a);
+		if (phenotypeAssociations == null)
+			phenotypeAssociations = new ArrayList<>();
+		phenotypeAssociations.add(a);
 	}
 
 	public static class Builder {
