@@ -3,6 +3,9 @@ package org.phenopackets.api.model.condition;
 
 import org.phenopackets.api.model.ontology.ClassInstance;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
 /**
  * A temporal region is an instance of any time interval, marked by a start boundary and
  * an end boundary.
@@ -11,17 +14,48 @@ import org.phenopackets.api.model.ontology.ClassInstance;
  * 
  *  - ontology classes (for example, anything from the 'age of onset' branch of HP)
  *  - start and end timestamps
+ *  
+ *  
+ * Note that two TemporalRegions can be combined to give a duration. For example,
+ * if a phenotype has an onset of TR1, and ceases during TR2,
+ * then this can be visualized:
+ * 
+ * <pre>
+ * 
+ *     tr1s      tr1e                     tr2s                 tr2e
+ *     |          |                        |                    |
+ *     |          |                        |                    |
+ *     [    TR1   ]>>>>>>>>>>>>>>>>>>>>>>>>[         TR2        ]
+ * </pre>
+ * 
+ * Where tr1s is the {@link TemporalRegion.getStartTime()} of TR1, etc.
+ * Note that the duration the organism has the phenotype is <code>tr2e-tr1s</code>
+ * 
+ * This allows us an arbitrary degree of fuzziness when recording onset and offset.
+ * 
+ * If all we know is that the {@link Condition} started at some point during the postnatal
+ * period, we can have a large temporal extent for TR1 (or we can simply describe TR1
+ * using the HPO class for postnatal onset). Alternatively, if we know the precise moment
+ * at which the phenotype started, we can create an extent of 0, with tr1s==tr2s
+ * 
+ * TODO: provide methods for calculating on dates,
+ * see https://github.com/phenopackets/phenopacket-reference-implementation/issues/10
  * 
  * @author cjm
  *
  */
 public class TemporalRegion extends ClassInstance {
 	
+	@JsonProperty("start_time")
+	@JsonPropertyDescription("the date or time at which the interval starts")
 	private String startTime;
+	
+	@JsonProperty("end_time")
+	@JsonPropertyDescription("the date or time at which the interval ends")
 	private String endTime;
 
 	/**
-	 * @return the startTime
+	 * @return the leftmost boundary of this temporal region
 	 */
 	public String getStartTime() {
 		return startTime;
@@ -35,7 +69,7 @@ public class TemporalRegion extends ClassInstance {
 	}
 
 	/**
-	 * @return the endTime
+	 * @return the leftmost boundary of this temporal region
 	 */
 	public String getEndTime() {
 		return endTime;
@@ -47,7 +81,5 @@ public class TemporalRegion extends ClassInstance {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	
-	
 	
 }

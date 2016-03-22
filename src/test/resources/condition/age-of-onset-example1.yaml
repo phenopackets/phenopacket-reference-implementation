@@ -1,0 +1,24 @@
+---
+id: "#"
+title: "age of onset example"
+persons:
+- id: "#1"
+  label: "Joe Bloggs"
+  sex: "M"
+phenotype_profile:
+- entity: "person#1"
+  phenotype:
+    types:
+    - id: "HP:0200055"
+      label: "Small hands"
+    onset:
+      description: "during development"
+      types:
+        - id: "HP:0003577"
+          label: "Congenital onset"
+  evidence:
+  - types:
+    - id: "ECO:0000033"
+      label: "TAS"
+    source:
+    - id: "PMID:23455423"
