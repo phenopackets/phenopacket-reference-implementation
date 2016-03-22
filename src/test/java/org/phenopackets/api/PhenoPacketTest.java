@@ -40,7 +40,7 @@ public class PhenoPacketTest {
 	}
 
 	@Test
-	public void testFromFile() throws IOException {
+	public void testFromYaml() throws IOException {
 		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/condition/person-phenotype-example2.yaml").toFile());
 		System.out.println(YamlGenerator.render(packet));
 		List<Person> persons = packet.getPersons();
@@ -51,8 +51,10 @@ public class PhenoPacketTest {
 	}
 
 	@Test
-	public void testFromFile_PersonVariantPhenotype() throws IOException {
+	public void testFromYaml_PersonVariantPhenotype() throws IOException {
 		PhenoPacket packet = YamlReader.readFile("src/test/resources/person-variant-phenotype-example1.yaml");
+
+		System.out.println("Reading in YAML:");
 		System.out.println(YamlGenerator.render(packet));
 
 		assertThat(packet.getId(), equalTo("phenopkt#1"));
@@ -89,6 +91,7 @@ public class PhenoPacketTest {
 		Publication publication = supportingPublications.get(0);
 		assertThat(publication.getId(), equalTo("PMID:23455423"));
 
+		System.out.println("Writing out YAML:");
 		System.out.println(YamlGenerator.render(packet));
 
 	}

@@ -48,10 +48,10 @@ public class PhenoPacket {
 	private List<PhenotypeAssociation> phenotypeAssociations;
 	
 	@JsonProperty("diagnosis_profile")
-	private List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociationList;
+	private List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations;
 
 	@JsonProperty("environment_profile")
-	private List<EnvironmentAssociation> environmentAssociationList;
+	private List<EnvironmentAssociation> environmentAssociations;
 
 	public PhenoPacket(Builder builder) {
 		id = builder.id;
@@ -158,16 +158,16 @@ public class PhenoPacket {
 	/**
 	 * @return the diseaseOccurrenceAssociationList
 	 */
-	public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociationList() {
-		return diseaseOccurrenceAssociationList;
+	public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociations() {
+		return diseaseOccurrenceAssociations;
 	}
 
 	/**
-	 * @param diseaseOccurrenceAssociationList the diseaseOccurrenceAssociationList to set
+	 * @param diseaseOccurrenceAssociations the diseaseOccurrenceAssociationList to set
 	 */
-	public void setDiseaseOccurrenceAssociationList(
-			List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociationList) {
-		this.diseaseOccurrenceAssociationList = diseaseOccurrenceAssociationList;
+	public void setDiseaseOccurrenceAssociations(
+			List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations) {
+		this.diseaseOccurrenceAssociations = diseaseOccurrenceAssociations;
 	}
 
 	/**
