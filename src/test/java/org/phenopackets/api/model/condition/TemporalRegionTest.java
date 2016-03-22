@@ -6,21 +6,26 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import org.phenopackets.api.PhenoPacket;
+import org.phenopackets.api.io.JsonGenerator;
 import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
 import org.phenopackets.api.model.entity.Person;
+import org.phenopackets.api.util.DateTimeUtils;
 
 public class TemporalRegionTest {
 
 	@Test
 	public void testAgeOfOnset() throws IOException {
 		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/condition/age-of-onset-example1.yaml").toFile());
+		//System.out.println(JsonGenerator.render(packet));
 		System.out.println(YamlGenerator.render(packet));
 		List<Person> persons = packet.getPersons();
 		assertTrue(persons.size() == 1);
@@ -46,8 +51,12 @@ public class TemporalRegionTest {
 		System.out.println(YamlGenerator.render(onset));
 		assertEquals("2000-01-01", onset.getStartTime());
 		assertEquals("2015-01-01", offset.getEndTime());
-		//Date d = new SimpleDateFormat("YYYY-MM-DD").parse(onset.getStartTime());
-		//System.out.println(d);
+		Date s = DateTimeUtils.parseDateString(onset.getStartTime());
+		System.out.println(s);
+		Period p = DateTimeUtils.getPeriod(onset);
+		System.out.println(p);
+		Period p2 = DateTimeUtils.getDuration(phenotype);
+		System.out.println(p2); // 15 years
 	}
 
 }

@@ -1,7 +1,15 @@
 package org.phenopackets.api.model.condition;
 
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
+
+import org.apache.commons.lang.time.DateUtils;
 import org.phenopackets.api.model.ontology.ClassInstance;
+import org.phenopackets.api.util.DateTimeUtils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -38,8 +46,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
  * using the HPO class for postnatal onset). Alternatively, if we know the precise moment
  * at which the phenotype started, we can create an extent of 0, with tr1s==tr2s
  * 
- * TODO: provide methods for calculating on dates,
- * see https://github.com/phenopackets/phenopacket-reference-implementation/issues/10
  * 
  * @author cjm
  *
@@ -61,6 +67,7 @@ public class TemporalRegion extends ClassInstance {
 		return startTime;
 	}
 
+
 	/**
 	 * @param startTime the startTime to set
 	 */
@@ -69,11 +76,12 @@ public class TemporalRegion extends ClassInstance {
 	}
 
 	/**
-	 * @return the leftmost boundary of this temporal region
+	 * @return the rightmost boundary of this temporal region
 	 */
 	public String getEndTime() {
 		return endTime;
 	}
+
 
 	/**
 	 * @param endTime the endTime to set
@@ -82,4 +90,9 @@ public class TemporalRegion extends ClassInstance {
 		this.endTime = endTime;
 	}
 	
+	
+
+
+
+
 }

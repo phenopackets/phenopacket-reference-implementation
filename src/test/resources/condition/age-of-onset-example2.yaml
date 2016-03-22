@@ -14,6 +14,7 @@ phenotype_profile:
     onset:
       description: "started shortly after birth"
       start_time: "2000-01-01"
+      end_time: "2000-01-01"
       types:
         - id: "HP:0003623"
           label: "Neonatal onset"
