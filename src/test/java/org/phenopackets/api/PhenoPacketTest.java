@@ -7,6 +7,7 @@ import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
 import org.phenopackets.api.model.condition.Phenotype;
+import org.phenopackets.api.model.entity.EntityType;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 import org.phenopackets.api.model.meta.Evidence;
@@ -62,14 +63,33 @@ public class PhenoPacketTest {
 		Person person = persons.get(0);
 		assertThat(person.getSex(), equalTo("M"));
 		assertThat(person.getId(), equalTo("person#1"));
+		assertThat(person.getType(), equalTo(EntityType.PERSON));
 
 		List<Variant> variants = packet.getVariants();
 		assertThat(variants.size(), equalTo(1));
 		Variant variant = variants.get(0);
 		assertThat(variant.getId(), equalTo("variant#1"));
 		assertThat(variant.getDescriptionHGVS(), equalTo("c.1234A>G"));
+		assertThat(variant.getType(), equalTo(EntityType.VARIANT));
 
 		List<PhenotypeAssociation> phenotypeAssociations = packet.getPhenotypeAssociations();
+		assertThat(phenotypeAssociations.size(), equalTo(1));
+		PhenotypeAssociation phenotypeAssociation = phenotypeAssociations.get(0);
+		assertThat(phenotypeAssociation.getEntityId(), equalTo("person#1"));
+
+		Evidence evidence = phenotypeAssociation.getEvidence().get(0);
+		List<OntologyClass> types = evidence.getTypes();
+		assertThat(types.size(), equalTo(1));
+		OntologyClass ontologyClass = types.get(0);
+		assertThat(ontologyClass.getId(), equalTo("ECO:0000033"));
+		assertThat(ontologyClass.getLabel(), equalTo("TAS"));
+
+		List<Publication> supportingPublications = evidence.getSupportingPublications();
+		assertThat(supportingPublications.size(), equalTo(1));
+		Publication publication = supportingPublications.get(0);
+		assertThat(publication.getId(), equalTo("PMID:23455423"));
+
+		System.out.println(YamlGenerator.render(packet));
 
 	}
 

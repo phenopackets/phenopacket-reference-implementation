@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonDeserialize(builder = PhenotypeAssociation.Builder.class)
-@JsonPropertyOrder({"entity", "evidence", "phenotype"})
+@JsonPropertyOrder({"entity", "phenotype", "evidence"})
 public class PhenotypeAssociation implements Association {
 	
 	private final Phenotype phenotype;

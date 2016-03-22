@@ -8,7 +8,6 @@ persons:
 variants:
 - id: "variant#1"
   descriptionHGVS: "c.1234A>G"
-  type: variant
   label: "c.1234A>G"
 phenotype_profile:
 - entity: "person#1"
