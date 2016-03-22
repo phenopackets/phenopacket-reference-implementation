@@ -5,7 +5,25 @@
 	<artifactId>phenopackets-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>phenopackets-api</name>
+	<name>Phenopackets API</name>
+	<url>https://github.com/phenopackets</url>
+    <inceptionYear>2016</inceptionYear>
+	<licenses>
+		<license>
+			<name>The BSD 3-Clause License</name>
+			<url>https://opensource.org/licenses/BSD-3-Clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:https://github.com/phenopackets/phenopacket-reference-implementation.git</connection>
+		<developerConnection>scm:git:git@github.com:phenopackets/phenopacket-reference-implementation.git</developerConnection>
+		<url>https://github.com/phenopackets/phenopacket-reference-implementation</url>
+	</scm>
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/phenopackets/phenopacket-reference-implementation</url>
+	</ciManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,7 +58,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>18.0</version>
+			<version>19.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.io-informatics.oss</groupId>
