@@ -1,13 +1,13 @@
 persons:
-  - id: #1
+  - id: '#1'
     date_of_birth: 1999-01-01
     sex: M
-  - id: #2
+  - id: '#2'
     sex: M
-  - id: #3
+  - id: '#3'
     sex: M
 phenotype_profile:
-  - entity: #1
+  - entity: '#1'
     phenotype:
       types:
         - id: HP:0003560
@@ -17,13 +17,13 @@ phenotype_profile:
           - id: HP:0003584
             label: Late onset
       description: additional notes on this phenotype here
-    evidence:
+    evidence: 
       - types:
-          id: TAS
+          - id: TAS
         source:
-          id: PMID:23455423
+        - id: PMID:23455423
           title: Mutations in prion-like domains in hnRNPA2B1 and hnRNPA1 cause multisystem proteinopathy and ALS
-  - entity: #1
+  - entity: '#1'
     phenotype:
       types:
         - id: HP:0007354

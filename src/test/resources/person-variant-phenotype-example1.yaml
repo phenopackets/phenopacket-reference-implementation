@@ -1,0 +1,23 @@
+---
+id: "phenopkt#1"
+title: "Patient X phenotypes and potentially causative variant"
+persons:
+- id: "person#1"
+  label: "Joe Bloggs"
+  sex: "M"
+variants:
+- id: "variant#1"
+  descriptionHGVS: "c.1234A>G"
+  label: "c.1234A>G"
+phenotype_profile:
+- entity: "person#1"
+  phenotype:
+    types:
+    - id: "HP:0200055"
+      label: "Small hands"
+  evidence:
+  - types:
+    - id: "ECO:0000033"
+      label: "TAS"
+    source:
+    - id: "PMID:23455423"
