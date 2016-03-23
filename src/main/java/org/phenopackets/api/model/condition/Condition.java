@@ -93,6 +93,36 @@ public abstract class Condition extends ClassInstance {
 
 
 
+	/**
+	 * @return the severity
+	 */
+	public ConditionSeverity getSeverity() {
+		return severity;
+	}
+
+	/**
+	 * @param severity the severity to set
+	 */
+	public void setSeverity(ConditionSeverity severity) {
+		this.severity = severity;
+	}
+
+	/**
+	 * @return the environment
+	 */
+	public Environment getEnvironment() {
+		return environment;
+	}
+
+	/**
+	 * @param environment the environment to set
+	 */
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
+
+
 	public abstract static class Builder extends ClassInstance.Builder {
 		protected TemporalRegion timeOfOnset;
 		protected TemporalRegion timeOfFinishing;
