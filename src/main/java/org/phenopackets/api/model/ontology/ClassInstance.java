@@ -2,6 +2,7 @@ package org.phenopackets.api.model.ontology;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,10 @@ public abstract class ClassInstance {
     }
 
     /**
-     * @param classList the classList to set
+     * @param classes the classList to set
      */
-    public void setTypes(List<OntologyClass> classList) {
-        this.types = classList;
+    public void setTypes(List<OntologyClass> classes) {
+        this.types = ImmutableList.copyOf(classes);
     }
 
     /**
@@ -47,10 +48,10 @@ public abstract class ClassInstance {
     }
 
     /**
-     * @param negatedClassList the negatedClassList to set
+     * @param negatedClasses the negatedClassList to set
      */
-    public void setNegatedTypes(List<OntologyClass> negatedClassList) {
-        this.negatedTypes = negatedClassList;
+    public void setNegatedTypes(List<OntologyClass> negatedClasses) {
+        this.negatedTypes = ImmutableList.copyOf(negatedClasses);
     }
 
     /**
@@ -72,6 +73,7 @@ public abstract class ClassInstance {
         private List<OntologyClass> negatedTypeList;
         private String description;
 
+        //TODO: enable this to work with negatedTypes too
         public Builder addType(String id) {
             OntologyClass c = new OntologyClass.Builder(id).build();
             typeList.add(c);
@@ -84,7 +86,7 @@ public abstract class ClassInstance {
         }
     }
 
-    public ClassInstance(ClassInstance.Builder builder) {
+    public ClassInstance(Builder builder) {
         this.types = builder.typeList;
         this.negatedTypes = builder.negatedTypeList;
         this.description = builder.description;

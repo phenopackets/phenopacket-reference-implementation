@@ -7,7 +7,7 @@ import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
 import org.phenopackets.api.model.condition.Phenotype;
-import org.phenopackets.api.model.entity.EntityType;
+import org.phenopackets.api.model.condition.TemporalRegion;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 import org.phenopackets.api.model.meta.Evidence;
@@ -20,9 +20,9 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class PhenoPacketTest {
 
@@ -43,11 +43,69 @@ public class PhenoPacketTest {
 	public void testFromYaml() throws IOException {
 		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/condition/person-phenotype-example2.yaml").toFile());
 		System.out.println(YamlGenerator.render(packet));
+
 		List<Person> persons = packet.getPersons();
-		assertTrue(persons.size() == 3);
-		// order is preserved
-		assertTrue(persons.get(0).getSex().equals("M"));
-		assertEquals("#1", persons.get(0).getId());
+		assertThat(persons.size(), equalTo(3));
+
+		Person person1 = persons.get(0);
+		assertThat(person1.getId(), equalTo("#1"));
+		assertThat(person1.getSex(), equalTo("M"));
+		assertThat(person1.getDateOfBirth(), equalTo("1999-01-01"));
+
+		Person person2 = persons.get(1);
+		assertThat(person2.getId(), equalTo("#2"));
+		assertThat(person2.getSex(), equalTo("M"));
+		assertThat(person2.getDateOfBirth(), nullValue());
+
+		Person person3 = persons.get(2);
+		assertThat(person3.getId(), equalTo("#3"));
+		assertThat(person3.getSex(), equalTo("M"));
+		assertThat(person3.getDateOfBirth(), nullValue());
+
+		List<PhenotypeAssociation> phenotypeAssociations = packet.getPhenotypeAssociations();
+		assertThat(phenotypeAssociations.size(), equalTo(2));
+		PhenotypeAssociation phenotypeAssociation = phenotypeAssociations.get(0);
+		assertThat(phenotypeAssociation.getEntityId(), equalTo("#1"));
+
+		Phenotype phenotype = phenotypeAssociation.getPhenotype();
+		assertThat(phenotype.getDescription(), equalTo("additional notes on this phenotype here"));
+		List<OntologyClass> phenotypeTypes = phenotype.getTypes();
+		assertThat(phenotypeTypes.size(), equalTo(1));
+		OntologyClass phenotypeClass = phenotypeTypes.get(0);
+		assertThat(phenotypeClass.getId(), equalTo("HP:0003560"));
+		assertThat(phenotypeClass.getLabel(), equalTo("Muscular dystrophy"));
+
+		TemporalRegion onset = phenotype.getTimeOfOnset();
+		List<OntologyClass> onsetTypes = onset.getTypes();
+		assertThat(onsetTypes.size(), equalTo(1));
+		OntologyClass onsetClass = onsetTypes.get(0);
+		assertThat(onsetClass.getId(), equalTo("HP:0003584"));
+		assertThat(onsetClass.getLabel(), equalTo("Late onset"));
+
+		Evidence evidence = phenotypeAssociation.getEvidence().get(0);
+		List<OntologyClass> evidenceTypes = evidence.getTypes();
+		assertThat(evidenceTypes.size(), equalTo(1));
+		OntologyClass evidenceClass = evidenceTypes.get(0);
+		//TODO: this is probably wrong in the source file. Shouldn't it be getId == "ECO:0000033", getLabel == "TAS"
+		assertThat(evidenceClass.getId(), equalTo("TAS"));
+		assertThat(evidenceClass.getLabel(), equalTo(""));
+
+		List<Publication> supportingPublications = evidence.getSupportingPublications();
+		assertThat(supportingPublications.size(), equalTo(1));
+		Publication publication = supportingPublications.get(0);
+		assertThat(publication.getId(), equalTo("PMID:23455423"));
+		assertThat(publication.getTitle(), equalTo("Mutations in prion-like domains in hnRNPA2B1 and hnRNPA1 cause multisystem proteinopathy and ALS"));
+
+		PhenotypeAssociation phenotypeAssociation2 = phenotypeAssociations.get(1);
+		assertThat(phenotypeAssociation2.getEntityId(), equalTo("#1"));
+
+		Phenotype phenotype2 = phenotypeAssociation2.getPhenotype();
+		assertThat(phenotype2.getDescription(), nullValue());
+		List<OntologyClass> phenotypeTypes2 = phenotype2.getTypes();
+		assertThat(phenotypeTypes2.size(), equalTo(1));
+		OntologyClass phenotypeClass2 = phenotypeTypes2.get(0);
+		assertThat(phenotypeClass2.getId(), equalTo("HP:0007354"));
+		assertThat(phenotypeClass2.getLabel(), equalTo("Amyotrophic lateral sclerosis"));
 	}
 
 	@Test
@@ -63,28 +121,33 @@ public class PhenoPacketTest {
 		List<Person> persons = packet.getPersons();
 		assertThat(persons.size(), equalTo(1));
 		Person person = persons.get(0);
-		assertThat(person.getSex(), equalTo("M"));
 		assertThat(person.getId(), equalTo("person#1"));
-		assertThat(person.getType(), equalTo(EntityType.PERSON));
+		assertThat(person.getSex(), equalTo("M"));
 
 		List<Variant> variants = packet.getVariants();
 		assertThat(variants.size(), equalTo(1));
 		Variant variant = variants.get(0);
 		assertThat(variant.getId(), equalTo("variant#1"));
 		assertThat(variant.getDescriptionHGVS(), equalTo("c.1234A>G"));
-		assertThat(variant.getType(), equalTo(EntityType.VARIANT));
 
 		List<PhenotypeAssociation> phenotypeAssociations = packet.getPhenotypeAssociations();
 		assertThat(phenotypeAssociations.size(), equalTo(1));
 		PhenotypeAssociation phenotypeAssociation = phenotypeAssociations.get(0);
 		assertThat(phenotypeAssociation.getEntityId(), equalTo("person#1"));
 
+		Phenotype phenotype = phenotypeAssociation.getPhenotype();
+		List<OntologyClass> phenotypeTypes = phenotype.getTypes();
+		assertThat(phenotypeTypes.size(), equalTo(1));
+		OntologyClass phenotypeClass = phenotypeTypes.get(0);
+		assertThat(phenotypeClass.getId(), equalTo("HP:0200055"));
+		assertThat(phenotypeClass.getLabel(), equalTo("Small hands"));
+
 		Evidence evidence = phenotypeAssociation.getEvidence().get(0);
-		List<OntologyClass> types = evidence.getTypes();
-		assertThat(types.size(), equalTo(1));
-		OntologyClass ontologyClass = types.get(0);
-		assertThat(ontologyClass.getId(), equalTo("ECO:0000033"));
-		assertThat(ontologyClass.getLabel(), equalTo("TAS"));
+		List<OntologyClass> evidenceTypes = evidence.getTypes();
+		assertThat(evidenceTypes.size(), equalTo(1));
+		OntologyClass evidenceClass = evidenceTypes.get(0);
+		assertThat(evidenceClass.getId(), equalTo("ECO:0000033"));
+		assertThat(evidenceClass.getLabel(), equalTo("TAS"));
 
 		List<Publication> supportingPublications = evidence.getSupportingPublications();
 		assertThat(supportingPublications.size(), equalTo(1));
