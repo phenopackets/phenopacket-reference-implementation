@@ -61,6 +61,11 @@
 			<version>19.0</version>
 		</dependency>
 		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
 			<groupId>com.io-informatics.oss</groupId>
 			<artifactId>jackson-jsonld</artifactId>
 			<version>0.0.5</version>
