@@ -1,0 +1,33 @@
+---
+id: "phenopkt#1"
+title: "A male smoker"
+persons:
+- id: "person#1"
+  label: "Joe Bloggs"
+  sex: "M"
+environment_profile:
+- entity: "person#1"
+  environment:
+    description: "Smoked since birth, gave up as a teenager"
+    types:
+    - id: "EFO_0004318"
+      label: "smoking behavior"
+#    onset:
+#      description: "started shortly after birth"
+#      start_time: "2000-01-01"
+#      end_time: "2000-01-01"
+#      types:
+#        - id: "HP:0003623"
+#          label: "Neonatal onset"
+#    offset:
+#      description: "finished as a teenager"
+#      end_time: "2015-01-01"
+#      types:
+#        - id: "HP:0003621"
+#          label: "Juvenile onset"
+  evidence:
+  - types:
+    - id: "ECO:0000033"
+      label: "TAS"
+    source:
+    - id: "PMID:00000000"

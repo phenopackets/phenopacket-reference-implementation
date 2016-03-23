@@ -2,6 +2,7 @@ package org.phenopackets.api.model.meta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.google.common.collect.ImmutableList;
 import org.phenopackets.api.model.ontology.ClassInstance;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class Evidence extends ClassInstance {
 	 * @param supportingEntities the supportingEntities to set
 	 */
 	public void setSupportingEntities(List<String> supportingEntities) {
-		this.supportingEntities = supportingEntities;
+		this.supportingEntities = ImmutableList.copyOf(supportingEntities);
 	}
 
 	/**
@@ -49,7 +50,7 @@ public class Evidence extends ClassInstance {
 	 * @param supportingPublications the supportingPublications to set
 	 */
 	public void setSupportingPublications(List<Publication> supportingPublications) {
-		this.supportingPublications = supportingPublications;
+		this.supportingPublications = ImmutableList.copyOf(supportingPublications);
 	}
 
 

@@ -22,7 +22,6 @@ public class Phenotype extends Condition {
 	}
 
 
-
 	/**
 	 * @return the measurements
 	 */

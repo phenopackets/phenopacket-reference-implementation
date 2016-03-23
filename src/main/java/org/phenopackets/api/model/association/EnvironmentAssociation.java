@@ -1,11 +1,16 @@
 package org.phenopackets.api.model.association;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.collect.ImmutableList;
+import org.phenopackets.api.model.entity.Entity;
 import org.phenopackets.api.model.environment.Environment;
 import org.phenopackets.api.model.meta.Evidence;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,18 +20,19 @@ import java.util.Objects;
  * @author cjm
  *
  */
+@JsonDeserialize(builder = EnvironmentAssociation.Builder.class)
+@JsonPropertyOrder({"entity", "environment", "evidence"})
 public class EnvironmentAssociation implements Association {
 	
-	@JsonPropertyDescription("The environment which this association is about")
+    @JsonPropertyDescription("The environment which this association is about")
 	private final Environment environment;
-
 	private final String entityId;
 	private final List<Evidence> evidence;
 
 	private EnvironmentAssociation(Builder builder) {
 		this.environment = builder.environment;
 		this.entityId = builder.entityId;
-		this.evidence = Collections.unmodifiableList(builder.evidence);
+		this.evidence = ImmutableList.copyOf(builder.evidence);
 	}
 	/**
 	 * @return the environment
@@ -72,17 +78,26 @@ public class EnvironmentAssociation implements Association {
 	public static class Builder {
 
 		private final Environment environment;
-		private String entityId;
-		private List<Evidence> evidence = new ArrayList<>();
 
-		public Builder(Environment environment) {
+        @JsonProperty("entity")
+        private String entityId;
+        @JsonProperty
+        private List<Evidence> evidence = new ArrayList<>();
+
+		@JsonCreator
+        public Builder(@JsonProperty("environment") Environment environment) {
 			this.environment = environment;
 		}
 
-		public Builder setEntityId(String entityId) {
-			this.entityId = entityId;
-			return this;
-		}
+        public Builder setEntity(Entity entity) {
+            this.entityId = entity.getId();
+            return this;
+        }
+
+        public Builder setEntityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
 
 		public Builder setEvidence(List<Evidence> evidence) {
 			this.evidence = evidence;

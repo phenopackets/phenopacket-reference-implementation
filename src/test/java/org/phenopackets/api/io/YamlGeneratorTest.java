@@ -12,22 +12,20 @@ import java.util.Collections;
 public class YamlGeneratorTest {
 
 	private PhenoPacket makePhenoPacket() {
-		PhenoPacket pk = new PhenoPacket();
 
-        Disease e = new Disease();
-        e.setId("OMIM:101600");
-        e.setLabel("Pfeiffer syndrome");
-		pk.addEntity(e);
+        Disease disease = new Disease();
+        disease.setId("OMIM:101600");
+        disease.setLabel("Pfeiffer syndrome");
 
 		Phenotype p = new Phenotype();
-		OntologyClass oc = new OntologyClass.Builder("X:1").setLabel("foo").build();
-		p.setTypes(Collections.singletonList(oc));
+        p.setTypes(Collections.singletonList(new OntologyClass.Builder("X:1").setLabel("foo").build()));
 		p.setDescription("foo");
 
-		PhenotypeAssociation pa = new PhenotypeAssociation.Builder(p).setEntity(e).build();
-		pk.addPhenotypeAssociation(pa);
-
-		return pk;
+		PhenotypeAssociation pa = new PhenotypeAssociation.Builder(p).setEntity(disease).build();
+        return new PhenoPacket.Builder()
+                .addDisease(disease)
+                .addPhenotypeAssociation(pa)
+                .build();
 	}
 
 	@Test

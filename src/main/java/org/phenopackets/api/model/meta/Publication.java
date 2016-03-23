@@ -1,26 +1,30 @@
 package org.phenopackets.api.model.meta;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.Objects;
 
+@JsonDeserialize(builder = Publication.Builder.class)
+@JsonPropertyOrder({"id", "title"})
 public class Publication {
 	
-	private String title;
-	private String id;
+	private final String id;
+	private final String title;
 
-	public String getId() {
+	private Publication(Builder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+    }
+
+    public String getId() {
 		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
 		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	@Override
@@ -40,8 +44,34 @@ public class Publication {
 	@Override
 	public String toString() {
 		return "Publication{" +
-				"title='" + title + '\'' +
-				", id='" + id + '\'' +
+				"id='" + id + '\'' +
+				", title='" + title + '\'' +
 				'}';
 	}
+
+    public static class Builder {
+
+        @JsonProperty
+        private String id;
+        @JsonProperty
+        private String title;
+
+        @JsonCreator
+        public Builder() {
+        }
+
+        public Builder setId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Publication build() {
+            return new Publication(this);
+        }
+    }
 }
