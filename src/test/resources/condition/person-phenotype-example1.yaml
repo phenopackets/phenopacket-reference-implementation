@@ -12,4 +12,3 @@ phenotype_profile:
       types:
         - id: HP:0003560
           label: foo
-     
