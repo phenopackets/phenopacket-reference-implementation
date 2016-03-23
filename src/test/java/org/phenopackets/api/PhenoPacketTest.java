@@ -5,22 +5,23 @@ import org.junit.Test;
 import org.phenopackets.api.io.JsonGenerator;
 import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
+import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
 import org.phenopackets.api.model.condition.Phenotype;
 import org.phenopackets.api.model.condition.TemporalRegion;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
-import org.phenopackets.api.model.meta.Evidence;
-import org.phenopackets.api.model.meta.Publication;
+import org.phenopackets.api.model.environment.Environment;
+import org.phenopackets.api.model.evidence.Evidence;
+import org.phenopackets.api.model.evidence.Publication;
 import org.phenopackets.api.model.ontology.OntologyClass;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -167,17 +168,16 @@ public class PhenoPacketTest {
 		person.setLabel("Joe Bloggs");
 
 		Phenotype phenotype = new Phenotype();
-		phenotype.setTypes(ImmutableList.of(new OntologyClass.Builder("HP:0200055").setLabel("Small hands").build()));
+		phenotype.setTypes(ImmutableList.of(ontologyClass("HP:0200055", "Small hands")));
 
 		Evidence journalOneEvidence = new Evidence();
-		journalOneEvidence.setTypes(ImmutableList.of(new OntologyClass.Builder("ECO:0000033").setLabel("TAS").build()));
-		Publication pub = new Publication();
-		pub.setId("PMID:23455423");
+		journalOneEvidence.setTypes(ImmutableList.of(ontologyClass("ECO:0000033", "TAS")));
+		Publication pub = new Publication.Builder().setId("PMID:23455423").build();
 		journalOneEvidence.setSupportingPublications(ImmutableList.of(pub));
 
 		PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Builder(phenotype)
 																						.setEntity(person)
-																						.setEvidence(Collections.singletonList(journalOneEvidence))
+																						.addEvidence(journalOneEvidence)
 																						.build();
 		Variant personVariant = new Variant();
 		personVariant.setId("variant#1");
@@ -189,12 +189,13 @@ public class PhenoPacketTest {
 
 		String id = "test-id";
 		String title = "Patient X phenotypes and potentially causative variant";
-		PhenoPacket pk = new PhenoPacket.Builder().id(id).title(title).build();
-		pk.addEntity(person);
-		pk.setPersons(Collections.singletonList(person));
-		pk.addPhenotypeAssociation(patientPhenotypeAssociation);
-		pk.addEntity(personVariant);
-		pk.setVariants(Collections.singletonList(personVariant));
+		PhenoPacket pk = new PhenoPacket.Builder()
+				.id(id)
+				.title(title)
+				.addPerson(person)
+				.addVariant(personVariant)
+				.addPhenotypeAssociation(patientPhenotypeAssociation)
+				.build();
 
 		assertEquals(id, pk.getId());
 		assertEquals(title, pk.getTitle());
@@ -202,5 +203,29 @@ public class PhenoPacketTest {
 		System.out.println(JsonGenerator.render(pk));
 		System.out.println(YamlGenerator.render(pk));
 
+	}
+
+	@Test
+	public void testEnvironmentAssociations() throws Exception {
+		Environment environment = new Environment();
+
+		Person person = new Person();
+		person.setId("person#1");
+		person.setLabel("Joe Bloggs");
+
+		EnvironmentAssociation environmentAssociation = new EnvironmentAssociation.Builder(environment).setEntity(person).build();
+
+		PhenoPacket pkt = new PhenoPacket.Builder()
+				.setEnvironmentAssociations(new ArrayList<>())
+				.addEnvironmentAssociation(environmentAssociation)
+				.build();
+		System.out.println(pkt.getEnvironmentAssociations());
+		System.out.println(YamlGenerator.render(pkt));
+
+		assertThat(pkt.getEnvironmentAssociations(), hasItem(environmentAssociation));
+	}
+
+	private OntologyClass ontologyClass(String id, String label) {
+		return new OntologyClass.Builder(id).setLabel(label).build();
 	}
 }

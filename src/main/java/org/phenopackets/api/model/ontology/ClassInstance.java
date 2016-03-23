@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * An abstract class for anything that can be described as a boolean combination of ontology classes
@@ -95,5 +96,21 @@ public abstract class ClassInstance {
     public ClassInstance() {
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClassInstance)) return false;
+        ClassInstance that = (ClassInstance) o;
+        return Objects.equals(types, that.types) &&
+                Objects.equals(negatedTypes, that.negatedTypes) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(types, negatedTypes, description);
+    }
+
 
 }

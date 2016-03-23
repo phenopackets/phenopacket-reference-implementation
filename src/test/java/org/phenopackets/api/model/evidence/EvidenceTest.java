@@ -1,6 +1,5 @@
-package org.phenopackets.api.model.meta;
+package org.phenopackets.api.model.evidence;
 
-import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 import org.phenopackets.api.PhenoPacket;
@@ -8,6 +7,8 @@ import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
 import org.phenopackets.api.model.ontology.OntologyClass;
+
+import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,11 +24,26 @@ public class EvidenceTest {
     @Before
     public void setUp() {
         evidence = new Evidence();
-        evidence.setTypes(ImmutableList.of(new OntologyClass.Builder("ECO:0000033").setLabel("TAS").build()));
-        Publication pub = new Publication();
-        pub.setId("ISBN-13:9780810911505");
-        pub.setTitle("All Mimsy were the Borogoves");
-        evidence.setSupportingPublications(ImmutableList.of(pub));
+        evidence.setTypes(Arrays.asList(new OntologyClass.Builder("ECO:0000033").setLabel("TAS").build()));
+        evidence.setSupportingPublications(
+                Arrays.asList(
+                        new Publication.Builder()
+                                .setId("ISBN-13:9780810911505")
+                                .setTitle("All Mimsy were the Borogoves")
+                                .build()
+                )
+        );
+        evidence.setSupportingEntities(Arrays.asList("entity#1"));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testSupportingPublicationsIsImmutable() {
+        evidence.getSupportingPublications().add(new Publication.Builder().setTitle("Crime and Punishment").build());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testSupportingEntitiesIsImmutable() {
+        evidence.getSupportingEntities().add("illegal entity");
     }
 
     @Test

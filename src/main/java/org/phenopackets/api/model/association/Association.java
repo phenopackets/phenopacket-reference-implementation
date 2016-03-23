@@ -3,7 +3,7 @@ package org.phenopackets.api.model.association;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import org.phenopackets.api.model.entity.Entity;
-import org.phenopackets.api.model.meta.Evidence;
+import org.phenopackets.api.model.evidence.Evidence;
 
 import java.util.List;
 
