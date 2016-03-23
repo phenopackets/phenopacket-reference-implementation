@@ -1,0 +1,21 @@
+persons:
+  - id: '#1'
+    date_of_birth: 1999-01-01
+    sex: M
+  - id: '#2'
+    sex: M
+  - id: '#3'
+    sex: M
+phenotype_profile:
+  - entity: '#1'
+    phenotype:
+      description: Bilateral ventricle anomalies (but not hypertrophy)
+      types:
+        - id: HP:0001711
+          label: Abnormality of the left ventricle
+        - id: HP:0001707 
+          label: Abnormality of the right ventricle
+      negated_types:
+        - id: HP:0001714
+          label: Ventricular hypertrophy
+     
