@@ -6,8 +6,8 @@ import org.phenopackets.api.PhenoPacket;
 import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
 import org.phenopackets.api.model.environment.Environment;
-import org.phenopackets.api.model.meta.Evidence;
-import org.phenopackets.api.model.meta.Publication;
+import org.phenopackets.api.model.evidence.Evidence;
+import org.phenopackets.api.model.evidence.Publication;
 import org.phenopackets.api.model.ontology.OntologyClass;
 
 import java.util.List;

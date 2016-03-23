@@ -12,8 +12,8 @@ import org.phenopackets.api.model.condition.TemporalRegion;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 import org.phenopackets.api.model.environment.Environment;
-import org.phenopackets.api.model.meta.Evidence;
-import org.phenopackets.api.model.meta.Publication;
+import org.phenopackets.api.model.evidence.Evidence;
+import org.phenopackets.api.model.evidence.Publication;
 import org.phenopackets.api.model.ontology.OntologyClass;
 
 import java.io.IOException;

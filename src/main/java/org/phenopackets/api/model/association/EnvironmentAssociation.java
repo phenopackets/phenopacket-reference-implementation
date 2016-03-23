@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.ImmutableList;
 import org.phenopackets.api.model.entity.Entity;
 import org.phenopackets.api.model.environment.Environment;
-import org.phenopackets.api.model.meta.Evidence;
+import org.phenopackets.api.model.evidence.Evidence;
 
 import java.util.ArrayList;
 import java.util.List;

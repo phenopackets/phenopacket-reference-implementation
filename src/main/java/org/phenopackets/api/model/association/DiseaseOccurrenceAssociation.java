@@ -2,7 +2,7 @@ package org.phenopackets.api.model.association;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.phenopackets.api.model.condition.DiseaseOccurrence;
-import org.phenopackets.api.model.meta.Evidence;
+import org.phenopackets.api.model.evidence.Evidence;
 
 import java.util.List;
 

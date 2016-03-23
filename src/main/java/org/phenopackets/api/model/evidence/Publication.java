@@ -1,4 +1,4 @@
-package org.phenopackets.api.model.meta;
+package org.phenopackets.api.model.evidence;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

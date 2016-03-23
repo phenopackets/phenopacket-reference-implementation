@@ -1,4 +1,4 @@
-package org.phenopackets.api.model.meta;
+package org.phenopackets.api.model.evidence;
 
 import org.junit.Before;
 import org.junit.Test;
