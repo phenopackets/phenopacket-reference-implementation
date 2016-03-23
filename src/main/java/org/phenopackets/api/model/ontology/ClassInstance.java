@@ -3,6 +3,8 @@ package org.phenopackets.api.model.ontology;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,11 @@ public abstract class ClassInstance {
 
     @JsonProperty("types")
     @JsonPropertyDescription("Any instance can be positively described as the intersection of any number of ontology classes.")
+    @JsonldProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
     List<OntologyClass> types;
 
     @JsonProperty("negated_types")
+    @JsonldProperty("http://www.w3.org/2002/07/owl#complementOf")
     @JsonPropertyDescription("Any instance can be assigned any number of negative classes.")
     List<OntologyClass> negatedTypes;
 
