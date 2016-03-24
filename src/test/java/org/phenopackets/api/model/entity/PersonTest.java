@@ -1,4 +1,4 @@
-package org.phenopackets.api.model.organism;
+package org.phenopackets.api.model.entity;
 
 import org.junit.Test;
 import org.phenopackets.api.PhenoPacket;
@@ -6,7 +6,6 @@ import org.phenopackets.api.io.JsonGenerator;
 import org.phenopackets.api.io.JsonReader;
 import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.io.YamlReader;
-import org.phenopackets.api.model.entity.Person;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -18,8 +17,7 @@ import static org.junit.Assert.assertTrue;
 public class PersonTest {
 
 	/**
-	 * TODO: is this the best strategy for testing? See https://github.com/phenopackets/phenopacket-reference-implementation/issues/14
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	@Test

@@ -27,37 +27,37 @@ import java.util.List;
 public class PhenoPacket {
 
     @JsonldId
-    String id;
+    private final String id;
 
     @JsonldProperty("http://purl.org/dc/elements/1.1/title")
-    String title;
+    private final String title;
 
-    // ---- ENTITIES ----
     /*
-     * TODO: check this is really the case
      * due to typing in yaml not using a 'type' fields in the same way as json
      * this doesn't serialise and deserialise in the way we want to represent the entities,
      * so we need to specify them explicitly in distinct lists. Plus it makes the API cleaner
      * as you had to add an entity twice.
      */
 
-    private List<Variant> variants;
-
-    private List<Person> persons;
-
-    private List<Organism> organisms;
+    // ---- ENTITIES ----
+    private final List<Person> persons;
+    private final List<Organism> organisms;
+    private final List<Variant> variants;
+    private final List<Disease> diseases;
 
     // ---- PROFILES/ASSOCIATIONS ----
-    private List<PhenotypeAssociation> phenotypeAssociations;
-    private List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations;
-    private List<EnvironmentAssociation> environmentAssociations;
+    private final List<PhenotypeAssociation> phenotypeAssociations;
+    private final List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations;
+    private final List<EnvironmentAssociation> environmentAssociations;
 
     private PhenoPacket(Builder builder) {
         id = builder.id;
         title = builder.title;
+
         variants = nullIfEmptyOrImmutableList(builder.variants);
         persons = nullIfEmptyOrImmutableList(builder.persons);
         organisms = nullIfEmptyOrImmutableList(builder.organisms);
+        diseases = nullIfEmptyOrImmutableList(builder.diseases);
 
         phenotypeAssociations = nullIfEmptyOrImmutableList(builder.phenotypeAssociations);
         diseaseOccurrenceAssociations = nullIfEmptyOrImmutableList(builder.diseaseOccurrenceAssociations);
@@ -111,6 +111,10 @@ public class PhenoPacket {
         return organisms;
     }
 
+    public List<Disease> getDiseases() {
+        return diseases;
+    }
+
     /**
      * @return the phenotype_profile
      */
@@ -119,7 +123,7 @@ public class PhenoPacket {
     }
 
     /**
-     * @return the diseaseOccurrenceAssociationList
+     * @return the diseaseOccurrenceAssociations
      */
     public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociations() {
         return diseaseOccurrenceAssociations;
