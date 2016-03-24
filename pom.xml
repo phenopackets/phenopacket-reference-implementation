@@ -3,11 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.phenopackets</groupId>
 	<artifactId>phenopackets-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
-	<name>Phenopackets API</name>
-	<url>https://github.com/phenopackets</url>
-    <inceptionYear>2016</inceptionYear>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>Reference implementation for the Phenopackets specification</description>
+	<url>http://phenopackets.org</url>
+	<inceptionYear>2016</inceptionYear>
 	<licenses>
 		<license>
 			<name>The BSD 3-Clause License</name>
@@ -15,6 +16,20 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	<developers>
+		<developer>
+			<name>Chris Mungall</name>
+			<email>cjmungall@lbl.gov</email>
+			<organization>Monarch Initiative</organization>
+			<organizationUrl>http://monarchinitiative.org</organizationUrl>
+		</developer>
+		<developer>
+			<name>Jules Jacobsen</name>
+			<email>jj8@sanger.ac.uk</email>
+			<organization>Sanger Institute</organization>
+			<organizationUrl>http://sanger.ac.uk</organizationUrl>
+		</developer>
+	</developers>
 	<scm>
 		<connection>scm:git:https://github.com/phenopackets/phenopacket-reference-implementation.git</connection>
 		<developerConnection>scm:git:git@github.com:phenopackets/phenopacket-reference-implementation.git</developerConnection>
@@ -30,8 +45,39 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -103,13 +149,13 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-            <scope>test</scope>
+			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
