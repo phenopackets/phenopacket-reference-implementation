@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class PublicationTest {
 
     private static String ID = "ID:1";
-    private static String TITLE  = "Title";
+    private static String TITLE = "Title";
     private final Publication publication = new Publication.Builder().setId(ID).setTitle(TITLE).build();
 
     @Test
