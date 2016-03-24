@@ -16,36 +16,35 @@ import static org.junit.Assert.assertTrue;
 
 public class PersonTest {
 
-	/**
-	 *
-	 * @throws IOException
-	 */
-	@Test
-	public void testYaml() throws IOException {
-		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/organism/persons-example1.yaml").toFile());
-		System.out.println(YamlGenerator.render(packet));
+    /**
+     * @throws IOException
+     */
+    @Test
+    public void testYaml() throws IOException {
+        PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/organism/persons-example1.yaml").toFile());
+        System.out.println(YamlGenerator.render(packet));
 
-		List<Person> persons = packet.getPersons();
-		assertTrue(persons.size() == 3);
-		// order is preserved
-		System.out.println(persons.get(0));
-		assertEquals("#1", persons.get(0).getId());
-		assertEquals("M", persons.get(0).getSex());
-		assertEquals("1999-01-01", persons.get(0).getDateOfBirth());
-	}
+        List<Person> persons = packet.getPersons();
+        assertTrue(persons.size() == 3);
+        // order is preserved
+        System.out.println(persons.get(0));
+        assertEquals("#1", persons.get(0).getId());
+        assertEquals("M", persons.get(0).getSex());
+        assertEquals("1999-01-01", persons.get(0).getDateOfBirth());
+    }
 
-	@Test
-	public void testJson() throws IOException {
-		PhenoPacket packet = JsonReader.readFile(Paths.get("src/test/resources/organism/persons-example1.json").toFile());
-		System.out.println(JsonGenerator.render(packet));
+    @Test
+    public void testJson() throws IOException {
+        PhenoPacket packet = JsonReader.readFile(Paths.get("src/test/resources/organism/persons-example1.json").toFile());
+        System.out.println(JsonGenerator.render(packet));
 
-		List<Person> persons = packet.getPersons();
-		assertTrue(persons.size() == 3);
-		// order is preserved
-		System.out.println(persons.get(0));
-		assertEquals("#1", persons.get(0).getId());
-		assertEquals("M", persons.get(0).getSex());
-		assertEquals("1999-01-01", persons.get(0).getDateOfBirth());
+        List<Person> persons = packet.getPersons();
+        assertTrue(persons.size() == 3);
+        // order is preserved
+        System.out.println(persons.get(0));
+        assertEquals("#1", persons.get(0).getId());
+        assertEquals("M", persons.get(0).getSex());
+        assertEquals("1999-01-01", persons.get(0).getDateOfBirth());
 
-	}
+    }
 }

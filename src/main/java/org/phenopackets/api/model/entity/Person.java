@@ -3,7 +3,6 @@ package org.phenopackets.api.model.entity;
 
 /**
  * @author cjm
- *
  */
 public class Person extends Organism {
 
@@ -14,7 +13,7 @@ public class Person extends Organism {
 
     @Override
     public String toString() {
-        return "Person{"+
+        return "Person{" +
                 "id='" + super.getId() + '\'' +
                 ", label='" + super.getLabel() + '\'' +
                 ", taxon=" + super.getTaxon() +

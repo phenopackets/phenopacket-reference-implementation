@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * An association connects an entity (for example, disease, person or variant) with either
  * another entity, or with some kind of descriptor (for example, phenotype).
- * 
+ * <p/>
  * All pieces of evidences are attached to associations
- * 
+ *
  * @author cjm
  * @author Jules Jacobsen <jules.jacobsen@sanger.ac.uk>
  */
@@ -21,8 +21,8 @@ public interface Association<T extends Entity> {
     @JsonProperty("entity")
     public String getEntityId();
 
-	@JsonProperty("evidence")
-	@JsonPropertyDescription("Any Association can have any number of pieces of evidence attached")
-	public List<Evidence> getEvidence();
+    @JsonProperty("evidence")
+    @JsonPropertyDescription("Any Association can have any number of pieces of evidence attached")
+    public List<Evidence> getEvidence();
 
 }

@@ -70,6 +70,7 @@ public class DiseaseOccurrenceAssociationTest {
         System.out.println(association);
         assertThat(association.toString(), startsWith("DiseaseOccurrenceAssociation"));
     }
+
     @Test
     public void testYamlWrite() throws Exception {
         DiseaseOccurrence occurrence = getDiseaseOccurrence();
