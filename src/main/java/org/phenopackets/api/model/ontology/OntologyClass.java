@@ -3,6 +3,7 @@ package org.phenopackets.api.model.ontology;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.Objects;
  *
  */
 @JsonDeserialize(builder = OntologyClass.Builder.class)
+@JsonPropertyOrder({"id", "label"})
 public class OntologyClass {
 	
 	@JsonProperty("id")
