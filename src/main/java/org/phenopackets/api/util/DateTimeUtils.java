@@ -24,7 +24,7 @@ public class DateTimeUtils {
 
 
     /**
-     * @param dateString, ISO-8601
+     * @param dateString
      * @return date object
      * @throws ParseException
      */
@@ -35,7 +35,7 @@ public class DateTimeUtils {
 
     /**
      * @param d
-     * @return
+     * @return local date
      */
     public static LocalDate dateToLocalDate(Date d) {
         return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -62,7 +62,7 @@ public class DateTimeUtils {
 
     /**
      * @param tr
-     * @return
+     * @return local date
      * @throws ParseException
      */
     public static LocalDate getStartTimeAsLocalDate(TemporalRegion tr) throws ParseException {
@@ -71,7 +71,7 @@ public class DateTimeUtils {
 
     /**
      * @param tr
-     * @return
+     * @return locate date
      * @throws ParseException
      */
     public static LocalDate getEndTimeAsLocalDate(TemporalRegion tr) throws ParseException {
@@ -80,7 +80,7 @@ public class DateTimeUtils {
 
     /**
      * Note that this is not the period of the condition; it is the period of an
-     * individual temporal region. See {@link Condition.getDuration()} for duration
+     * individual temporal region. See {@link #getDuration(Condition condition)} for duration
      *
      * @param tr
      * @return period between start and end
