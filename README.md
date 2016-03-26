@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/phenopackets/phenopacket-reference-implementation.svg?branch=master)](https://travis-ci.org/phenopackets/phenopacket-reference-implementation)
 
+Javadoc: [org.phenopackets/phenopackets-api](http://www.javadoc.io/doc/org.phenopackets/phenopackets-api)
+
 Reference implementation for phenopackets/PXF
 
 See https://github.com/phenopackets/phenopacket-format/ for more details.
