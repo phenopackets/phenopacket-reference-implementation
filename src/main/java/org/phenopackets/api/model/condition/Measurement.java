@@ -29,7 +29,7 @@ public class Measurement extends ClassInstance {
     //  we could potentially have the serialization allow two different properties
     @JsonProperty("value")
     @JsonPropertyDescription("the value of the measurement")
-    private Double value;
+    private String value;
 
 
     @JsonProperty("property_values")
@@ -55,14 +55,14 @@ public class Measurement extends ClassInstance {
     /**
      * @return the value
      */
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
     /**
      * @param value the magnitude to set
      */
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

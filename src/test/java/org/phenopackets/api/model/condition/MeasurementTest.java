@@ -37,7 +37,7 @@ public class MeasurementTest {
 		assertEquals(1, m.getPropertyValues().size());
 		PropertyLiteralValue pv = m.getPropertyValues().get(0);
         assertEquals("standard_error", pv.getProperty());
-        assertEquals(2.38, pv.getFiller());
+        assertEquals("2.38", pv.getFiller());
 		
 	}
 
