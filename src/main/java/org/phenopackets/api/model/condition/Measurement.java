@@ -24,9 +24,12 @@ public class Measurement extends ClassInstance {
     @JsonPropertyDescription("the unit of measurement")
     private String unit;
 
+    // TODO - protobuf does not allow generic Numbers
+    //  encoding an int as a double is not ideal.
+    //  we could potentially have the serialization allow two different properties
     @JsonProperty("value")
     @JsonPropertyDescription("the value of the measurement")
-    private Number value;
+    private Double value;
 
 
     @JsonProperty("property_values")
@@ -52,14 +55,14 @@ public class Measurement extends ClassInstance {
     /**
      * @return the value
      */
-    public Number getValue() {
+    public Double getValue() {
         return value;
     }
 
     /**
      * @param value the magnitude to set
      */
-    public void setValue(Number value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
