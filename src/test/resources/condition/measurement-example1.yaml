@@ -4,7 +4,7 @@ title: "measurement example, taken from genenetwork.org"
 organisms:
 - id: "#1"
   label: "BXD mouse population"
-  taxon: NCBITaxon:10090
+##  taxon: NCBITaxon:10090
 phenotype_profile:
 - entity: "#1"
   phenotype:
@@ -17,7 +17,7 @@ phenotype_profile:
         value: 61.400
         property_values:
           - property: standard_error
-            value: 2.38 
+            filler: 2.38 
     attribute_of:
       types:
         - id: "UBERON:0002037"

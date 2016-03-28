@@ -8,41 +8,59 @@ import org.phenopackets.api.model.ontology.ClassInstance;
 import org.phenopackets.api.model.ontology.OntologyClass;
 import org.phenopackets.api.model.ontology.PropertyLiteralValue;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
+/**
+ * Represents a measurement of a phenotype or trait
+ * 
+ * @author cjm
+ *
+ */
 @JsonldType("http://purl.obolibrary.org/obo/IAO_0000416")
 public class Measurement extends ClassInstance {
 
-    private OntologyClass unit;
-    private double value;
+    @JsonProperty("unit")
+    @JsonPropertyDescription("the unit of measurement")
+    private String unit;
+
+    @JsonProperty("value")
+    @JsonPropertyDescription("the value of the measurement")
+    private Number value;
+
+
+    @JsonProperty("property_values")
+    @JsonPropertyDescription("a list of (property,value) pairs")
     private List<PropertyLiteralValue> propertyValues;
-    
+
     // TODO - trait
 
     /**
      * @return the unit
      */
-    public OntologyClass getUnit() {
+    public String getUnit() {
         return unit;
     }
 
     /**
      * @param unit the unit to set
      */
-    public void setUnit(OntologyClass unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 
     /**
-     * @return the magnitude
+     * @return the value
      */
-    public double getValue() {
+    public Number getValue() {
         return value;
     }
 
     /**
-     * @param magnitude the magnitude to set
+     * @param value the magnitude to set
      */
-    public void setValue(double magnitude) {
-        this.value = magnitude;
+    public void setValue(Number value) {
+        this.value = value;
     }
 
     /**
@@ -59,6 +77,6 @@ public class Measurement extends ClassInstance {
         this.propertyValues = propertyValues;
     }
 
-    
+
 
 }

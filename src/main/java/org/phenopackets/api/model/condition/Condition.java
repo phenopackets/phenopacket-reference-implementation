@@ -20,6 +20,11 @@ public abstract class Condition extends ClassInstance {
     @JsonldProperty("http://purl.obolibrary.org/obo/BFO_0000066")
     private OrganismalSite hasLocation;
 
+    @JsonProperty("attribute_of")
+    @JsonPropertyDescription("the entity which this phenotype is about -- normally bundled into ontology class")
+    private OrganismalSite attributeOf;
+
+    
     @JsonProperty("onset")
     @JsonPropertyDescription("the time region in which the condition is first manifest")
     private TemporalRegion timeOfOnset;
