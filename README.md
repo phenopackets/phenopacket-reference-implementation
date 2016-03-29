@@ -49,7 +49,7 @@ PhenoPacket phenoPacket = new PhenoPacket.Builder()
                 .title("Empty phenopacket")
                 .build();
 ```
-### Creating Entities
+### Entities
 Entities refer to things such as individuals of an organism/people, variants or diseases. For example here is a new Person:
 ```java
 Person person = new Person();
@@ -57,28 +57,66 @@ person.setId("person#1");
 person.setLabel("Joe Bloggs");
 person.setSex("M");
 ```
+here is the disease Pfeiffer syndrome
+```java
+Disease disease = new Disease();
+disease.setId("OMIM:101600");
+disease.setLabel("Pfeiffer syndrome");
+List<OntologyClass> phenotypes = ImmutableList.of(
+        OntologyClass.of("HP:0000272", "Malar flattening"),
+        OntologyClass.of("HP:0005347", "Cartilaginous trachea"),
+        OntologyClass.of("HP:0001249", "Intellectual disability"),
+        OntologyClass.of("HP:0005048", "Synostosis of carpal bones"),
+        OntologyClass.of("HP:0004440", "Coronal craniosynostosis"),
+        OntologyClass.of("HP:0001156", "Brachydactyly syndrome")
+);
+disease.setTypes(phenotypes);
+```
 
-### Associating Entities with Conditions
-Entities can have associated Conditions. A Condition is usually defined with a phenotype, location, time of onset/offset
-the severity and the environment in which this condition was observed. Entities and Conditions are linked by an Association.
-Associations are also immutable objects which use a Builder. 
-
-Here we're going to associate a phenotype from the [HPO](http://human-phenotype-ontology.org) with the person from the previous example.
+### Conditions
+A Condition is usually defined with a phenotype, location, time of onset/offset
+the severity and the environment in which this condition was observed. A condition could simply be a phenotype - here is 
+one from the [HPO](http://human-phenotype-ontology.org) 
 ```java
 Phenotype phenotype = new Phenotype();
 phenotype.setTypes(ImmutableList.of(
-        new OntologyClass.Builder("HP:0000272").setLabel("Malar flattening").build()
+        OntologyClass.of("HP:0000272", "Malar flattening")
 ));
-// Typically an observation is accompanied with some kind of evidence attribution - here we have a journal
+```
+or an occurrence of a disease
+```java
+DiseaseOccurrence diseaseOccurrence = new DiseaseOccurrence();
+DiseaseStage stage = new DiseaseStage();
+stage.setDescription("Childhood onset");
+stage.setTypes(ImmutableList.of(
+        OntologyClass.of("HP:0011463", "Childhood onset")
+));
+diseaseOccurrence.setStage(stage);
+```
+
+Typically an observation is accompanied with some kind of evidence attribution - here we have a journal
+```java
 Evidence journalEvidence = new Evidence();
-        journalEvidence.setTypes(ImmutableList.of(new OntologyClass.Builder(("ECO:0000033").setLabel("TAS").build()));
-        Publication pub = new Publication.Builder().setId("PMID:23455423").build();
-        journalEvidence.setSupportingPublications(ImmutableList.of(pub));
+journalEvidence.setTypes(ImmutableList.of(OntologyClass.of("ECO:0000033", "TAS")));
+Publication pub = new Publication.Builder().setId("PMID:23455423").build();
+journalEvidence.setSupportingPublications(ImmutableList.of(pub));
+```
+
+### Associating Entities with Conditions
+Entities can have associated Conditions.Entities and Conditions are linked by an Association.
+Associations are also immutable objects which use a Builder. 
+
+Here we're going to associate the phenotype with the person from the previous examples.
+```java
 // These are then linked with a PhenotypeAssociation
 PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Builder(phenotype)
         .setEntity(person)
         .addEvidence(journalEvidence)
         .build();
+```
+and the Disease with the DiseaseAssociation.
+```java
+DiseaseOccurrenceAssociation association = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence).setEntity(disease).build();
 ```
 ### Adding Entities and Associations to a PhenoPacket
 Using the API it s now trivial to create a phenopacket containing the person and their observed phenotype. 
@@ -88,6 +126,15 @@ PhenoPacket pk = new PhenoPacket.Builder()
                 .title("Patient with a phenotype")
                 .addPerson(person)
                 .addPhenotypeAssociation(patientPhenotypeAssociation)
+                .build();
+```
+or a disease as characterised by its associated pehnotypes and its time of onset
+```java
+PhenoPacket pk = new PhenoPacket.Builder()
+                .id(id)
+                .title("Description of a disease and its time of onset")
+                .addDisease(disease)
+                .addDiseaseOccurrenceAssociation(diseaseOccurrenceAssociation)
                 .build();
 ```
 
