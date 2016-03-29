@@ -76,11 +76,14 @@ disease.setTypes(phenotypes);
 ### Conditions
 A Condition is usually defined with a phenotype, location, time of onset/offset
 the severity and the environment in which this condition was observed. A condition could simply be a phenotype - here is 
-one from the [HPO](http://human-phenotype-ontology.org) 
+one from the [HPO](http://human-phenotype-ontology.org), with a negative type too (i.e. this was tested for and not observed).
 ```java
 Phenotype phenotype = new Phenotype();
 phenotype.setTypes(ImmutableList.of(
         OntologyClass.of("HP:0000272", "Malar flattening")
+));
+phenotype.setNegatedTypes(ImmutableList.of(
+        OntologyClass.of("HP:0001249", "Intellectual disability")
 ));
 ```
 or an occurrence of a disease
@@ -108,7 +111,6 @@ Associations are also immutable objects which use a Builder.
 
 Here we're going to associate the phenotype with the person from the previous examples.
 ```java
-// These are then linked with a PhenotypeAssociation
 PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Builder(phenotype)
         .setEntity(person)
         .addEvidence(journalEvidence)
@@ -116,7 +118,9 @@ PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Buil
 ```
 and the Disease with the DiseaseAssociation.
 ```java
-DiseaseOccurrenceAssociation association = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence).setEntity(disease).build();
+DiseaseOccurrenceAssociation association = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence)
+        .setEntity(disease)
+        .build();
 ```
 ### Adding Entities and Associations to a PhenoPacket
 Using the API it s now trivial to create a phenopacket containing the person and their observed phenotype. 
