@@ -38,7 +38,7 @@ public class PhenoPacketTest {
      * @return
      */
     private OntologyClass ontologyClass(String id, String label) {
-        return new OntologyClass.Builder(id).setLabel(label).build();
+        return OntologyClass.of(id, label);
     }
 
     private Person getPerson() {
