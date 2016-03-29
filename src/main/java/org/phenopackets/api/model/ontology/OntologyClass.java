@@ -89,4 +89,15 @@ public class OntologyClass {
             return new OntologyClass(this);
         }
     }
+
+    /**
+     * Convenience static factory method to remove some of the {@link Builder} verbosity at the expense of getting the id
+     * and label switched the wrong way round. Use at your own risk.
+     * @param id
+     * @param label
+     * @return
+     */
+    public static OntologyClass of(String id, String label) {
+        return new Builder(id).setLabel(label).build();
+    };
 }
