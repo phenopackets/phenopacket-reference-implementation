@@ -7,7 +7,7 @@ import org.phenopackets.api.model.ontology.OntologyClass;
  * @author cjm
  */
 
-@JsonldType("http://purl.obolibrary.org/obo/SO_0000000")
+@JsonldType("http://purl.obolibrary.org/obo/SO_0000110")
 public class GenomicEntity implements Entity {
 
     private String id;
