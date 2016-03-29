@@ -27,7 +27,7 @@ import org.phenopackets.api.model.ontology.ClassInstance;
  *     [    TR1   ]>>>>>>>>>>>>>>>>>>>>>>>>[         TR2        ]
  * </pre>
  * <p/>
- * Where tr1s is the {@link TemporalRegion.getStartTime()} of TR1, etc.
+ * Where tr1s is the {@link TemporalRegion#getStartTime()} of TR1, etc.
  * Note that the duration the organism has the phenotype is <code>tr2e-tr1s</code>
  * <p/>
  * This allows us an arbitrary degree of fuzziness when recording onset and offset.
