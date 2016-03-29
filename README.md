@@ -8,8 +8,8 @@ This project provides a reference java implementation for the Phenotype eXchange
 used to describe the mapping to the JSON serialization of PXF. We are also experimenting with generating the JSON Schema 
 from the reference implementation.
 
-See [Phenopcket-format repo](https://github.com/phenopackets/phenopacket-format) and the [src/test/resources](https://github.com/phenopackets/phenopacket-reference-implementation/tree/master/src/test/resources) package of this repo for examples of 
-the input and output formats. [Phenopcket-format wiki](https://github.com/phenopackets/phenopacket-format/wiki) contains more details on the project 
+See [phenopacket-format repo](https://github.com/phenopackets/phenopacket-format) and the [src/test/resources](https://github.com/phenopackets/phenopacket-reference-implementation/tree/master/src/test/resources) package of this repo for examples of 
+the serialised JSON and YAML formats. The phenopacket-format repo [wiki](https://github.com/phenopackets/phenopacket-format/wiki) contains more details on the project 
 in general.
 
 # Including phenopackets-api in your code:
