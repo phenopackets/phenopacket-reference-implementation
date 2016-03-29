@@ -1,0 +1,35 @@
+---
+id: "#"
+title: "measurement example, taken from genenetwork.org"
+organisms:
+- id: "#1"
+  label: "BXD mouse population"
+##  taxon: NCBITaxon:10090
+phenotype_profile:
+- entity: "#1"
+  phenotype:
+    description: "cerebellum weight"
+    types:
+    - id: "PATO:0000128"
+      label: "weight"
+    measurements:
+      - unit: mg
+        value: 61.400
+        property_values:
+          - property: standard_error
+            filler: 2.38 
+    attribute_of:
+      types:
+        - id: "UBERON:0002037"
+          label: "cerebellum"
+    onset:
+      description: "measured in adults"
+      types:
+        - id: "MmusDv:0000061"
+          label: "early adult"
+  evidence:
+  - types:
+    - id: "ECO:0000033"
+      label: "TAS"
+    source:
+    - id: "http://gn2.genenetwork.org"

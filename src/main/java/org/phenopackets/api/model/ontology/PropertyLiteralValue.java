@@ -1,9 +1,17 @@
 package org.phenopackets.api.model.ontology;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
 public class PropertyLiteralValue implements PropertyValue {
 
+    @JsonProperty("property")
+    @JsonPropertyDescription("the data property used")
     String property;
-    Object filler;
+    
+    // TODO - this is a string to accommodate protobuf
+    String filler;
 
     /**
      * @return the property
@@ -22,15 +30,19 @@ public class PropertyLiteralValue implements PropertyValue {
     /**
      * @return the filler
      */
-    public Object getFiller() {
+    public String getFiller() {
         return filler;
     }
 
     /**
      * @param filler the filler to set
      */
-    public void setFiller(Object filler) {
+    public void setFiller(String filler) {
         this.filler = filler;
     }
 
+    @JsonIgnore
+    public Double getTest() {
+        return 0.0;
+    }
 }
