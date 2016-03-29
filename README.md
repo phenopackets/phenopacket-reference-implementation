@@ -69,12 +69,12 @@ Phenotype phenotype = new Phenotype();
 phenotype.setTypes(ImmutableList.of(
         new OntologyClass.Builder("HP:0000272").setLabel("Malar flattening").build()
 ));
-# Typically an observation is accompanied with some kind of evidence attribution - here we have a journal
+// Typically an observation is accompanied with some kind of evidence attribution - here we have a journal
 Evidence journalEvidence = new Evidence();
         journalEvidence.setTypes(ImmutableList.of(new OntologyClass.Builder(("ECO:0000033").setLabel("TAS").build()));
         Publication pub = new Publication.Builder().setId("PMID:23455423").build();
         journalEvidence.setSupportingPublications(ImmutableList.of(pub));
-# These are then linked with a PhenotypeAssociation
+// These are then linked with a PhenotypeAssociation
 PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Builder(phenotype)
         .setEntity(person)
         .addEvidence(journalEvidence)
