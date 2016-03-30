@@ -16,24 +16,17 @@ import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.environment.Environment;
 import org.phenopackets.api.util.DateTimeUtils;
 
-public class ConditionSeverityTest {
+public class ConditionFrequencyTest {
 
 	@Test
 	public void test() throws IOException {
-		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/condition/person-phenotype-advanced-example.yaml").toFile());
+		PhenoPacket packet = YamlReader.readFile(Paths.get("src/test/resources/condition/organism-phenotype-penetrance-expressivity-example.yaml").toFile());
 		System.out.println(YamlGenerator.render(packet));
 		Phenotype phenotype = packet.getPhenotypeAssociations().get(0).getPhenotype();
 		System.out.println(YamlGenerator.render(phenotype));
-		TemporalRegion onset = phenotype.getTimeOfOnset();
-		TemporalRegion offset = phenotype.getTimeOfFinishing();
-		assertEquals("HP:0003623", onset.getTypes().get(0).getId());
-		
-		Environment environment = phenotype.getEnvironment();
-		assertEquals("SCTID:161080002", environment.getTypes().get(0).getId());
-		
-		ConditionSeverity severity = phenotype.getSeverity();
-        assertEquals("HP:0012829", severity.getTypes().get(0).getId());
-		
+	
+		ConditionSeverity frequency = phenotype.getFrequency();
+		assertEquals(2, frequency.getTypes().size());
 		
 	}
 
