@@ -72,7 +72,7 @@ public class PhenoPacket {
      * @param list
      * @return
      */
-    private ImmutableList nullIfEmptyOrImmutableList(List list) {
+    private <T> ImmutableList<T> nullIfEmptyOrImmutableList(List<T> list) {
         return list.isEmpty() ? null : ImmutableList.copyOf(list);
     }
 
