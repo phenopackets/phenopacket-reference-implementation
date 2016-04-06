@@ -1,0 +1,34 @@
+id: "#"
+title: "penetrance/expressivity example"
+organisms:
+- id: "#1"
+  label: "example cohort"
+##  taxon: NCBITaxon:10090
+phenotype_profile:
+  - entity: '#1'
+    phenotype:
+      types:
+        - id: HP:0003560
+          label: Muscular dystrophy
+      onset:
+        types:
+          - id: HP:0003584
+            label: Late onset
+      frequency:
+        types:
+          - id: HP:0003829
+            label: Incomplete penetrance
+          - id: HP:0003828
+            label: Variable expressivity
+      severity:
+        types:
+          - id: HP:0003829
+            label: Incomplete penetrance
+      description: additional notes on this phenotype here
+    evidence: 
+      - types:
+          - id: TAS
+        source:
+        - id: PMID:23455423
+          title: Mutations in prion-like domains in hnRNPA2B1 and hnRNPA1 cause multisystem proteinopathy and ALS
+     
