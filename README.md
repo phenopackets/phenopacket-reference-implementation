@@ -27,6 +27,13 @@ in general.
 compile 'org.phenopackets:phenopackets-api:${project.version}'
 ```
 
+## Installing a development snapshot
+When developing against an unreleased snapshot version of the API, you can use Maven to install it in your local m2 repository:
+
+```
+mvn -Dgpg.skip install
+```
+
 # Using it
 
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.phenopackets/phenopackets-api/badge.svg)](http://www.javadoc.io/doc/org.phenopackets/phenopackets-api)
