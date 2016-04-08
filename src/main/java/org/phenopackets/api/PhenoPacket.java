@@ -1,11 +1,11 @@
 package org.phenopackets.api;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.collect.ImmutableList;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.phenopackets.api.model.association.DiseaseOccurrenceAssociation;
 import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
@@ -14,8 +14,12 @@ import org.phenopackets.api.model.entity.Organism;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Top level container
@@ -54,26 +58,14 @@ public class PhenoPacket {
         id = builder.id;
         title = builder.title;
 
-        variants = nullIfEmptyOrImmutableList(builder.variants);
-        persons = nullIfEmptyOrImmutableList(builder.persons);
-        organisms = nullIfEmptyOrImmutableList(builder.organisms);
-        diseases = nullIfEmptyOrImmutableList(builder.diseases);
+        variants = ImmutableList.copyOf(builder.variants);
+        persons = ImmutableList.copyOf(builder.persons);
+        organisms = ImmutableList.copyOf(builder.organisms);
+        diseases = ImmutableList.copyOf(builder.diseases);
 
-        phenotypeAssociations = nullIfEmptyOrImmutableList(builder.phenotypeAssociations);
-        diseaseOccurrenceAssociations = nullIfEmptyOrImmutableList(builder.diseaseOccurrenceAssociations);
-        environmentAssociations = nullIfEmptyOrImmutableList(builder.environmentAssociations);
-    }
-
-    /**
-     * Returns a null if the given list is empty or an immutable copy if not. This is used to cut down on the verbosity
-     * of the yaml/json output which is set to ignore nulls. Lets hope this doesn't devolve into a nullguardfest down
-     * the line.
-     *
-     * @param list
-     * @return
-     */
-    private <T> ImmutableList<T> nullIfEmptyOrImmutableList(List<T> list) {
-        return list.isEmpty() ? null : ImmutableList.copyOf(list);
+        phenotypeAssociations = ImmutableList.copyOf(builder.phenotypeAssociations);
+        diseaseOccurrenceAssociations = ImmutableList.copyOf(builder.diseaseOccurrenceAssociations);
+        environmentAssociations = ImmutableList.copyOf(builder.environmentAssociations);
     }
 
     /**
@@ -93,6 +85,7 @@ public class PhenoPacket {
     /**
      * @return the variants
      */
+    @JsonInclude(Include.NON_EMPTY)
     public List<Variant> getVariants() {
         return variants;
     }
@@ -100,6 +93,7 @@ public class PhenoPacket {
     /**
      * @return the persons
      */
+    @JsonInclude(Include.NON_EMPTY)
     public List<Person> getPersons() {
         return persons;
     }
@@ -107,10 +101,12 @@ public class PhenoPacket {
     /**
      * @return the organisms
      */
+    @JsonInclude(Include.NON_EMPTY)
     public List<Organism> getOrganisms() {
         return organisms;
     }
 
+    @JsonInclude(Include.NON_EMPTY)
     public List<Disease> getDiseases() {
         return diseases;
     }
@@ -118,6 +114,7 @@ public class PhenoPacket {
     /**
      * @return the phenotype_profile
      */
+    @JsonInclude(Include.NON_EMPTY)
     public List<PhenotypeAssociation> getPhenotypeAssociations() {
         return phenotypeAssociations;
     }
@@ -125,10 +122,12 @@ public class PhenoPacket {
     /**
      * @return the diseaseOccurrenceAssociations
      */
+    @JsonInclude(Include.NON_EMPTY)
     public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociations() {
         return diseaseOccurrenceAssociations;
     }
 
+    @JsonInclude(Include.NON_EMPTY)
     public List<EnvironmentAssociation> getEnvironmentAssociations() {
         return environmentAssociations;
     }
