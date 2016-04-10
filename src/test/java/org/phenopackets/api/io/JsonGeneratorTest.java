@@ -15,7 +15,7 @@ import org.phenopackets.api.model.ontology.OntologyClass;
 public class JsonGeneratorTest {
 
 	private PhenoPacket makePhenoPacket() {
-
+		
         Disease disease = new Disease();
         disease.setId("OMIM:101600");
         disease.setLabel("Pfeiffer syndrome");
@@ -26,6 +26,8 @@ public class JsonGeneratorTest {
 
 		PhenotypeAssociation pa = new PhenotypeAssociation.Builder(p).setEntity(disease).build();
         return new PhenoPacket.Builder()
+        		.id("EX:1234")
+        		.title("A phenopacket for testing roundtrip")
                 .addDisease(disease)
                 .addPhenotypeAssociation(pa)
                 .build();

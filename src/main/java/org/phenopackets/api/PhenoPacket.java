@@ -31,9 +31,11 @@ import com.google.common.collect.ImmutableList;
 public class PhenoPacket {
 
     @JsonldId
+    @JsonProperty("id")
     private final String id;
 
     @JsonldProperty("http://purl.org/dc/elements/1.1/title")
+    @JsonProperty("title")
     private final String title;
 
     /*
