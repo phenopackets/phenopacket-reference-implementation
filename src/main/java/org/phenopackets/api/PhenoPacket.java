@@ -115,6 +115,7 @@ public class PhenoPacket {
      * @return the phenotype_profile
      */
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("phenotype_profile")
     public List<PhenotypeAssociation> getPhenotypeAssociations() {
         return phenotypeAssociations;
     }
@@ -123,11 +124,13 @@ public class PhenoPacket {
      * @return the diseaseOccurrenceAssociations
      */
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("diagnosis_profile")
     public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociations() {
         return diseaseOccurrenceAssociations;
     }
 
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("environment_profile")
     public List<EnvironmentAssociation> getEnvironmentAssociations() {
         return environmentAssociations;
     }
