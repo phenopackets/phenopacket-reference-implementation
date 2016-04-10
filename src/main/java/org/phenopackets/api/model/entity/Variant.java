@@ -1,5 +1,7 @@
 package org.phenopackets.api.model.entity;
 
+import org.phenopackets.api.model.ontology.OntologyClass;
+
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
 
 /**
@@ -19,7 +21,28 @@ public class Variant extends GenomicEntity {
     /**
      * This is highly preliminary, follow https://github.com/phenopackets/phenopacket-format/issues/10
      */
-    String descriptionHGVS;
+    private String descriptionHGVS;
+
+    private String chromosome;
+
+    private String assembly;
+
+    private String isoform;
+
+    private String exonId;
+
+    private int startPosition;
+
+    private int endPosition;
+
+    private String refBases;
+
+    private String altBases;
+
+    /**
+     * SO class denoting the mutation type (e.g., frameshift, insertion, etc)
+     */
+    private OntologyClass mutationType;
 
     /**
      * @return the descriptionHGVS
@@ -35,5 +58,76 @@ public class Variant extends GenomicEntity {
         this.descriptionHGVS = descriptionHGVS;
     }
 
+	public String getChromosome() {
+		return chromosome;
+	}
 
+	public void setChromosome(String chromosome) {
+		this.chromosome = chromosome;
+	}
+
+	public String getAssembly() {
+		return assembly;
+	}
+
+	public void setAssembly(String assembly) {
+		this.assembly = assembly;
+	}
+
+	public String getIsoform() {
+		return isoform;
+	}
+
+	public void setIsoform(String isoform) {
+		this.isoform = isoform;
+	}
+
+	public String getExonId() {
+		return exonId;
+	}
+
+	public void setExonId(String exonId) {
+		this.exonId = exonId;
+	}
+
+	public int getStartPosition() {
+		return startPosition;
+	}
+
+	public void setStartPosition(int startPosition) {
+		this.startPosition = startPosition;
+	}
+
+	public int getEndPosition() {
+		return endPosition;
+	}
+
+	public void setEndPosition(int endPosition) {
+		this.endPosition = endPosition;
+	}
+
+	public String getRefBases() {
+		return refBases;
+	}
+
+	public void setRefBases(String refBases) {
+		this.refBases = refBases;
+	}
+
+	public String getAltBases() {
+		return altBases;
+	}
+
+	public void setAltBases(String altBases) {
+		this.altBases = altBases;
+	}
+
+	public OntologyClass getMutationType() {
+		return mutationType;
+	}
+
+	public void setMutationType(OntologyClass mutationType) {
+		this.mutationType = mutationType;
+	}
+    
 }
