@@ -31,9 +31,11 @@ import com.google.common.collect.ImmutableList;
 public class PhenoPacket {
 
     @JsonldId
+    @JsonProperty("id")
     private final String id;
 
     @JsonldProperty("http://purl.org/dc/elements/1.1/title")
+    @JsonProperty("title")
     private final String title;
 
     /*
@@ -115,6 +117,7 @@ public class PhenoPacket {
      * @return the phenotype_profile
      */
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("phenotype_profile")
     public List<PhenotypeAssociation> getPhenotypeAssociations() {
         return phenotypeAssociations;
     }
@@ -123,11 +126,13 @@ public class PhenoPacket {
      * @return the diseaseOccurrenceAssociations
      */
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("diagnosis_profile")
     public List<DiseaseOccurrenceAssociation> getDiseaseOccurrenceAssociations() {
         return diseaseOccurrenceAssociations;
     }
 
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("environment_profile")
     public List<EnvironmentAssociation> getEnvironmentAssociations() {
         return environmentAssociations;
     }
