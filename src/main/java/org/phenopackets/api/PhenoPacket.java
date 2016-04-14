@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.ImmutableList;
+
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+
 import org.phenopackets.api.model.association.DiseaseOccurrenceAssociation;
 import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
+import org.phenopackets.api.model.association.VariantAssociation;
 import org.phenopackets.api.model.entity.Disease;
 import org.phenopackets.api.model.entity.Organism;
 import org.phenopackets.api.model.entity.Person;
@@ -48,6 +51,7 @@ public class PhenoPacket {
     // ---- PROFILES/ASSOCIATIONS ----
     private final List<PhenotypeAssociation> phenotypeAssociations;
     private final List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations;
+    private final List<VariantAssociation> variantAssociations;
     private final List<EnvironmentAssociation> environmentAssociations;
 
     private PhenoPacket(Builder builder) {
@@ -62,6 +66,7 @@ public class PhenoPacket {
         phenotypeAssociations = nullIfEmptyOrImmutableList(builder.phenotypeAssociations);
         diseaseOccurrenceAssociations = nullIfEmptyOrImmutableList(builder.diseaseOccurrenceAssociations);
         environmentAssociations = nullIfEmptyOrImmutableList(builder.environmentAssociations);
+        variantAssociations = nullIfEmptyOrImmutableList(builder.variantAssociations);
     }
 
     /**
@@ -133,7 +138,11 @@ public class PhenoPacket {
         return environmentAssociations;
     }
 
-    public static class Builder {
+    public List<VariantAssociation> getVariantAssociations() {
+		return variantAssociations;
+	}
+
+	public static class Builder {
 
         @JsonProperty
         private String id;
@@ -160,6 +169,9 @@ public class PhenoPacket {
         @JsonProperty("environment_profile")
         private List<EnvironmentAssociation> environmentAssociations;
 
+        @JsonProperty("variat_profile")
+        private List<VariantAssociation> variantAssociations;
+
         @JsonCreator
         public Builder() {
             this.variants = new ArrayList<>();
@@ -170,6 +182,7 @@ public class PhenoPacket {
             this.phenotypeAssociations = new ArrayList<>();
             this.diseaseOccurrenceAssociations = new ArrayList<>();
             this.environmentAssociations = new ArrayList<>();
+            this.variantAssociations = new ArrayList<>();
         }
 
         public Builder id(String id) {
@@ -236,11 +249,21 @@ public class PhenoPacket {
             return this;
         }
 
+        public Builder addVariantAssociation(VariantAssociation a) {
+        	variantAssociations.add(a);
+            return this;
+        }
+
         /**
          * @param phenotypeAssociations the phenotype_profile to set
          */
         public Builder setPhenotypeAssociations(List<PhenotypeAssociation> phenotypeAssociations) {
             this.phenotypeAssociations = phenotypeAssociations;
+            return this;
+        }
+
+        public Builder setVariantAssociations(List<VariantAssociation> variantAssociations) {
+            this.variantAssociations = variantAssociations;
             return this;
         }
 
