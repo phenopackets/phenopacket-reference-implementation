@@ -25,6 +25,10 @@ phenotype_profile:
         types:
           - id: "HP:0003623"
             label: "Neonatal onset"
+      severity:
+        types:
+          - id: HP:0012829
+            label: Profound
       environment:
         types:
           - id: SCTID:161080002

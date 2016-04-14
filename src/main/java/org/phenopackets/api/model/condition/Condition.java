@@ -23,7 +23,6 @@ public abstract class Condition extends ClassInstance {
     @JsonProperty("attribute_of")
     @JsonPropertyDescription("the entity which this phenotype is about -- normally bundled into ontology class")
     private OrganismalSite attributeOf;
-
     
     @JsonProperty("onset")
     @JsonPropertyDescription("the time region in which the condition is first manifest")
@@ -36,6 +35,10 @@ public abstract class Condition extends ClassInstance {
     @JsonProperty("severity")
     @JsonPropertyDescription("the degree to which the phenotype is manifest, related to the concept of expressivity, see http://www.ncbi.nlm.nih.gov/books/NBK22090/")
     private ConditionSeverity severity;
+
+    @JsonProperty("frequency")
+    @JsonPropertyDescription("the frequency with which the phenotype manifests, related to the concept of penetrance, see http://www.ncbi.nlm.nih.gov/books/NBK22090/")
+    private ConditionSeverity frequency;
 
     @JsonProperty("environment")
     @JsonPropertyDescription("the environment in which the phenotype is expressed")
@@ -100,8 +103,23 @@ public abstract class Condition extends ClassInstance {
 	public void setSeverity(ConditionSeverity severity) {
 		this.severity = severity;
 	}
+	
 
 	/**
+     * @return the frequency
+     */
+    public ConditionSeverity getFrequency() {
+        return frequency;
+    }
+
+    /**
+     * @param frequency the frequency to set
+     */
+    public void setFrequency(ConditionSeverity frequency) {
+        this.frequency = frequency;
+    }
+
+    /**
 	 * @return the environment
 	 */
 	public Environment getEnvironment() {
