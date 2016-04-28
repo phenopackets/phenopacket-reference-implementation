@@ -30,6 +30,7 @@ public class DiseaseOccurrenceAssociation implements Association {
     /**
      * @return the disease
      */
+    @JsonProperty("disease_occurrence")
     public DiseaseOccurrence getDiseaseOcurrence() {
         return diseaseOccurrence;
     }
