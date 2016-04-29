@@ -8,6 +8,7 @@ import org.phenopackets.api.io.YamlReader;
 import org.phenopackets.api.model.association.DiseaseOccurrenceAssociation;
 import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
+import org.phenopackets.api.model.association.VariantAssociation;
 import org.phenopackets.api.model.condition.DiseaseOccurrence;
 import org.phenopackets.api.model.condition.Phenotype;
 import org.phenopackets.api.model.condition.TemporalRegion;
@@ -276,7 +277,11 @@ public class PhenoPacketTest {
         Person person = getPerson();
 
         Phenotype phenotype = new Phenotype();
-        phenotype.setTypes(ImmutableList.of(ontologyClass("HP:0200055", "Small hands")));
+        phenotype.setTypes(ImmutableList.of(OntologyClass.of("HP:0200055", "Small hands")));
+        TemporalRegion congenitalOnset = new TemporalRegion();
+        congenitalOnset.setDescription("during development");
+        congenitalOnset.setTypes(ImmutableList.of(OntologyClass.of("HP:0003577", "Congenital onset")));
+        phenotype.setTimeOfOnset(congenitalOnset);
 
         Evidence journalOneEvidence = new Evidence();
         journalOneEvidence.setTypes(ImmutableList.of(ontologyClass("ECO:0000033", "TAS")));
@@ -287,22 +292,29 @@ public class PhenoPacketTest {
                 .setEntity(person)
                 .addEvidence(journalOneEvidence)
                 .build();
-        Variant personVariant = new Variant();
-        personVariant.setId("variant#1");
-        personVariant.setLabel("c.1234A>G");
-        personVariant.setDescriptionHGVS("c.1234A>G");
+
+        Variant variant = new Variant();
+        variant.setId("variant#1");
+        variant.setLabel("c.1234A>G");
+        variant.setDescriptionHGVS("c.1234A>G");
 
         //How can I associate the variant with the person? If there are multiple people in the phenopacket, must they all have the same variant?
         //In this case variants and phenotypes belong to the entity (the person), the person is described in the phenopacket.
 
+        VariantAssociation variantAssociation = new VariantAssociation.Builder(variant)
+                .setEntity(person)
+                .addEvidence(journalOneEvidence)
+                .build();
+
         String id = "test-id";
-        String title = "Patient X phenotypes and potentially causative variant";
+        String title = "Patient phenotype with age of onset and potentially causative variant";
         PhenoPacket pk = new PhenoPacket.Builder()
                 .id(id)
                 .title(title)
                 .addPerson(person)
-                .addVariant(personVariant)
+                .addVariant(variant)
                 .addPhenotypeAssociation(patientPhenotypeAssociation)
+                .addVariantAssociation(variantAssociation)
                 .build();
 
         assertEquals(id, pk.getId());

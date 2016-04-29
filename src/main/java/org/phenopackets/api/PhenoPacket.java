@@ -1,11 +1,14 @@
 package org.phenopackets.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.collect.ImmutableList;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.phenopackets.api.model.association.DiseaseOccurrenceAssociation;
 import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
@@ -15,12 +18,8 @@ import org.phenopackets.api.model.entity.Organism;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.collect.ImmutableList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Top level container
@@ -29,6 +28,7 @@ import com.google.common.collect.ImmutableList;
  * @author Jules Jacobsen <jules.jacobsen@sanger.ac.uk>
  */
 @JsonDeserialize(builder = PhenoPacket.Builder.class)
+@JsonPropertyOrder({"id", "title"})
 public class PhenoPacket {
 
     @JsonldId
@@ -141,6 +141,7 @@ public class PhenoPacket {
     }
 
     @JsonInclude(Include.NON_EMPTY)
+    @JsonProperty("variant_profile")
     public List<VariantAssociation> getVariantAssociations() {
 		return variantAssociations;
 	}
@@ -172,7 +173,7 @@ public class PhenoPacket {
         @JsonProperty("environment_profile")
         private List<EnvironmentAssociation> environmentAssociations;
 
-        @JsonProperty("variat_profile")
+        @JsonProperty("variant_profile")
         private List<VariantAssociation> variantAssociations;
 
         @JsonCreator
