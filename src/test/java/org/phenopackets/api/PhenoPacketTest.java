@@ -301,7 +301,7 @@ public class PhenoPacketTest {
 
         Evidence journalOneEvidence = new Evidence();
         journalOneEvidence.setTypes(ImmutableList.of(ontologyClass("ECO:0000033", "TAS")));
-        Publication pub = Publication.newBuilder().setId("PMID:23455423").build();
+        Publication pub = new Publication.Builder().setId("PMID:23455423").build();
         journalOneEvidence.setSupportingPublications(ImmutableList.of(pub));
 
         PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Builder(phenotype)
