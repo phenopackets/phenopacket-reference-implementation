@@ -69,15 +69,9 @@ here is the disease Pfeiffer syndrome
 Disease disease = new Disease();
 disease.setId("OMIM:101600");
 disease.setLabel("Pfeiffer syndrome");
-List<OntologyClass> phenotypes = ImmutableList.of(
-        OntologyClass.of("HP:0000272", "Malar flattening"),
-        OntologyClass.of("HP:0005347", "Cartilaginous trachea"),
-        OntologyClass.of("HP:0001249", "Intellectual disability"),
-        OntologyClass.of("HP:0005048", "Synostosis of carpal bones"),
-        OntologyClass.of("HP:0004440", "Coronal craniosynostosis"),
-        OntologyClass.of("HP:0001156", "Brachydactyly syndrome")
-);
-disease.setTypes(phenotypes);
+disease.setTypes(ImmutableList.of(
+        OntologyClass.of("EFO:0000508", "genetic disorder")
+));
 ```
 
 ### Conditions
@@ -103,6 +97,18 @@ stage.setTypes(ImmutableList.of(
 ));
 diseaseOccurrence.setStage(stage);
 ```
+and a disease phenotype
+```java
+Phenotype diseasePhenotype = new Phenotype();
+diseasePhenotype.setTypes(ImmutableList.of(
+                           OntologyClass.of("HP:0000272", "Malar flattening"),
+                           OntologyClass.of("HP:0005347", "Cartilaginous trachea"),
+                           OntologyClass.of("HP:0001249", "Intellectual disability"),
+                           OntologyClass.of("HP:0005048", "Synostosis of carpal bones"),
+                           OntologyClass.of("HP:0004440", "Coronal craniosynostosis"),
+                           OntologyClass.of("HP:0001156", "Brachydactyly syndrome")
+));
+```
 
 Typically an observation is accompanied with some kind of evidence attribution - here we have a journal
 ```java
@@ -123,12 +129,19 @@ PhenotypeAssociation patientPhenotypeAssociation = new PhenotypeAssociation.Buil
         .addEvidence(journalEvidence)
         .build();
 ```
-and the Disease with the DiseaseAssociation.
+and the Disease with the DiseaseAssociation
 ```java
-DiseaseOccurrenceAssociation association = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence)
+DiseaseOccurrenceAssociation diseaseOccurrenceAssociation = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence)
         .setEntity(disease)
         .build();
 ```
+and the typically observed phenotypes for this disease
+ ```java
+ PhenotypeAssociation diseasePhenotypeAssociation = new PhenotypeAssociation.Builder(diseasePhenotype)
+         .setEntity(disease)
+         .build();
+ ```
+
 ### Adding Entities and Associations to a PhenoPacket
 Using the API it s now trivial to create a phenopacket containing the person and their observed phenotype. 
 ```java
@@ -139,13 +152,14 @@ PhenoPacket pk = new PhenoPacket.Builder()
                 .addPhenotypeAssociation(patientPhenotypeAssociation)
                 .build();
 ```
-or a disease as characterised by its associated pehnotypes and its time of onset
+or a disease as characterised by its associated phenotypes and its time of onset
 ```java
 PhenoPacket pk = new PhenoPacket.Builder()
                 .id(id)
-                .title("Description of a disease and its time of onset")
+                .title("Description of a disease its phenotype and time of onset")
                 .addDisease(disease)
                 .addDiseaseOccurrenceAssociation(diseaseOccurrenceAssociation)
+                .addPhenotypeAssociation(diseasePhenotypeAssociation)
                 .build();
 ```
 
