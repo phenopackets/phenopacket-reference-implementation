@@ -10,6 +10,7 @@ import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
 import org.phenopackets.api.model.association.VariantAssociation;
 import org.phenopackets.api.model.condition.DiseaseOccurrence;
+import org.phenopackets.api.model.condition.DiseaseStage;
 import org.phenopackets.api.model.condition.Phenotype;
 import org.phenopackets.api.model.condition.TemporalRegion;
 import org.phenopackets.api.model.entity.Disease;
@@ -48,6 +49,38 @@ public class PhenoPacketTest {
         person.setLabel("Joe Bloggs");
         person.setSex("M");
         return person;
+    }
+
+    private Disease getDisease() {
+        Disease disease = new Disease();
+        disease.setId("OMIM:101600");
+        disease.setLabel("Pfeiffer syndrome");
+        disease.setTypes(ImmutableList.of(OntologyClass.of("EFO:0000508", "genetic disorder")));
+        return disease;
+    }
+
+    private Phenotype getDiseasePhenotype() {
+        Phenotype diseasePhenotype = new Phenotype();
+        diseasePhenotype.setTypes(ImmutableList.of(
+                OntologyClass.of("HP:0000272", "Malar flattening"),
+                OntologyClass.of("HP:0005347", "Cartilaginous trachea"),
+                OntologyClass.of("HP:0001249", "Intellectual disability"),
+                OntologyClass.of("HP:0005048", "Synostosis of carpal bones"),
+                OntologyClass.of("HP:0004440", "Coronal craniosynostosis"),
+                OntologyClass.of("HP:0001156", "Brachydactyly syndrome")
+        ));
+        return diseasePhenotype;
+    }
+
+    private DiseaseOccurrence getDiseaseOccurrence() {
+        DiseaseOccurrence diseaseOccurrence = new DiseaseOccurrence();
+        DiseaseStage stage = new DiseaseStage();
+        stage.setDescription("Childhood onset");
+        stage.setTypes(ImmutableList.of(
+                OntologyClass.of("HP:0011463", "Childhood onset")
+        ));
+        diseaseOccurrence.setStage(stage);
+        return diseaseOccurrence;
     }
 
     @Test
@@ -97,23 +130,6 @@ public class PhenoPacketTest {
         PhenoPacket packet = new PhenoPacket.Builder().addDisease(disease).build();
         System.out.println(YamlGenerator.render(packet));
         assertThat(packet.getDiseases(), hasItem(disease));
-    }
-
-    private Disease getDisease() {
-        Disease disease = new Disease();
-        disease.setId("OMIM:101600");
-        disease.setLabel("Pfeiffer syndrome");
-        List<OntologyClass> phenotypes = ImmutableList.of(
-                ontologyClass("HP:0000272", "Malar flattening"),
-                ontologyClass("HP:0005347", "Cartilaginous trachea"),
-                ontologyClass("HP:0001249", "Intellectual disability"),
-                ontologyClass("HP:0005048", "Synostosis of carpal bones"),
-                ontologyClass("HP:0004440", "Coronal craniosynostosis"),
-                ontologyClass("HP:0001156", "Brachydactyly syndrome")
-        );
-
-        disease.setTypes(phenotypes);
-        return disease;
     }
 
     @Test
@@ -323,6 +339,35 @@ public class PhenoPacketTest {
         System.out.println(JsonGenerator.render(pk));
         System.out.println(YamlGenerator.render(pk));
 
+    }
+
+    /**
+     * Code for the example shown on the wiki - use this to test it and update the wiki if the API changes.
+     * @throws Exception
+     */
+    @Test
+    public void testDiseaseAssociatedWithPhenotypesAndTimeOfOnset() throws Exception {
+        Disease disease = getDisease();
+
+        DiseaseOccurrence diseaseOccurrence = getDiseaseOccurrence();
+        DiseaseOccurrenceAssociation diseaseOccurrenceAssociation = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence)
+                .setEntity(disease)
+                .build();
+
+        Phenotype diseasePhenotype = getDiseasePhenotype();
+        PhenotypeAssociation diseasePhenotypeAssociation = new PhenotypeAssociation.Builder(diseasePhenotype)
+                .setEntity(disease)
+                .build();
+
+        PhenoPacket pk = new PhenoPacket.Builder()
+                .id("id1")
+                .title("Description of a disease its phenotype and time of onset")
+                .addDisease(disease)
+                .addDiseaseOccurrenceAssociation(diseaseOccurrenceAssociation)
+                .addPhenotypeAssociation(diseasePhenotypeAssociation)
+                .build();
+
+        System.out.println(YamlGenerator.render(pk));
     }
 
 }
