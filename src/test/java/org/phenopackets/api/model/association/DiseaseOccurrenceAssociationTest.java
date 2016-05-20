@@ -1,10 +1,14 @@
 package org.phenopackets.api.model.association;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.phenopackets.api.io.YamlGenerator;
 import org.phenopackets.api.model.condition.DiseaseOccurrence;
 import org.phenopackets.api.model.condition.DiseaseStage;
 import org.phenopackets.api.model.entity.Disease;
+import org.phenopackets.api.model.evidence.Evidence;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -56,6 +60,16 @@ public class DiseaseOccurrenceAssociationTest {
                 .setEntityId(entityId)
                 .build();
         assertThat(association.getEntityId(), equalTo(entityId));
+    }
+
+    @Test
+    public void testBuildAndGetEvidence() {
+        DiseaseOccurrence occurrence = getDiseaseOccurrence();
+        List<Evidence> evidences = ImmutableList.of();
+        DiseaseOccurrenceAssociation association = new DiseaseOccurrenceAssociation.Builder(occurrence)
+                .setEvidence(evidences)
+                .build();
+        assertThat(association.getEvidence(), equalTo(evidences));
     }
 
     @Test
