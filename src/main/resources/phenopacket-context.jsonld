@@ -1,0 +1,98 @@
+{
+  "@context" : {
+    "id": "@id",
+    "label": "rdfs:label",
+    "types": {
+      "@id": "rdf:type",
+      "@type": "@id"
+    },
+    "negated_types": {
+      "@id": "owl:complementOf",
+      "@type": "@id"
+    },
+    "title": "dc:title",
+    "pheno": "http://phenopackets.org/",
+    "persons": "pheno:persons",
+    "variants": "pheno:variants",
+    "organisms": "pheno:organisms",
+    "diseases": "pheno:diseases",
+    "phenotype_profile": "pheno:phenotype_profile",
+    "diagnosis_profile": "pheno:diagnosis_profile",
+    "environment_profile": "pheno:environment_profile",
+    "variant_profile": "pheno:variant_profile",
+    "entity": {
+      "@id": "pheno:entity",
+      "@type": "@id"
+    },
+    "evidence": "pheno:evidence",
+    "disease_occurrence": "pheno:disease_occurrence",
+    "environment": "pheno:environment",
+    "phenotype": "pheno:phenotype",
+    "variant": "pheno:variant",
+    "has_location": "obo:BFO_0000066",
+    "attribute_of": "pheno:attribute_of",
+    "onset": "pheno:onset",
+    "offset": "pheno:offset",
+    "severity": "pheno:severity",
+    "frequency": "pheno:frequency",
+    "stage": "pheno:stage",
+    "unit": "pheno:unit",
+    "value": "pheno:value",
+    "property_values": "pheno:property_values",
+    "measurements": "pheno:measurements",
+    "start_time": "pheno:start_time",
+    "end_time": "pheno:end_time",
+    "taxon": "pheno:taxon",
+    "sex": "pheno:sex",
+    "date_of_birth": "pheno:date_of_birth",
+    "strain": "pheno:strain",
+    "supporting_entities": "pheno:supporting_entities",
+    "source": "dc:source",
+    "property": "pheno:property",
+    "filler": "pheno:filler",
+    
+    "dc": "http://purl.org/dc/terms/",
+    "EFO" : "http://purl.obolibrary.org/obo/EFO_",
+    "obo" : "http://purl.obolibrary.org/obo/",
+    "GENO" : "http://purl.obolibrary.org/obo/GENO_",
+    "UMLS" : "http://purl.obolibrary.org/obo/UMLS_",
+    "dcat" : "http://www.w3.org/ns/dcat#",
+    "PMID" : "http://www.ncbi.nlm.nih.gov/pubmed/",
+    "MP" : "http://purl.obolibrary.org/obo/MP_",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "Class" : "owl:Class",
+    "FBbt" : "http://purl.obolibrary.org/obo/FBbt_",
+    "ECO" : "http://purl.obolibrary.org/obo/ECO_",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "creator" : {
+      "@id" : "dc:creator",
+      "@type" : "@id"
+    },
+    "SIO" : "http://semanticscience.org/resource/SIO_",
+    "DOID" : "http://purl.obolibrary.org/obo/DOID_",
+    "publisher" : "dc:publisher",
+    "depiction" : {
+      "@id" : "foaf:depiction",
+      "@type" : "@id"
+    },
+    "monarch" : "http://monarchinitiative.org/",
+    "ORPHANET" : "http://purl.obolibrary.org/obo/ORPHANET_",
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "type" : {
+      "@id" : "rdf:type",
+      "@type" : "@id"
+    },
+    "created" : {
+      "@id" : "dc:created",
+      "@type" : "xsd:dateTime"
+    },
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "oboInOwl" : "http://www.geneontology.org/formats/oboInOwl#",
+    "description" : "dc:description",
+    "foaf" : "http://xmlns.com/foaf/0.1/",
+    "subClassOf" : "owl:subClassOf",
+    "source" : "dc:source",
+    "keyword" : "dcat:keyword"
+
+  }
+}
