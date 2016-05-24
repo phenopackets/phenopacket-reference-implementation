@@ -202,9 +202,10 @@
 			<version>2.7.2</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
-			<version>4.2.3</version>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<type>pom</type>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
