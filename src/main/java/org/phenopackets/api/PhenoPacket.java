@@ -16,6 +16,7 @@ import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,6 +32,7 @@ import com.google.common.collect.ImmutableList;
  */
 @JsonDeserialize(builder = PhenoPacket.Builder.class)
 @JsonPropertyOrder({"id", "title"})
+@JsonFilter("PhenoPacketClass")
 public class PhenoPacket {
 
     @JsonldId
