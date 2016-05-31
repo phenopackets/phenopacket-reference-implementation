@@ -1,0 +1,20 @@
+---
+id: "phenopkt#1"
+title: "A male smoker"
+persons:
+- id: "person#1"
+  label: "Joe Bloggs"
+  sex: "M"
+environment_profile:
+- entity: "person#1"
+  environment:
+    description: "Smoked since birth, gave up as a teenager"
+    types:
+    - id: "EFO:0004318"
+      label: "smoking behavior"
+  evidence:
+  - types:
+    - id: "ECO:0000033"
+      label: "TAS"
+    source:
+    - id: "PMID:00000000"

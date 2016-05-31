@@ -1,14 +1,11 @@
 package org.phenopackets.api;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.collect.ImmutableList;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.phenopackets.api.model.association.DiseaseOccurrenceAssociation;
 import org.phenopackets.api.model.association.EnvironmentAssociation;
 import org.phenopackets.api.model.association.PhenotypeAssociation;
@@ -18,8 +15,14 @@ import org.phenopackets.api.model.entity.Organism;
 import org.phenopackets.api.model.entity.Person;
 import org.phenopackets.api.model.entity.Variant;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Top level container
@@ -29,6 +32,7 @@ import java.util.List;
  */
 @JsonDeserialize(builder = PhenoPacket.Builder.class)
 @JsonPropertyOrder({"id", "title"})
+@JsonFilter("PhenoPacketClass")
 public class PhenoPacket {
 
     @JsonldId
@@ -38,6 +42,15 @@ public class PhenoPacket {
     @JsonldProperty("http://purl.org/dc/elements/1.1/title")
     @JsonProperty("title")
     private final String title;
+    
+    /**
+     * The JSON-LD context for this document. This needs to be an unstructured
+     * Object, since it could be either a list or a map. We don't want to store
+     * it here as a Context because we want to roundtrip it the way it is written
+     * in the document.
+     */
+    @JsonProperty("@context")
+    private final Object context;
 
     /*
      * due to typing in yaml not using a 'type' fields in the same way as json
@@ -61,6 +74,7 @@ public class PhenoPacket {
     private PhenoPacket(Builder builder) {
         id = builder.id;
         title = builder.title;
+        context = builder.context;
 
         variants = ImmutableList.copyOf(builder.variants);
         persons = ImmutableList.copyOf(builder.persons);
@@ -85,6 +99,14 @@ public class PhenoPacket {
      */
     public String getTitle() {
         return title;
+    }
+    
+    /**
+     * @return the local context
+     */
+    @JsonInclude(Include.NON_EMPTY)
+    public Object getContext() {
+    	return context;
     }
 
     /**
@@ -152,6 +174,9 @@ public class PhenoPacket {
         private String id;
         @JsonProperty
         private String title;
+        @JsonProperty("@context")
+        private Object context;
+       
 
         // ---- ENTITIES ----
         @JsonProperty
@@ -197,6 +222,11 @@ public class PhenoPacket {
         public Builder title(String title) {
             this.title = title;
             return this;
+        }
+        
+        public Builder setContext(Object context) {
+        	this.context = context;
+        	return this;
         }
 
         public Builder addVariant(Variant variant) {

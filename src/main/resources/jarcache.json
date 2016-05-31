@@ -1,0 +1,7 @@
+[
+  {
+    "Content-Location": "http://phenopackets.org/context",
+    "X-Classpath": "phenopacket-context.jsonld",
+    "Content-Type": "application/ld+json"
+  }
+]
