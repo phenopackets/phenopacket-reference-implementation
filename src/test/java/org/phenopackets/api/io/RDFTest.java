@@ -11,10 +11,12 @@ import org.apache.jena.riot.Lang;
 import org.junit.Test;
 import org.phenopackets.api.PhenoPacket;
 
+import com.github.jsonldjava.core.JsonLdError;
+
 public class RDFTest {
 
 	@Test
-	public void testWriteRDF() throws IOException {
+	public void testWriteRDF() throws IOException, JsonLdError {
 		PhenoPacket packet = YamlReader
 				.readFile("src/test/resources/context/phenopacket-with-context.yaml");
 		System.out.println(RDFGenerator.render(packet, Lang.TURTLE));
