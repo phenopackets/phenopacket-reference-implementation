@@ -1,5 +1,7 @@
 package org.phenopackets.api.model.entity;
 
+import java.util.Objects;
+
 import org.phenopackets.api.model.ontology.OntologyClass;
 
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
@@ -130,4 +132,50 @@ public class Variant extends GenomicEntity {
 		this.mutationType = mutationType;
 	}
     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Variant that = (Variant) o;
+        return Objects.equals(descriptionHGVS, that.descriptionHGVS) &&
+                Objects.equals(chromosome, that.chromosome) &&
+                Objects.equals(assembly, that.assembly) &&
+                Objects.equals(isoform, that.isoform) &&
+                Objects.equals(exonId, that.exonId) &&
+                Objects.equals(startPosition, that.startPosition) &&
+                Objects.equals(endPosition, that.endPosition) &&
+                Objects.equals(refBases, that.refBases) &&
+                Objects.equals(altBases, that.altBases) &&
+                Objects.equals(mutationType, that.mutationType);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(descriptionHGVS,
+                chromosome,
+                assembly,
+                isoform,
+                exonId,
+                startPosition,
+                endPosition,
+                refBases,
+                altBases,
+                mutationType);
+    }
+
+    @Override
+    public String toString() {
+        return "Variant{" +
+                "descriptionHGVS='" + descriptionHGVS + '\'' +
+                ", chromosome='" + chromosome + '\'' +
+                ", assembly='" + assembly + '\'' +
+                ", isoform='" + isoform + '\'' +
+                ", exonId='" + exonId + '\'' +
+                ", startPosition='" + startPosition + '\'' +
+                ", endPosition='" + endPosition + '\'' +
+                ", refBases='" + refBases + '\'' +
+                ", altBases='" + altBases + '\'' +
+                ", mutationType='" + mutationType + '\'' +
+                '}';
+    }
 }
