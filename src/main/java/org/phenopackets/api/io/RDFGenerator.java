@@ -2,6 +2,7 @@ package org.phenopackets.api.io;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.UUID;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -15,13 +16,25 @@ import com.github.jsonldjava.core.JsonLdError;
 
 public class RDFGenerator {
 
-	public static Model toRDF(PhenoPacket packet)
-			throws JsonProcessingException, JsonLdError {
+	/**
+	 * Convert a PhenoPacket to RDF triples using the JSON-LD context
+	 * 
+	 * @param packet
+	 * @param base
+	 *            URI base for generated RDF; if `null` a UUID-based base will
+	 *            be used
+	 * @return model containing RDF triples
+	 * @throws JsonLdError
+	 * @throws JsonProcessingException
+	 */
+	public static Model toRDF(PhenoPacket packet, String base)
+			throws JsonLdError, JsonProcessingException {
 		PhenoPacket packetWithContext;
 		if (packet.getContext() == null) {
+			// FIXME this cloning is not very future-proof; should be handled by
+			// PhenoPacket class
 			packetWithContext = new PhenoPacket.Builder()
-					.setContext(
-							ContextUtil.getDefaultContext().getPrefixes(false))
+					.setContext(ContextUtil.defaultContextURI)
 					.id(packet.getId())
 					.title(packet.getTitle())
 					.setDiseaseOccurrenceAssociations(
@@ -39,14 +52,34 @@ public class RDFGenerator {
 		Model rdfModel = ModelFactory.createDefaultModel();
 		StringReader reader = new StringReader(
 				JsonGenerator.render(packetWithContext));
-		RDFDataMgr.read(rdfModel, reader, null, Lang.JSONLD);
+		String baseToUse;
+		if (base != null) {
+			baseToUse = base;
+		} else {
+			String uuid = UUID.randomUUID().toString();
+			baseToUse = "http://phenopackets.org/local/" + uuid + "/";
+		}
+		RDFDataMgr.read(rdfModel, reader, baseToUse, Lang.JSONLD);
 		return rdfModel;
 	}
 
-	public static String render(PhenoPacket packet, Lang format)
-			throws JsonProcessingException, JsonLdError {
+	/**
+	 * Serialize a PhenoPacket as an RDF string
+	 * 
+	 * @param packet
+	 * @param base
+	 *            base URI base for generated RDF; if `null` a UUID-based base
+	 *            will be used
+	 * @param format
+	 *            RDF serialization format
+	 * @return
+	 * @throws JsonLdError
+	 * @throws JsonProcessingException
+	 */
+	public static String render(PhenoPacket packet, String base, Lang format)
+			throws JsonLdError, JsonProcessingException {
 		StringWriter writer = new StringWriter();
-		RDFDataMgr.write(writer, toRDF(packet), format);
+		RDFDataMgr.write(writer, toRDF(packet, base), format);
 		return writer.toString();
 	}
 }

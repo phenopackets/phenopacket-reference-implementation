@@ -12,7 +12,7 @@ import com.github.jsonldjava.core.JsonLdError;
 
 public class ContextUtil {
 
-	private static final String defaultContextURI = "http://phenopackets.org/context";
+	public static final String defaultContextURI = "http://phenopackets.org/context";
 
 	/**
 	 * @param packet

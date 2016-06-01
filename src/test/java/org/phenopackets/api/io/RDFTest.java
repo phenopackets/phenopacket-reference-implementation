@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.riot.Lang;
 import org.junit.Test;
 import org.phenopackets.api.PhenoPacket;
 
@@ -19,8 +18,7 @@ public class RDFTest {
 	public void testWriteRDF() throws IOException, JsonLdError {
 		PhenoPacket packet = YamlReader
 				.readFile("src/test/resources/context/phenopacket-with-context.yaml");
-		System.out.println(RDFGenerator.render(packet, Lang.TURTLE));
-		Model model = RDFGenerator.toRDF(packet);
+		Model model = RDFGenerator.toRDF(packet, null);
 		assertThat(
 				model.contains(
 						ResourceFactory
@@ -37,6 +35,28 @@ public class RDFTest {
 								.createProperty("http://www.w3.org/2000/01/rdf-schema#label"),
 						ResourceFactory.createPlainLiteral("smoking behavior")),
 				is(true));
-	}
+		PhenoPacket packet2 = YamlReader
+				.readFile("src/test/resources/context/phenopacket-without-context.yaml");
+		Model model2 = RDFGenerator.toRDF(packet2, null);
+		assertThat(
+				model2.listResourcesWithProperty(
+						ResourceFactory
+								.createProperty("http://www.w3.org/2000/01/rdf-schema#label"),
+						ResourceFactory.createPlainLiteral("Joe Bloggs"))
+						.next().getURI()
+						.startsWith("http://phenopackets.org/local/"), is(true));
+		PhenoPacket packet3 = YamlReader
+				.readFile("src/test/resources/context/phenopacket-without-context.yaml");
+		Model model3 = RDFGenerator.toRDF(packet3,
+				"http://example.org/testbase/");
+		assertThat(
+				model3.contains(
+						ResourceFactory
+								.createResource("http://example.org/testbase/person#1"),
+						ResourceFactory
+								.createProperty("http://www.w3.org/2000/01/rdf-schema#label"),
+						ResourceFactory.createPlainLiteral("Joe Bloggs")),
+				is(true));
 
+	}
 }
