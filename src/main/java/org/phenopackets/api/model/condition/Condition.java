@@ -38,7 +38,7 @@ public abstract class Condition extends ClassInstance {
 
     @JsonProperty("frequency")
     @JsonPropertyDescription("the frequency with which the phenotype manifests, related to the concept of penetrance, see http://www.ncbi.nlm.nih.gov/books/NBK22090/")
-    private ConditionSeverity frequency;
+    private ConditionFrequency frequency;
 
     @JsonProperty("environment")
     @JsonPropertyDescription("the environment in which the phenotype is expressed")
@@ -108,14 +108,14 @@ public abstract class Condition extends ClassInstance {
 	/**
      * @return the frequency
      */
-    public ConditionSeverity getFrequency() {
+    public ConditionFrequency getFrequency() {
         return frequency;
     }
 
     /**
      * @param frequency the frequency to set
      */
-    public void setFrequency(ConditionSeverity frequency) {
+    public void setFrequency(ConditionFrequency frequency) {
         this.frequency = frequency;
     }
 

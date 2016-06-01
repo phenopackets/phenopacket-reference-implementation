@@ -25,7 +25,7 @@ public class ConditionFrequencyTest {
 		Phenotype phenotype = packet.getPhenotypeAssociations().get(0).getPhenotype();
 		System.out.println(YamlGenerator.render(phenotype));
 	
-		ConditionSeverity frequency = phenotype.getFrequency();
+		ConditionFrequency frequency = phenotype.getFrequency();
 		assertEquals(2, frequency.getTypes().size());
 		
 	}
