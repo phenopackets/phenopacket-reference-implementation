@@ -9,7 +9,13 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.junit.Test;
 import org.phenopackets.api.PhenoPacket;
+import org.phenopackets.api.util.ContextUtil;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.github.jsonldjava.core.JsonLdError;
 
 public class RDFTest {
@@ -59,4 +65,22 @@ public class RDFTest {
 				is(true));
 
 	}
+
+	@Test
+	public void testReadRDF() throws IOException, JsonLdError {
+		// FIXME this does not really test the output
+		PhenoPacket packet = YamlReader
+				.readFile("src/test/resources/context/phenopacket-with-context.yaml");
+		Model model = RDFGenerator.toRDF(packet, null);
+		String packetID = packet.getId();
+		PhenoPacket newPacket = RDFReader.readModel(model,
+				ContextUtil.expandIdentifierAsValue(packetID, packet));
+		ObjectMapper m = new ObjectMapper();
+		m.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		m.setFilterProvider(new SimpleFilterProvider().addFilter(
+				"PhenoPacketClass", SimpleBeanPropertyFilter.serializeAll()));
+		ObjectWriter writer = m.writerWithDefaultPrettyPrinter();
+		System.out.println(writer.writeValueAsString(newPacket));
+	}
+
 }
