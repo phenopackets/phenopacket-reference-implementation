@@ -103,7 +103,8 @@ public class ContextUtil {
 	/**
 	 * Use the provided JSON-LD context to expand the given identifier, assuming
 	 * the identifier is used in a document as a property. Depending on the
-	 * context, the result may or may not be a valid IRI.
+	 * context, the result may or may not be a valid IRI. If the identifier
+	 * cannot be expanded by the context, it is returned as-is.
 	 * 
 	 * @param identifier
 	 * @param context
@@ -114,11 +115,16 @@ public class ContextUtil {
 			Context context) throws JsonLdError {
 		// This is very convoluted due to how jsonld-api works
 		Map<String, Object> jsonMap = new HashMap<>();
-		jsonMap.put(identifier, "ignore this value");
+		jsonMap.put(identifier, "ignorethisvalue");
 		@SuppressWarnings("unchecked")
 		Map<String, Object> result = (Map<String, Object>) (new JsonLdApi()
 				.expand(context, jsonMap));
-		return result.keySet().iterator().next();
+		if (result != null) {
+			return result.keySet().iterator().next();
+		} else {
+			return identifier;
+		}
+
 	}
 
 	/**

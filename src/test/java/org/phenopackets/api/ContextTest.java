@@ -76,6 +76,16 @@ public class ContextTest {
 		String curieNotInDocument = "dim:sum";
 		assertThat(ContextUtil.expandIdentifierAsValue(curieNotInDocument,
 				context), equalTo(curieNotInDocument));
+		assertThat(ContextUtil.expandIdentifierAsPropertyOrType(
+				curieNotInDocument, context), equalTo(curieNotInDocument));
+		assertThat(
+				ContextUtil.expandIdentifierAsPropertyOrType("dimSum", context),
+				equalTo("dimSum"));
+		assertThat(ContextUtil.expandIdentifierAsPropertyOrType(
+				"negated_types", context),
+				equalTo("http://www.w3.org/2002/07/owl#complementOf"));
+		assertThat(ContextUtil.expandIdentifierAsValue("owl:complementOf",
+				context), equalTo("http://www.w3.org/2002/07/owl#complementOf"));
 	}
 
 	@Test

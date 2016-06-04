@@ -50,6 +50,8 @@
     "source": "dc:source",
     "property": "pheno:property",
     "filler": "pheno:filler",
+    "stressor": "pheno:stressor",
+    "transportPath": "pheno:transportPath",
     
     "dc": "http://purl.org/dc/terms/",
     "EFO" : "http://purl.obolibrary.org/obo/EFO_",
