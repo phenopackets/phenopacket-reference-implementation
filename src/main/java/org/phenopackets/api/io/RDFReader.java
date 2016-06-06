@@ -133,6 +133,14 @@ public class RDFReader {
 														.textNode(v
 																.asLiteral()
 																.getLexicalForm()));
+									} else if (valueType.equals("integer")) {
+										targetValues = values
+												.stream()
+												.filter(v -> v.isLiteral())
+												.map(v -> JsonNodeFactory.instance
+														.numberNode(v
+																.asLiteral()
+																.getInt()));
 									} else if (valueType.equals("object")) {
 										targetValues = values
 												.stream()
