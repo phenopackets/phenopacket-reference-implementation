@@ -1,8 +1,11 @@
 package org.phenopackets.api.model.evidence;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.google.common.collect.ImmutableList;
+
 import org.phenopackets.api.model.ontology.ClassInstance;
 
 import java.util.List;
@@ -18,10 +21,12 @@ import java.util.Objects;
 public class Evidence extends ClassInstance {
 
     @JsonProperty("supporting_entities")
+    @JsonInclude(Include.NON_EMPTY)
     private List<String> supportingEntities;
 
     @JsonProperty("source")
     @JsonPropertyDescription("publications may be represented inside or outside the packet, so a key rather than object is used")
+    @JsonInclude(Include.NON_EMPTY)
     private List<Publication> supportingPublications;
 
     /**

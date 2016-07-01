@@ -8,8 +8,10 @@ import org.phenopackets.api.model.ontology.ClassInstance;
 import org.phenopackets.api.model.ontology.OntologyClass;
 import org.phenopackets.api.model.ontology.PropertyLiteralValue;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * Represents a measurement of a phenotype or trait
@@ -34,6 +36,7 @@ public class Measurement extends ClassInstance {
 
     @JsonProperty("property_values")
     @JsonPropertyDescription("a list of (property,value) pairs")
+    @JsonInclude(Include.NON_EMPTY)
     private List<PropertyLiteralValue> propertyValues;
 
     // TODO - trait
