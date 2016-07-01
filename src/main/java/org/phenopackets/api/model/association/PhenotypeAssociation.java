@@ -1,10 +1,13 @@
 package org.phenopackets.api.model.association;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.ImmutableList;
+
 import org.phenopackets.api.model.condition.Phenotype;
 import org.phenopackets.api.model.entity.Entity;
 import org.phenopackets.api.model.evidence.Evidence;
@@ -72,6 +75,7 @@ public class PhenotypeAssociation implements Association {
         @JsonProperty("entity")
         private String entityId;
         @JsonProperty
+        @JsonInclude(Include.NON_EMPTY)
         private List<Evidence> evidence = new ArrayList<>();
 
         @JsonCreator

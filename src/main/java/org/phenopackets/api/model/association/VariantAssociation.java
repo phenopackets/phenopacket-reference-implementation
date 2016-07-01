@@ -9,8 +9,10 @@ import org.phenopackets.api.model.entity.Variant;
 import org.phenopackets.api.model.evidence.Evidence;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.ImmutableList;
 
@@ -73,6 +75,7 @@ public class VariantAssociation implements Association {
         @JsonProperty("entity")
         private String entityId;
         @JsonProperty
+        @JsonInclude(Include.NON_EMPTY)
         private List<Evidence> evidence = new ArrayList<>();
 
         @JsonCreator
