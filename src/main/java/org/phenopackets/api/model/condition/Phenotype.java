@@ -2,6 +2,9 @@ package org.phenopackets.api.model.condition;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 
 /**
  * An individual occurrence of a phenotype (a type of condition)
@@ -10,6 +13,7 @@ import java.util.List;
  */
 public class Phenotype extends Condition {
 
+	@JsonInclude(Include.NON_EMPTY)
     List<Measurement> measurements;
 
     public Phenotype(Phenotype.Builder builder) {
