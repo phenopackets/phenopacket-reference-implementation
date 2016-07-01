@@ -82,14 +82,12 @@ public class RDFReader {
 			if (incomingNode.has("id")) {
 				schemaNode = incomingNode;
 			} else if (incomingNode.has("$ref")) {
-				schemaNode = repeatedStructureMap.get(incomingNode.get("$ref")
-						.textValue());
+				schemaNode = repeatedStructureMap.get(incomingNode.get("$ref").textValue());
 			} else {
 				return null;
 			}
 			ObjectNode packetNode = JsonNodeFactory.instance.objectNode();
-			ObjectNode propertiesObj = (ObjectNode) schemaNode
-					.get("properties");
+			ObjectNode propertiesObj = (ObjectNode) schemaNode.get("properties");
 			propertiesObj
 					.fieldNames()
 					.forEachRemaining(
@@ -98,69 +96,49 @@ public class RDFReader {
 									List<RDFNode> values;
 									if (field.equals("id")) {
 										values = ImmutableList.of(ResourceFactory
-												.createPlainLiteral(rdfNode
-														.getURI()));
+												.createPlainLiteral(rdfNode.getURI()));
 									} else {
-										Property property = getProperty(field,
-												context);
-										values = getValues(model, rdfNode,
-												property);
+										Property property = getProperty(field, context);
+										values = getValues(model, rdfNode, property);
 									}
-									String type = propertiesObj.get(field)
-											.get("type").textValue();
+									String type = propertiesObj.get(field).get("type").textValue();
 									boolean array;
 									String valueType;
 									ObjectNode valueObject;
 									if (type.equals("array")) {
 										array = true;
-										valueObject = (ObjectNode) propertiesObj
-												.get(field).get("items");
-										valueType = valueObject.get("type")
-												.textValue();
+										valueObject = (ObjectNode) propertiesObj.get(field).get("items");
+										valueType = valueObject.get("type").textValue();
 									} else {
 										array = false;
-										valueObject = (ObjectNode) propertiesObj
-												.get(field);
+										valueObject = (ObjectNode) propertiesObj.get(field);
 										valueType = type;
 									}
-									Stream<JsonNode> targetValues = Stream
-											.empty();
+									Stream<JsonNode> targetValues = Stream.empty();
 									if (valueType.equals("string")) {
 										targetValues = values
 												.stream()
-												.filter(v -> v.isLiteral())
-												.map(v -> JsonNodeFactory.instance
-														.textNode(v
-																.asLiteral()
-																.getLexicalForm()));
+												.map(v -> JsonNodeFactory.instance.textNode(v.toString())); //TODO if v is resource then compact with context
 									} else if (valueType.equals("integer")) {
 										targetValues = values
 												.stream()
 												.filter(v -> v.isLiteral())
-												.map(v -> JsonNodeFactory.instance
-														.numberNode(v
-																.asLiteral()
-																.getInt()));
+												.map(v -> JsonNodeFactory.instance.numberNode(v.asLiteral().getInt()));
 									} else if (valueType.equals("object")) {
 										targetValues = values
 												.stream()
 												.filter(v -> v.isResource())
 												.map(v -> v.asResource())
-												.map(v -> processObjectNode(
-														valueObject, v));
+												.map(v -> processObjectNode(valueObject, v));
 									} else {
-										logger.error("Didn't account for "
-												+ valueType);
+										logger.error("Didn't account for " + valueType);
 									}
 									if (array) {
-										ArrayNode valuesNode = JsonNodeFactory.instance
-												.arrayNode();
-										valuesNode.addAll(targetValues
-												.collect(Collectors.toList()));
+										ArrayNode valuesNode = JsonNodeFactory.instance.arrayNode();
+										valuesNode.addAll(targetValues.collect(Collectors.toList()));
 										packetNode.set(field, valuesNode);
 									} else {
-										packetNode.set(field, targetValues
-												.findAny().orElse(null));
+										packetNode.set(field, targetValues.findAny().orElse(null));
 									}
 								}
 							});
