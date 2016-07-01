@@ -118,7 +118,7 @@ public class RDFReader {
 									if (valueType.equals("string")) {
 										targetValues = values
 												.stream()
-												.map(v -> JsonNodeFactory.instance.textNode(v.toString())); //TODO if v is resource then compact with context
+												.map(v -> JsonNodeFactory.instance.textNode(nodeToString(v))); //TODO if v is resource then compact with context
 									} else if (valueType.equals("integer")) {
 										targetValues = values
 												.stream()
@@ -175,6 +175,16 @@ public class RDFReader {
 		m.acceptJsonFormatVisitor(m.constructType(PhenoPacket.class), visitor);
 		JsonSchema jsonSchema = visitor.finalSchema();
 		return (ObjectNode) m.valueToTree(jsonSchema);
+	}
+
+	private static String nodeToString(RDFNode node) {
+		if (node.isURIResource()) {
+			return node.asResource().getURI();
+		} else if (node.isLiteral()) {
+			return node.asLiteral().getLexicalForm();
+		} else {
+			return node.toString();
+		}
 	}
 
 	private static Logger logger = LoggerFactory.getLogger(RDFReader.class);
