@@ -4,8 +4,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.UUID;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.phenopackets.api.PhenoPacket;
@@ -13,6 +11,8 @@ import org.phenopackets.api.util.ContextUtil;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jsonldjava.core.JsonLdError;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class RDFGenerator {
 
