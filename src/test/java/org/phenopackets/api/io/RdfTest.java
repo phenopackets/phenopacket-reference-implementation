@@ -18,13 +18,13 @@ import com.github.jsonldjava.core.JsonLdError;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
-public class RDFTest {
+public class RdfTest {
 
 	@Test
-	public void testWriteRDF() throws IOException, JsonLdError {
+	public void testWriteRdf() throws IOException, JsonLdError {
 		PhenoPacket packet = YamlReader
 				.readFile("src/test/resources/context/phenopacket-with-context.yaml");
-		Model model = RDFGenerator.toRDF(packet, null);
+		Model model = RdfGenerator.toRdf(packet, null);
 		assertThat(
 				model.contains(
 						ResourceFactory
@@ -43,7 +43,7 @@ public class RDFTest {
 				is(true));
 		PhenoPacket packet2 = YamlReader
 				.readFile("src/test/resources/context/phenopacket-without-context.yaml");
-		Model model2 = RDFGenerator.toRDF(packet2, null);
+		Model model2 = RdfGenerator.toRdf(packet2, null);
 		assertThat(
 				model2.listResourcesWithProperty(
 						ResourceFactory
@@ -53,7 +53,7 @@ public class RDFTest {
 						.startsWith("http://phenopackets.org/local/"), is(true));
 		PhenoPacket packet3 = YamlReader
 				.readFile("src/test/resources/context/phenopacket-without-context.yaml");
-		Model model3 = RDFGenerator.toRDF(packet3,
+		Model model3 = RdfGenerator.toRdf(packet3,
 				"http://example.org/testbase/");
 		assertThat(
 				model3.contains(
@@ -67,13 +67,13 @@ public class RDFTest {
 	}
 
 	@Test
-	public void testReadRDF() throws IOException, JsonLdError {
+	public void testReadRdf() throws IOException, JsonLdError {
 		// FIXME this does not really test the output
 		PhenoPacket packet = YamlReader
 				.readFile("src/test/resources/context/phenopacket-with-context.yaml");
-		Model model = RDFGenerator.toRDF(packet, null);
+		Model model = RdfGenerator.toRdf(packet, null);
 		String packetID = packet.getId();
-		PhenoPacket newPacket = RDFReader.readModel(model,
+		PhenoPacket newPacket = RdfReader.readModel(model,
 				ContextUtil.expandIdentifierAsValue(packetID, packet));
 		ObjectMapper m = new ObjectMapper();
 		m.setSerializationInclusion(JsonInclude.Include.NON_NULL);

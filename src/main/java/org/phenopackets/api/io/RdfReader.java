@@ -31,7 +31,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class RDFReader {
+public class RdfReader {
 
 	public static PhenoPacket readModel(Model model, String packetURI)
 			throws JsonMappingException, JsonLdError {
@@ -187,5 +187,5 @@ public class RDFReader {
 		}
 	}
 
-	private static Logger logger = LoggerFactory.getLogger(RDFReader.class);
+	private static Logger logger = LoggerFactory.getLogger(RdfReader.class);
 }
