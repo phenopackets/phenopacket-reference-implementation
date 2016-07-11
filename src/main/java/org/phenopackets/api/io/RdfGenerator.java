@@ -14,7 +14,7 @@ import com.github.jsonldjava.core.JsonLdError;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-public class RDFGenerator {
+public class RdfGenerator {
 
 	/**
 	 * Convert a PhenoPacket to RDF triples using the JSON-LD context
@@ -27,7 +27,7 @@ public class RDFGenerator {
 	 * @throws JsonLdError
 	 * @throws JsonProcessingException
 	 */
-	public static Model toRDF(PhenoPacket packet, String base)
+	public static Model toRdf(PhenoPacket packet, String base)
 			throws JsonLdError, JsonProcessingException {
 		PhenoPacket packetWithContext;
 		if (packet.getContext() == null) {
@@ -79,7 +79,7 @@ public class RDFGenerator {
 	public static String render(PhenoPacket packet, String base, Lang format)
 			throws JsonLdError, JsonProcessingException {
 		StringWriter writer = new StringWriter();
-		RDFDataMgr.write(writer, toRDF(packet, base), format);
+		RDFDataMgr.write(writer, toRdf(packet, base), format);
 		return writer.toString();
 	}
 }
