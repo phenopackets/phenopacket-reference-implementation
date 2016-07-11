@@ -1,5 +1,10 @@
 package org.phenopackets.api;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.phenopackets.api.io.JsonGenerator;
@@ -370,4 +375,116 @@ public class PhenoPacketTest {
         System.out.println(YamlGenerator.render(pk));
     }
 
+    @Test
+    public void testBuilder() {
+        PhenoPacket pk = PhenoPacket.newBuilder()
+            .id("id1")
+            .title("Description of a disease its phenotype and time of onset")
+            .build();
+
+        assertNotNull(pk);
+        assertEquals("id1", pk.getId());
+        assertEquals("Description of a disease its phenotype and time of onset", pk.getTitle());
+        assertNull(pk.getContext());
+        assertTrue(pk.getVariants().isEmpty());
+        assertTrue(pk.getPersons().isEmpty());
+        assertTrue(pk.getOrganisms().isEmpty());
+        assertTrue(pk.getDiseases().isEmpty());
+        assertTrue(pk.getPhenotypeAssociations().isEmpty());
+        assertTrue(pk.getDiseaseOccurrenceAssociations().isEmpty());
+        assertTrue(pk.getEnvironmentAssociations().isEmpty());
+        assertTrue(pk.getVariantAssociations().isEmpty());
+    }
+
+    @Test
+    public void testBuilderInitializedFromPhenoPacket() {
+        Disease disease = getDisease();
+
+        DiseaseOccurrence diseaseOccurrence = getDiseaseOccurrence();
+        DiseaseOccurrenceAssociation diseaseOccurrenceAssociation = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence)
+            .setEntity(disease)
+            .build();
+
+        Phenotype diseasePhenotype = getDiseasePhenotype();
+        PhenotypeAssociation diseasePhenotypeAssociation = new PhenotypeAssociation.Builder(diseasePhenotype)
+            .setEntity(disease)
+            .build();
+
+        PhenoPacket pk = new PhenoPacket.Builder()
+            .id("id1")
+            .title("Description of a disease its phenotype and time of onset")
+            .addDisease(disease)
+            .addDiseaseOccurrenceAssociation(diseaseOccurrenceAssociation)
+            .addPhenotypeAssociation(diseasePhenotypeAssociation)
+            .build();
+
+        Object context = new Object();
+        PhenoPacket copy = PhenoPacket.newBuilder(pk)
+            .context(context)
+            .build();
+
+        assertNotNull(copy);
+        assertEquals("id1", copy.getId());
+        assertEquals("Description of a disease its phenotype and time of onset", copy.getTitle());
+        assertEquals(context, copy.getContext());
+        assertTrue(copy.getVariants().isEmpty());
+        assertTrue(copy.getPersons().isEmpty());
+        assertTrue(copy.getOrganisms().isEmpty());
+        assertTrue(copy.getDiseases().contains(disease));
+        assertTrue(copy.getPhenotypeAssociations().contains(diseasePhenotypeAssociation));
+        assertTrue(copy.getDiseaseOccurrenceAssociations().contains(diseaseOccurrenceAssociation));
+        assertTrue(copy.getEnvironmentAssociations().isEmpty());
+        assertTrue(copy.getVariantAssociations().isEmpty());
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void testBuilderInitializedFromNullPhenoPacket() {
+        PhenoPacket.newBuilder(null);
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void testBuilderCtrNullPhenoPacket() {
+        new PhenoPacket.Builder(null);
+    }
+
+    @Test
+    public void testBuilderCtrPhenoPacket() {
+        Disease disease = getDisease();
+
+        DiseaseOccurrence diseaseOccurrence = getDiseaseOccurrence();
+        DiseaseOccurrenceAssociation diseaseOccurrenceAssociation = new DiseaseOccurrenceAssociation.Builder(diseaseOccurrence)
+            .setEntity(disease)
+            .build();
+
+        Phenotype diseasePhenotype = getDiseasePhenotype();
+        PhenotypeAssociation diseasePhenotypeAssociation = new PhenotypeAssociation.Builder(diseasePhenotype)
+            .setEntity(disease)
+            .build();
+
+        PhenoPacket pk = new PhenoPacket.Builder()
+            .id("id1")
+            .title("Description of a disease its phenotype and time of onset")
+            .addDisease(disease)
+            .addDiseaseOccurrenceAssociation(diseaseOccurrenceAssociation)
+            .addPhenotypeAssociation(diseasePhenotypeAssociation)
+            .build();
+
+        Object context = new Object();
+        PhenoPacket copy = new PhenoPacket.Builder(pk)
+            .context(context)
+            .build();
+
+        assertNotNull(copy);
+        assertEquals("id1", copy.getId());
+        assertEquals("Description of a disease its phenotype and time of onset", copy.getTitle());
+        assertEquals(context, copy.getContext());
+        assertTrue(copy.getVariants().isEmpty());
+        assertTrue(copy.getPersons().isEmpty());
+        assertTrue(copy.getOrganisms().isEmpty());
+        assertTrue(copy.getDiseases().contains(disease));
+        assertTrue(copy.getPhenotypeAssociations().contains(diseasePhenotypeAssociation));
+        assertTrue(copy.getDiseaseOccurrenceAssociations().contains(diseaseOccurrenceAssociation));
+        assertTrue(copy.getEnvironmentAssociations().isEmpty());
+        assertTrue(copy.getVariantAssociations().isEmpty());
+    }
 }

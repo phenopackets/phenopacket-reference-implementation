@@ -31,21 +31,9 @@ public class RdfGenerator {
 			throws JsonLdError, JsonProcessingException {
 		PhenoPacket packetWithContext;
 		if (packet.getContext() == null) {
-			// FIXME this cloning is not very future-proof; should be handled by
-			// PhenoPacket class
-			packetWithContext = new PhenoPacket.Builder()
-					.setContext(ContextUtil.defaultContextURI)
-					.id(packet.getId())
-					.title(packet.getTitle())
-					.setDiseaseOccurrenceAssociations(
-							packet.getDiseaseOccurrenceAssociations())
-					.setDiseases(packet.getDiseases())
-					.setEnvironmentAssociations(
-							packet.getEnvironmentAssociations())
-					.setOrganisms(packet.getOrganisms())
-					.setPersons(packet.getPersons())
-					.setVariantAssociations(packet.getVariantAssociations())
-					.setVariants(packet.getVariants()).build();
+			packetWithContext = PhenoPacket.newBuilder(packet)
+                            .context(ContextUtil.defaultContextURI)
+                            .build();
 		} else {
 			packetWithContext = packet;
 		}
