@@ -1,5 +1,7 @@
 package org.phenopackets.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldId;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldProperty;
 
@@ -71,7 +73,7 @@ public class PhenoPacket {
     private final List<VariantAssociation> variantAssociations;
     private final List<EnvironmentAssociation> environmentAssociations;
 
-    private PhenoPacket(Builder builder) {
+    private PhenoPacket(final Builder builder) {
         id = builder.id;
         title = builder.title;
         context = builder.context;
@@ -165,18 +167,35 @@ public class PhenoPacket {
     @JsonInclude(Include.NON_EMPTY)
     @JsonProperty("variant_profile")
     public List<VariantAssociation> getVariantAssociations() {
-		return variantAssociations;
-	}
+        return variantAssociations;
+    }
 
-	public static class Builder {
+    /**
+     * Create and return a new phenopacket builder.
+     *
+     * @return a new phenopacket builder
+     */
+    public static Builder newBuilder() {
+        return new Builder();
+    }
 
+    /**
+     * Create and return a new builder initialized from the fields in the specified phenopacket.
+     *
+     * @param phenoPacket phenopacket to initialize from, must not be null
+     * @return a new phenopacket builder initialized from the fields in the specified phenopacket
+     */
+    public static Builder newBuilder(final PhenoPacket phenoPacket) {
+        return new Builder(phenoPacket);
+    }
+
+    public static class Builder {
         @JsonProperty
         private String id;
         @JsonProperty
         private String title;
         @JsonProperty("@context")
         private Object context;
-       
 
         // ---- ENTITIES ----
         @JsonProperty
@@ -214,22 +233,44 @@ public class PhenoPacket {
             this.variantAssociations = new ArrayList<>();
         }
 
-        public Builder id(String id) {
+        /**
+         * Create a new phenopacket builder initialized from the fields in the specified phenopacket.
+         *
+         * @param phenoPacket phenopacket to initialize from, must not be null
+         */
+        public Builder(final PhenoPacket phenoPacket) {
+            checkNotNull(phenoPacket);
+            this.id = phenoPacket.getId();
+            this.title = phenoPacket.getTitle();
+            this.context = phenoPacket.getContext();
+
+            this.variants = ImmutableList.copyOf(phenoPacket.getVariants());
+            this.persons = ImmutableList.copyOf(phenoPacket.getPersons());
+            this.organisms = ImmutableList.copyOf(phenoPacket.getOrganisms());
+            this.diseases = ImmutableList.copyOf(phenoPacket.getDiseases());
+
+            this.phenotypeAssociations = ImmutableList.copyOf(phenoPacket.getPhenotypeAssociations());
+            this.diseaseOccurrenceAssociations = ImmutableList.copyOf(phenoPacket.getDiseaseOccurrenceAssociations());
+            this.environmentAssociations = ImmutableList.copyOf(phenoPacket.getEnvironmentAssociations());
+            this.variantAssociations = ImmutableList.copyOf(phenoPacket.getVariantAssociations());
+        }
+
+        public Builder id(final String id) {
             this.id = id;
             return this;
         }
 
-        public Builder title(String title) {
+        public Builder title(final String title) {
             this.title = title;
             return this;
         }
         
-        public Builder setContext(Object context) {
+        public Builder context(final Object context) {
         	this.context = context;
         	return this;
         }
 
-        public Builder addVariant(Variant variant) {
+        public Builder addVariant(final Variant variant) {
             variants.add(variant);
             return this;
         }
@@ -237,12 +278,12 @@ public class PhenoPacket {
         /**
          * @param variants the variants to set
          */
-        public Builder setVariants(List<Variant> variants) {
+        public Builder setVariants(final List<Variant> variants) {
             this.variants = variants;
             return this;
         }
 
-        public Builder addPerson(Person person) {
+        public Builder addPerson(final Person person) {
             persons.add(person);
             return this;
         }
@@ -250,12 +291,12 @@ public class PhenoPacket {
         /**
          * @param persons the persons to set
          */
-        public Builder setPersons(List<Person> persons) {
+        public Builder setPersons(final List<Person> persons) {
             this.persons = persons;
             return this;
         }
 
-        public Builder addOrganism(Organism organism) {
+        public Builder addOrganism(final Organism organism) {
             organisms.add(organism);
             return this;
         }
@@ -263,27 +304,27 @@ public class PhenoPacket {
         /**
          * @param organisms the organisms to set
          */
-        public Builder setOrganisms(List<Organism> organisms) {
+        public Builder setOrganisms(final List<Organism> organisms) {
             this.organisms = organisms;
             return this;
         }
 
-        public Builder addDisease(Disease disease) {
+        public Builder addDisease(final Disease disease) {
             diseases.add(disease);
             return this;
         }
 
-        public Builder setDiseases(List<Disease> diseases) {
+        public Builder setDiseases(final List<Disease> diseases) {
             this.diseases = diseases;
             return this;
         }
 
-        public Builder addPhenotypeAssociation(PhenotypeAssociation a) {
+        public Builder addPhenotypeAssociation(final PhenotypeAssociation a) {
             phenotypeAssociations.add(a);
             return this;
         }
 
-        public Builder addVariantAssociation(VariantAssociation a) {
+        public Builder addVariantAssociation(final VariantAssociation a) {
         	variantAssociations.add(a);
             return this;
         }
@@ -291,17 +332,17 @@ public class PhenoPacket {
         /**
          * @param phenotypeAssociations the phenotype_profile to set
          */
-        public Builder setPhenotypeAssociations(List<PhenotypeAssociation> phenotypeAssociations) {
+        public Builder setPhenotypeAssociations(final List<PhenotypeAssociation> phenotypeAssociations) {
             this.phenotypeAssociations = phenotypeAssociations;
             return this;
         }
 
-        public Builder setVariantAssociations(List<VariantAssociation> variantAssociations) {
+        public Builder setVariantAssociations(final List<VariantAssociation> variantAssociations) {
             this.variantAssociations = variantAssociations;
             return this;
         }
 
-        public Builder addDiseaseOccurrenceAssociation(DiseaseOccurrenceAssociation diseaseOccurrenceAssociation) {
+        public Builder addDiseaseOccurrenceAssociation(final DiseaseOccurrenceAssociation diseaseOccurrenceAssociation) {
             this.diseaseOccurrenceAssociations.add(diseaseOccurrenceAssociation);
             return this;
         }
@@ -309,17 +350,17 @@ public class PhenoPacket {
         /**
          * @param diseaseOccurrenceAssociations the diseaseOccurrenceAssociationList to set
          */
-        public Builder setDiseaseOccurrenceAssociations(List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations) {
+        public Builder setDiseaseOccurrenceAssociations(final List<DiseaseOccurrenceAssociation> diseaseOccurrenceAssociations) {
             this.diseaseOccurrenceAssociations = diseaseOccurrenceAssociations;
             return this;
         }
 
-        public Builder addEnvironmentAssociation(EnvironmentAssociation environmentAssociation) {
+        public Builder addEnvironmentAssociation(final EnvironmentAssociation environmentAssociation) {
             environmentAssociations.add(environmentAssociation);
             return this;
         }
 
-        public Builder setEnvironmentAssociations(List<EnvironmentAssociation> environmentAssociations) {
+        public Builder setEnvironmentAssociations(final List<EnvironmentAssociation> environmentAssociations) {
             this.environmentAssociations = environmentAssociations;
             return this;
         }
@@ -328,5 +369,4 @@ public class PhenoPacket {
             return new PhenoPacket(this);
         }
     }
-
 }
