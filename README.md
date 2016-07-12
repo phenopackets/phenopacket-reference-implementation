@@ -51,7 +51,7 @@ The PhenoPacket class is immutable, although instances of classes from the org.p
 org.phenopackets.api.model.entity package are not.
 
 ```java
-PhenoPacket phenoPacket = new PhenoPacket.Builder()
+PhenoPacket phenoPacket = PhenoPacket.newBuilder()
                 .id("PXF:000001")
                 .title("Empty phenopacket")
                 .build();
