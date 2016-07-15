@@ -145,7 +145,7 @@ and the typically observed phenotypes for this disease
 ### Adding Entities and Associations to a PhenoPacket
 Using the API it s now trivial to create a phenopacket containing the person and their observed phenotype. 
 ```java
-PhenoPacket pk = new PhenoPacket.Builder()
+PhenoPacket pk = PhenoPacket.newBuilder()
                 .id(id)
                 .title("Patient with a phenotype")
                 .addPerson(person)
@@ -154,7 +154,7 @@ PhenoPacket pk = new PhenoPacket.Builder()
 ```
 or a disease as characterised by its associated phenotypes and its time of onset
 ```java
-PhenoPacket pk = new PhenoPacket.Builder()
+PhenoPacket pk = PhenoPacket.newBuilder()
                 .id(id)
                 .title("Description of a disease its phenotype and time of onset")
                 .addDisease(disease)
