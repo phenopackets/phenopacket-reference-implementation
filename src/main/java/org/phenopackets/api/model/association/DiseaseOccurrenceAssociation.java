@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import org.phenopackets.api.model.association.PhenotypeAssociation.Builder;
 import org.phenopackets.api.model.condition.DiseaseOccurrence;
 import org.phenopackets.api.model.entity.Entity;
 import org.phenopackets.api.model.evidence.Evidence;
@@ -16,18 +17,22 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonDeserialize(builder = DiseaseOccurrenceAssociation.Builder.class)
-@JsonPropertyOrder({"entity", "disease_occurrence", "evidence"})
+@JsonPropertyOrder({"entity", "disease_occurrence", "evidence", "contributor", "date"})
 public class DiseaseOccurrenceAssociation implements Association {
 
     private final DiseaseOccurrence diseaseOccurrence;
     private final String entityId;
     private final List<Evidence> evidences;
+    private final String contributorId;
+	private final String date;
 
 
     private DiseaseOccurrenceAssociation(Builder builder) {
         this.diseaseOccurrence = builder.disease;
         this.entityId = builder.entityId;
         this.evidences = builder.evidence;
+        this.contributorId = builder.contributorId;
+        this.date = builder.date;
     }
 
     /**
@@ -47,6 +52,16 @@ public class DiseaseOccurrenceAssociation implements Association {
     public List<Evidence> getEvidence() {
         return evidences;
     }
+    
+    @Override
+    public String getContributorId() {
+        return contributorId;
+    }
+    
+    @Override
+    public String getDate() {
+        return date;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -55,12 +70,14 @@ public class DiseaseOccurrenceAssociation implements Association {
         DiseaseOccurrenceAssociation that = (DiseaseOccurrenceAssociation) o;
         return Objects.equals(diseaseOccurrence, that.diseaseOccurrence) &&
                 Objects.equals(entityId, that.entityId) &&
-                Objects.equals(evidences, that.evidences);
+                Objects.equals(evidences, that.evidences) &&
+                Objects.equals(contributorId, that.contributorId) &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(diseaseOccurrence, entityId, evidences);
+        return Objects.hash(diseaseOccurrence, entityId, evidences, contributorId, date);
     }
 
     @Override
@@ -69,6 +86,8 @@ public class DiseaseOccurrenceAssociation implements Association {
                 "diseaseOccurrence=" + diseaseOccurrence +
                 ", entityId='" + entityId + '\'' +
                 ", evidences=" + evidences +
+                ", contributorId=" + contributorId +
+                ", date=" + date +
                 '}';
     }
 
@@ -78,6 +97,10 @@ public class DiseaseOccurrenceAssociation implements Association {
 
         @JsonProperty("entity")
         private String entityId;
+        @JsonProperty("contributor")
+        private String contributorId;
+        @JsonProperty("date")
+        private String date;
         @JsonProperty
         @JsonInclude(Include.NON_EMPTY)
         private List<Evidence> evidence = new ArrayList<>();
@@ -95,6 +118,16 @@ public class DiseaseOccurrenceAssociation implements Association {
         public Builder setEntityId(String entityId) {
             this.entityId = entityId;
             return this;
+        }
+        
+        public Builder setContributorId(String contributorId) {
+        	this.contributorId = contributorId;
+        	return this;
+        }
+        
+        public Builder setDate(String date) {
+        	this.date = date;
+        	return this;
         }
 
         public Builder setEvidence(List<Evidence> evidence) {
