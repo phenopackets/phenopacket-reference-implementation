@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.ImmutableList;
 
+import org.phenopackets.api.model.association.PhenotypeAssociation.Builder;
 import org.phenopackets.api.model.entity.Entity;
 import org.phenopackets.api.model.environment.Environment;
 import org.phenopackets.api.model.evidence.Evidence;
@@ -24,17 +25,21 @@ import java.util.Objects;
  *
  */
 @JsonDeserialize(builder = EnvironmentAssociation.Builder.class)
-@JsonPropertyOrder({"entity", "environment", "evidence"})
+@JsonPropertyOrder({"entity", "environment", "evidence", "contributor", "date"})
 public class EnvironmentAssociation implements Association {
 	
     @JsonPropertyDescription("The environment which this association is about")
 	private final Environment environment;
 	private final String entityId;
+	private final String contributorId;
+	private final String date;
 	private final List<Evidence> evidence;
 
 	private EnvironmentAssociation(Builder builder) {
 		this.environment = builder.environment;
 		this.entityId = builder.entityId;
+		this.contributorId = builder.contributorId;
+        this.date = builder.date;
 		this.evidence = ImmutableList.copyOf(builder.evidence);
 	}
 	/**
@@ -48,6 +53,16 @@ public class EnvironmentAssociation implements Association {
 	public String getEntityId() {
 		return entityId;
 	}
+	
+	@Override
+    public String getContributorId() {
+        return contributorId;
+    }
+    
+    @Override
+    public String getDate() {
+        return date;
+    }
 
 	@Override
 	public List<Evidence> getEvidence() {
@@ -61,12 +76,14 @@ public class EnvironmentAssociation implements Association {
 		EnvironmentAssociation that = (EnvironmentAssociation) o;
 		return Objects.equals(environment, that.environment) &&
 				Objects.equals(entityId, that.entityId) &&
-				Objects.equals(evidence, that.evidence);
+				Objects.equals(evidence, that.evidence) &&
+                Objects.equals(contributorId, that.contributorId) &&
+                Objects.equals(date, that.date);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(environment, entityId, evidence);
+		return Objects.hash(environment, entityId, evidence, contributorId, date);
 	}
 
 	@Override
@@ -75,7 +92,9 @@ public class EnvironmentAssociation implements Association {
 				"environment=" + environment +
 				", entityId=" + entityId +
 				", evidence=" + evidence +
-				'}';
+				", contributorId=" + contributorId +
+                ", date=" + date +
+                '}';
 	}
 
 	public static class Builder {
@@ -84,6 +103,10 @@ public class EnvironmentAssociation implements Association {
 
         @JsonProperty("entity")
         private String entityId;
+        @JsonProperty("contributor")
+        private String contributorId;
+        @JsonProperty("date")
+        private String date;
         @JsonProperty
         @JsonInclude(Include.NON_EMPTY)
         private List<Evidence> evidence = new ArrayList<>();
@@ -101,6 +124,16 @@ public class EnvironmentAssociation implements Association {
         public Builder setEntityId(String entityId) {
             this.entityId = entityId;
             return this;
+        }
+        
+        public Builder setContributorId(String contributorId) {
+        	this.contributorId = contributorId;
+        	return this;
+        }
+        
+        public Builder setDate(String date) {
+        	this.date = date;
+        	return this;
         }
 
 		public Builder setEvidence(List<Evidence> evidence) {

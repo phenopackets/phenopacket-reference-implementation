@@ -24,5 +24,11 @@ public interface Association<T extends Entity> {
     @JsonProperty("evidence")
     @JsonPropertyDescription("Any Association can have any number of pieces of evidence attached")
     public List<Evidence> getEvidence();
+    
+    @JsonProperty("contributor")
+    public String getContributorId();
+    
+    @JsonProperty("date")
+    public String getDate();
 
 }

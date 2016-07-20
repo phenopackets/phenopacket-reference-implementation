@@ -52,6 +52,8 @@
     "filler": "pheno:filler",
     "stressor": "pheno:stressor",
     "transportPath": "pheno:transportPath",
+    "contributor": "dc:contributor",
+    "date": "dc:date",
     
     "dc": "http://purl.org/dc/terms/",
     "EFO" : "http://purl.obolibrary.org/obo/EFO_",
