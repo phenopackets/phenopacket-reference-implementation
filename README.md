@@ -40,6 +40,12 @@ mvn -Dgpg.skip install
 Most of these examples have been taken from the [test](https://github.com/phenopackets/phenopacket-reference-implementation/tree/master/src/test) package.
 Check there for more thorough examples. 
 
+## UML Diagram
+
+This diagram shows the object model:
+
+![img](images/phenopackets-uml.png)
+
 ### Reading a JSON/YAML file
 ```java
 PhenoPacket phenoPacket = YamlReader.readFile("phenopacket.yaml");
