@@ -2,6 +2,10 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.phenopackets/phenopackets-api/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.phenopackets/phenopackets-api)
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.phenopackets/phenopackets-api/badge.svg)](http://www.javadoc.io/doc/org.phenopackets/phenopackets-api)
 
+## CAUTION THIS REPO HAS BEED RETIRED!
+
+This initial implementation has now been archived - please refer to the [phenopacket-schema](https://github.com/phenopackets/phenopacket-schema) repository for the current implementation.
+
 # Phenopackets/PXF Reference Implementation
 
 This project provides a reference java implementation for the Phenotype eXchange Format (PXF). Jackson annotations are 
